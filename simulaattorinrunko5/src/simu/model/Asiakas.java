@@ -3,6 +3,7 @@ package simu.model;
 import simu.framework.Kello;
 import simu.framework.Trace;
 
+// eetun kommentti
 
 // TODO:
 // Asiakas koodataan simulointimallin edellyttämällä tavalla (data!)
