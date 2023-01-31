@@ -13,6 +13,7 @@ public class Asiakas {
 	private int id;
 	private static int i = 1;
 	private static long sum = 0;
+	private boolean labrassaKayty = false;
 	
 	public Asiakas(){
 	    id = i++;
@@ -39,6 +40,12 @@ public class Asiakas {
 	
 	public int getId() {
 		return id;
+	}
+	public void setLabrakaynti(boolean käyty) {
+		this.labrassaKayty = käyty;
+	}
+	public boolean getLabrakaynti() {
+		return labrassaKayty;
 	}
 	
 	public void raportti(){
