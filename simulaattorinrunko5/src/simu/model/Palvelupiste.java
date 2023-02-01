@@ -22,6 +22,7 @@ public class Palvelupiste {
 	//JonoStartegia strategia; //optio: asiakkaiden järjestys
 	
 	private boolean varattu = false;
+	private boolean labraKayty = false;
 
 
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi alkperTyyppi){
@@ -43,7 +44,10 @@ public class Palvelupiste {
 			//ARVOTAAN JOKO Labra = 1 TAI poistuminen = 2
 			Random rand = new Random();
 			int randomInt = rand.nextInt(2)+1;
-			if(randomInt == 1) {
+			
+			if(labrassaKayty == true) {
+				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.ELDEP;
+			}else if(randomInt == 1) {
 				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.LABARR;
 			}
 			else {
@@ -55,7 +59,10 @@ public class Palvelupiste {
 			//ARVOTAAN JOKO Labra = 1 TAI poistuminen = 2
 			Random rand = new Random();
 			int randomInt = rand.nextInt(2)+1;
-			if(randomInt == 1) {
+			
+			if(labraKayty == true) {
+				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.YLDEP;
+			} else if(randomInt == 1) {
 				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.LABARR;
 			}
 			else {
@@ -65,6 +72,7 @@ public class Palvelupiste {
 		//jos tyyppi on labra
 		else {
 			skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.YLARR;
+			labraKayty = true;
 
 		}
 
