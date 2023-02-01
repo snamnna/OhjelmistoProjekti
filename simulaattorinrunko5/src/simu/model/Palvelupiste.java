@@ -45,7 +45,7 @@ public class Palvelupiste {
 			Random rand = new Random();
 			int randomInt = rand.nextInt(2)+1;
 			
-			if(labrassaKayty == true) {
+			if(labraKayty == true) {
 				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.ELDEP;
 			}else if(randomInt == 1) {
 				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.LABARR;
