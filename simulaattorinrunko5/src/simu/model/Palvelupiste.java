@@ -50,7 +50,6 @@ public class Palvelupiste {
 			//ARVOTAAN JOKO Labra = 1 TAI poistuminen = 2
 			Random rand = new Random();
 			int randomInt = rand.nextInt(2)+1;
-			
 			if(randomInt == 1) {
 				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.ELLABARR;
 			}
