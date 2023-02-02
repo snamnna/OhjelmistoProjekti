@@ -8,6 +8,8 @@ public enum TapahtumanTyyppi {
 	ELARR,
 	YLDEP,
 	ELDEP,
-	LABARR
+	YLLABARR,
+	ELLABARR
+	
 
 }

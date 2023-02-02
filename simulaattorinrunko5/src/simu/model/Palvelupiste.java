@@ -24,6 +24,12 @@ public class Palvelupiste {
 	private boolean varattu = false;
 	private boolean labraKayty = false;
 
+	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista) {
+		this.tapahtumalista = tapahtumalista;
+		this.generator = generator;
+		skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.YLARR;
+		labraKayty = true;
+	}
 
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi alkperTyyppi){
 		this.tapahtumalista = tapahtumalista;
@@ -45,10 +51,8 @@ public class Palvelupiste {
 			Random rand = new Random();
 			int randomInt = rand.nextInt(2)+1;
 			
-			if(labraKayty == true) {
-				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.ELDEP;
-			}else if(randomInt == 1) {
-				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.LABARR;
+			if(randomInt == 1) {
+				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.ELLABARR;
 			}
 			else {
 				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.ELDEP;
@@ -59,21 +63,12 @@ public class Palvelupiste {
 			//ARVOTAAN JOKO Labra = 1 TAI poistuminen = 2
 			Random rand = new Random();
 			int randomInt = rand.nextInt(2)+1;
-			
-			if(labraKayty == true) {
-				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.YLDEP;
-			} else if(randomInt == 1) {
-				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.LABARR;
+			if(randomInt == 1) {
+				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.YLLABARR;
 			}
 			else {
 				skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.YLDEP;
 			}
-		}
-		//jos tyyppi on labra
-		else {
-			skeduloitavanTapahtumanTyyppi = TapahtumanTyyppi.YLARR;
-			labraKayty = true;
-
 		}
 
 	}
@@ -94,10 +89,6 @@ public class Palvelupiste {
 		
 		varattu = true;
 		double palveluaika = generator.sample();
-		// muutetaan tää: if else rakenne tyypin mukaan ARR: arpoo joko ELARR tai YLARR
-		//jos tyyppi: ELARR -> joko ELDEP tai LABARR
-		//jos YLARR -> joko YLDEP tai LABARR jos ei käyty labrassa
-		//LABARR YLARR
 		tapahtumalista.lisaa(new Tapahtuma(skeduloitavanTapahtumanTyyppi,Kello.getInstance().getAika()+palveluaika));
 	}
 
