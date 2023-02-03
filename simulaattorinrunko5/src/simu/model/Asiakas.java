@@ -10,7 +10,7 @@ import simu.framework.Trace;
 public class Asiakas {
 	private double saapumisaika;
 	private double poistumisaika;
-	private int id;
+	private final int id;
 	private static int i = 1;
 	private static long sum = 0;
 	private boolean labrassaKayty = false;
@@ -41,8 +41,8 @@ public class Asiakas {
 	public int getId() {
 		return id;
 	}
-	public void setLabrakaynti(boolean käyty) {
-		this.labrassaKayty = käyty;
+	public void setLabrakaynti(boolean kayty) {
+		this.labrassaKayty = kayty;
 	}
 	public boolean getLabrakaynti() {
 		return labrassaKayty;
@@ -57,5 +57,4 @@ public class Asiakas {
 		double keskiarvo = sum/id;
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
 	}
-
 }
