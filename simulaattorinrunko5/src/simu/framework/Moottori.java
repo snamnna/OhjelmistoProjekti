@@ -1,6 +1,6 @@
 package simu.framework;
 
-import simu.model.Palvelupiste;
+import simu.model.util.IPalvelupiste;
 
 public abstract class Moottori {
 	
@@ -9,7 +9,7 @@ public abstract class Moottori {
 	private Kello kello;
 	
 	protected Tapahtumalista tapahtumalista;
-	protected Palvelupiste[] palvelupisteet;
+	protected IPalvelupiste[] palvelupisteet;
 	
 
 	public Moottori(){
@@ -53,7 +53,7 @@ public abstract class Moottori {
 	}
 
 	private void yritaCTapahtumat(){
-		for (Palvelupiste p: palvelupisteet){
+		for (IPalvelupiste p: palvelupisteet){
 			if (!p.onVarattu() && p.onJonossa()){
 				p.aloitaPalvelu();
 			}
