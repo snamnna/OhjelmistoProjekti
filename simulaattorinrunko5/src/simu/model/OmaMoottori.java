@@ -1,85 +1,63 @@
 package simu.model;
 
 import eduni.distributions.Negexp;
-import eduni.distributions.Normal;
 import simu.framework.Kello;
 import simu.framework.Moottori;
 import simu.framework.Saapumisprosessi;
 import simu.framework.Tapahtuma;
+import simu.model.util.FPalvelupiste;
+import simu.model.util.IPalvelupiste;
 
-public class OmaMoottori extends Moottori{
-	
-	private Saapumisprosessi saapumisprosessi;
-	
-	private final static int SAIRAANHOITAJA = 0;
-	private final static int YLEISLAAKARI = 1;
-	private final static int ERIKOISLAAKARI = 2;
-	private final static int LABRA = 3;
+import java.util.HashMap;
+import java.util.Map;
 
-	public OmaMoottori(){
-			
+public class OmaMoottori extends Moottori {
 
-		
-		palvelupisteet = new Palvelupiste[4];
-		
-	
-		palvelupisteet[SAIRAANHOITAJA]=new Palvelupiste(new Normal(10,6), tapahtumalista, TapahtumanTyyppi.ARR);	
-		palvelupisteet[YLEISLAAKARI]=new Palvelupiste(new Normal(10,10), tapahtumalista, TapahtumanTyyppi.YLARR);
-		palvelupisteet[ERIKOISLAAKARI]=new Palvelupiste(new Normal(5,3), tapahtumalista, TapahtumanTyyppi.ELARR);
-		palvelupisteet[LABRA]=new Palvelupiste(new Normal(5,3), tapahtumalista);
+    private final Saapumisprosessi saapumisprosessi;
 
-		
-		saapumisprosessi = new Saapumisprosessi(new Negexp(15,5), tapahtumalista, TapahtumanTyyppi.ARR);
+    Map<TapahtumanTyyppi, IPalvelupiste> tapahtumaMap = new HashMap<>();
 
-	}
+    public final static int SAIRAANHOITAJA = 0;
+    public final static int YLEISLAAKARI = 1;
+    public final static int ERIKOISLAAKARI = 2;
+    public final static int LABRA = 3;
 
-	
-	@Override
-	protected void alustukset() {
-		saapumisprosessi.generoiSeuraava(); // Ensimmäinen saapuminen järjestelmään
-	}
-	
-	@Override
-	protected void suoritaTapahtuma(Tapahtuma t){  // B-vaiheen tapahtumat
+    public OmaMoottori() {
+        palvelupisteet = new IPalvelupiste[4];
 
-		Asiakas a;
-		switch (t.getTyyppi()){
-			
-			case ARR: palvelupisteet[SAIRAANHOITAJA].lisaaJonoon(new Asiakas());	
-				       saapumisprosessi.generoiSeuraava();	
-				break;
-			case YLARR: a = palvelupisteet[SAIRAANHOITAJA].otaJonosta();
-				   	   palvelupisteet[YLEISLAAKARI].lisaaJonoon(a);
-				break;
-			case ELARR: a = palvelupisteet[SAIRAANHOITAJA].otaJonosta();
-				   	   palvelupisteet[ERIKOISLAAKARI].lisaaJonoon(a); 
-				break;  
-			case YLLABARR: a = palvelupisteet[YLEISLAAKARI].otaJonosta();
-	   					palvelupisteet[LABRA].lisaaJonoon(a);
-						
-				break;	
-			case ELLABARR: a = palvelupisteet[ERIKOISLAAKARI].otaJonosta();
-		   	   			palvelupisteet[LABRA].lisaaJonoon(a); 
-		   	   	break;						
-			case ELDEP:
-				       a = palvelupisteet[ERIKOISLAAKARI].otaJonosta();
-					   a.setPoistumisaika(Kello.getInstance().getAika());
-			           a.raportti(); 
-			    break;
-			case YLDEP:
-			       a = palvelupisteet[YLEISLAAKARI].otaJonosta();
-				   a.setPoistumisaika(Kello.getInstance().getAika());
-		           a.raportti(); 
-		        break;
-		}	
-	}
+        palvelupisteet[SAIRAANHOITAJA] = FPalvelupiste.createPalvelupiste(TapahtumanTyyppi.ARR, tapahtumalista);
+        palvelupisteet[YLEISLAAKARI] = FPalvelupiste.createPalvelupiste(TapahtumanTyyppi.YLARR, tapahtumalista);
+        palvelupisteet[ERIKOISLAAKARI] = FPalvelupiste.createPalvelupiste(TapahtumanTyyppi.ELARR, tapahtumalista);
+        palvelupisteet[LABRA] = FPalvelupiste.createPalvelupiste(TapahtumanTyyppi.LABRA_ARRIVAL, tapahtumalista);
+        saapumisprosessi = new Saapumisprosessi(new Negexp(15, 5), tapahtumalista, TapahtumanTyyppi.ARR);
 
-	
-	@Override
-	protected void tulokset() {	
-		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
-		System.out.println("Tulokset ... puuttuvat vielä");
-	}
+        tapahtumaMap.put(TapahtumanTyyppi.ARR, palvelupisteet[SAIRAANHOITAJA]);
+        tapahtumaMap.put(TapahtumanTyyppi.YLARR, palvelupisteet[YLEISLAAKARI]);
+        tapahtumaMap.put(TapahtumanTyyppi.ELARR, palvelupisteet[ERIKOISLAAKARI]);
+        tapahtumaMap.put(TapahtumanTyyppi.LABRA_ARRIVAL, palvelupisteet[LABRA]);
+        tapahtumaMap.put(TapahtumanTyyppi.LABRA_DEPARTURE, palvelupisteet[LABRA]);
+        tapahtumaMap.put(TapahtumanTyyppi.YLDEP, palvelupisteet[YLEISLAAKARI]);
+        tapahtumaMap.put(TapahtumanTyyppi.ELDEP, palvelupisteet[ERIKOISLAAKARI]);
+    }
 
-	
+
+    @Override
+    protected void alustukset() {
+        saapumisprosessi.generoiSeuraava(); // Ensimmäinen saapuminen järjestelmään
+    }
+
+    @Override
+    protected void suoritaTapahtuma(Tapahtuma t) {  // B-vaiheen tapahtumat
+        for(IPalvelupiste p : palvelupisteet) System.out.println(p.getJonoString());
+        TapahtumanTyyppi tyyppi = t.getTyyppi();
+        tapahtumaMap.get(tyyppi).siirraAsiakas(t, palvelupisteet);
+        if(tyyppi == TapahtumanTyyppi.ARR) saapumisprosessi.generoiSeuraava();
+    }
+
+
+    @Override
+    protected void tulokset() {
+        System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
+        System.out.println("Tulokset ... puuttuvat vielä");
+    }
 }
