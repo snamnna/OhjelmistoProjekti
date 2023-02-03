@@ -2,6 +2,7 @@ package simu.model;
 
 // TODO:
 // Tapahtumien tyypit määritellään simulointimallin vaatimusten perusteella
+
 public enum TapahtumanTyyppi {
 	ARR,
 	YLARR,
@@ -9,7 +10,7 @@ public enum TapahtumanTyyppi {
 	YLDEP,
 	ELDEP,
 	YLLABARR,
-	ELLABARR
-	
-
+	ELLABARR,
+	LABRA_ARRIVAL,
+	LABRA_DEPARTURE
 }
