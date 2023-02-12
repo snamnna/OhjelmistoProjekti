@@ -22,10 +22,15 @@ import javafx.scene.layout.*;
 import javafx.scene.text.*;
 
 
-
 public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
-
 	
+	private IKontrolleri kontrolleri;
+	
+	@Override
+	public void init() {
+		kontrolleri = new Kontrolleri(this);
+	}
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
