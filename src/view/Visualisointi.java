@@ -10,4 +10,10 @@ public class Visualisointi extends Canvas implements IVisualisointi{
 	public void uusiAsiakas() {
 		// code here
 	}
+
+	@Override
+	public void tyhjennaNaytto() {
+		// TODO Auto-generated method stub
+		
+	}
 }

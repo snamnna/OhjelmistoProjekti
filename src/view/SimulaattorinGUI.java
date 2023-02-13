@@ -51,4 +51,46 @@ public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
 	public static void main(String[] args) {
 		launch(args);
 	}
+
+	@Override
+	public int getYlaakarienLkm() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getElaakarienLkm() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getLabraJakauma() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getSimulointiAika() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setLoppuaika(double aika) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTulokset() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public IVisualisointi getVisualisointi() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

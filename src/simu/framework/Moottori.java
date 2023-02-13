@@ -26,8 +26,7 @@ public abstract class Moottori {
 	public void setSimulointiaika(double aika) {
 		simulointiaika = aika;
 	}
-	
-	
+
 	public void aja(){
 		alustukset(); // luodaan mm. ensimmäinen tapahtuma
 		while (simuloidaan()){
@@ -69,12 +68,11 @@ public abstract class Moottori {
 		return kello.getAika() < simulointiaika;
 	}
 	
-			
-
-	protected abstract void alustukset(); // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
-	
-	protected abstract void suoritaTapahtuma(Tapahtuma t);  // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
-	
-	protected abstract void tulokset(); // Määritellään simu.model-pakkauksessa Moottorin aliluokassa
-	
+	// Määritellään simu.model-pakkauksessa Moottorin aliluokassa	
+	protected abstract void setLabJakauma();
+	protected abstract void setElaakarienLkm(); 
+	protected abstract void setYlaakarienLkm();
+	protected abstract void alustukset(); 
+	protected abstract void suoritaTapahtuma(Tapahtuma t);  
+	protected abstract void tulokset(); 
 }

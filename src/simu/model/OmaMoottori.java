@@ -57,7 +57,29 @@ public class OmaMoottori extends Moottori {
 
     @Override
     protected void tulokset() {
+    	//luodaanko tulokset tulos-luokassa ja sieltä sitten jotenkin tänne ja eteenpäin uille?
         System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
         System.out.println("Tulokset ... puuttuvat vielä");
     }
+
+
+	@Override
+	protected void setLabJakauma() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	protected void setElaakarienLkm() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	protected void setYlaakarienLkm() {
+		// TODO Auto-generated method stub
+		
+	}
 }
