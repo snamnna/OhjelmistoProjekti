@@ -1,16 +1,23 @@
 package controller;
 
 public interface IKontrolleri {
-	
-	// Rajapinta, joka tarjotaan  käyttöliittymälle:
-	public void naytaLoppuaika(double aika);
-	public void visualisoiAsiakas();
-	
 	// Rajapinta, joka tarjotaan moottorille:
+	// hakee annetut arvot ja kutsuu moottorin start metodia
 	public void kaynnistaSimulointi();
-	public int naytaYlaakarienLkm();
-	public int naytaElaakarienLkm();
-	public double naytaLabJakauma();
 
-	//muita? (onko ees oikeita :D)
+	// Rajapinta, joka tarjotaan käyttöliittymälle:
+	public void haeLoppuaika(double aika);
+
+	public void visualisoiAsiakas();
+
+	public void hidasta();
+
+	public void nopeuta();
+
+	public int haeYlaakarienLkm();
+
+	public int haeElaakarienLkm();
+
+	public double haeLabJakauma();
+
 }
