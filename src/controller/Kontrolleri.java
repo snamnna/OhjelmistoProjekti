@@ -8,6 +8,7 @@ import view.ISimulaattorinUI;
 public class Kontrolleri implements IKontrolleri {
 
 	private ISimulaattorinUI ui;
+	private IMoottori moottori;
 	
 	public Kontrolleri(ISimulaattorinUI ui) {
 		this.ui = ui;
@@ -15,7 +16,7 @@ public class Kontrolleri implements IKontrolleri {
 	}
 	
 	public void naytaLoppuaika(double aika) {
-		// Platform.runLater(() -> ui.setLoppuaika(aika));
+		
 	}
 	
 	public void visualisoiAsiakas(){
@@ -32,17 +33,35 @@ public class Kontrolleri implements IKontrolleri {
 	}
 
 	@Override
-	public int naytaYlaakarienLkm() {
+	public int haeYlaakarienLkm() {
 		return 	ui.getYlaakarienLkm();
 	}
 
 	@Override
-	public int naytaElaakarienLkm() {
+	public int haeElaakarienLkm() {
 		return ui.getElaakarienLkm();
 	}
 
 	@Override
-	public double naytaLabJakauma() {
+	public double haeLabJakauma() {
 		return ui.getLabraJakauma();
+	}
+
+	@Override
+	public void haeLoppuaika(double aika) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hidasta() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void nopeuta() {
+		// TODO Auto-generated method stub
+		
 	}
  }
