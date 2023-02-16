@@ -142,8 +142,8 @@
             <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
               <children>
                 <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Simulaation visuaalinen kuvaus" textAlignment="CENTER" textFill="$x2" wrapText="false" />
-                        <Label layoutX="274.0" layoutY="506.0" text="Loppuaika:" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="520.0" />
-                        <TextField layoutX="290.0" layoutY="494.0" text="Loppuaika" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="515.0" />
+                        <Label layoutX="274.0" layoutY="506.0" text="Loppuaika:" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="210.0" />
+                        <TextField layoutX="290.0" layoutY="494.0" text="Loppuaika" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="5.0" />
               </children>
             </AnchorPane>
           </content>
