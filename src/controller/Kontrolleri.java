@@ -5,7 +5,7 @@ import simu.framework.IMoottori;
 import simu.model.OmaMoottori;
 import view.ISimulaattorinUI;
 
-public class Kontrolleri implements IKontrolleri {
+public class Kontrolleri implements IKontrolleriVtoM {
 
 	private ISimulaattorinUI ui;
 	private IMoottori moottori;

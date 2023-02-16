@@ -24,7 +24,7 @@ import javafx.scene.text.*;
 
 public class SimulaattorinGUI extends Application implements ISimulaattorinUI{
 	
-	private IKontrolleri kontrolleri;
+	private IKontrolleriVtoM kontrolleri;
 	
 	@Override
 	public void init() {
