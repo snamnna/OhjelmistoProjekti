@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javafx.application.Platform;
 import simu.framework.IMoottori;
 import simu.model.OmaMoottori;
@@ -9,6 +12,8 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 
 	private ISimulaattorinUI ui;
 	private IMoottori moottori;
+	
+	
 	
 	public Kontrolleri(ISimulaattorinUI ui) {
 		this.ui = ui;
@@ -47,6 +52,16 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	@Override
 	public double haeLabJakauma() {
 		return ui.getLabraJakauma();
+	}
+	
+	@Override
+	public Map<String, Integer> haePalvelupisteet() {
+		Map<String, Integer> palvelupisteet = new HashMap<>();
+		palvelupisteet.put("SAIRAANHOITAJA", 1); //Kovakoodattu 1 koska sairaanhoitajia aina vain 1
+		palvelupisteet.put("YLaakari", haeYlaakarienLkm());
+		palvelupisteet.put("ELaakari", haeElaakarienLkm());
+		palvelupisteet.put("Labra", 1); //Kovakoodattu 1 koska labroja aina vain 1
+		return palvelupisteet;
 	}
 
 	@Override
