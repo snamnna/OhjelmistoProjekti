@@ -1,6 +1,7 @@
 package simu.model;
 
 import eduni.distributions.Negexp;
+import simu.framework.IMoottori;
 import simu.framework.Kello;
 import simu.framework.Moottori;
 import simu.framework.Saapumisprosessi;
@@ -11,7 +12,7 @@ import simu.model.util.IPalvelupiste;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OmaMoottori extends Moottori {
+public class OmaMoottori extends Moottori implements IMoottori {
 
     private final Saapumisprosessi saapumisprosessi;
 

@@ -5,14 +5,14 @@ import simu.framework.IMoottori;
 import simu.model.OmaMoottori;
 import view.ISimulaattorinUI;
 
-public class Kontrolleri implements IKontrolleriVtoM {
+public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 
 	private ISimulaattorinUI ui;
 	private IMoottori moottori;
 	
 	public Kontrolleri(ISimulaattorinUI ui) {
 		this.ui = ui;
-		// lisää?
+		//Tähän lisää?
 	}
 	
 	
@@ -27,6 +27,11 @@ public class Kontrolleri implements IKontrolleriVtoM {
 	@Override
 	public void kaynnistaSimulointi() {
 		// TODO Auto-generated method stub
+		moottori = new OmaMoottori(); // luodaan uusi moottorisäie jokaista simulointia varten
+		moottori.setSimulointiaika(ui.getSimulointiAika());
+		moottori.setViive(ui.getViive()); //Matias muokkaa moottoria?
+		ui.getVisualisointi().tyhjennaNaytto();
+		((Thread)moottori).start();
 	}
 
 	@Override
@@ -46,18 +51,16 @@ public class Kontrolleri implements IKontrolleriVtoM {
 
 	@Override
 	public void haeLoppuaika(double aika) {
-		
+		//return moottori.getLoppuAika(); Matias hoitaa?
 	}
 
 	@Override
 	public void hidasta() {
-		// TODO Auto-generated method stub
-		
+		//moottori.setViive((long)(moottori.getViive()*1.10)); Tähän tarvitaan moottoria
 	}
 
 	@Override
 	public void nopeuta() {
-		// TODO Auto-generated method stub
-		
+		//moottori.setViive((long)(moottori.getViive()*0.9)); Tarvitaan moottoria
 	}
  }
