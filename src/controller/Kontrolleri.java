@@ -15,9 +15,6 @@ public class Kontrolleri implements IKontrolleri {
 		// lisää?
 	}
 	
-	public void naytaLoppuaika(double aika) {
-		
-	}
 	
 	public void visualisoiAsiakas(){
 		/* Platform.runLater(new Runnable() {
@@ -49,7 +46,6 @@ public class Kontrolleri implements IKontrolleri {
 
 	@Override
 	public void haeLoppuaika(double aika) {
-		// TODO Auto-generated method stub
 		
 	}
 
