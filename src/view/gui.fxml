@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TESTISimulaationGUI">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.26280623608017817, 0.6447661469933185" prefHeight="576.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+        <items>
+          <AnchorPane prefHeight="373.0" prefWidth="201.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Käyttäjän tiedot:" textFill="#575656" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="5.0" layoutY="44.0" text="Simulointiaika:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="50.0">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="simulointiAikaTxtField" layoutX="5.0" layoutY="69.0" text="Anna Simulointiaika" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="75.0" />
+                  <Label layoutX="6.0" layoutY="133.0" text="Lääkärien määrät:" AnchorPane.leftAnchor="6.0" AnchorPane.topAnchor="125.0">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="yLaakarienLkmTxtField" layoutX="5.0" layoutY="179.0" text="Anna lukumäärä" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="175.0" />
+                  <TextField fx:id="eLaakarienLkmTxtField" layoutX="5.0" layoutY="229.0" text="Anna lukumäärä" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="225.0" />
+                  <Label layoutX="2.0" layoutY="162.0" text="Yleislääkärien määrä" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="155.0" />
+                  <Label layoutX="4.0" layoutY="212.0" text="Erikoislääkärien määrä" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="205.0" />
+                  <Label layoutX="14.0" layoutY="232.0" text="Laboratorion tiedot:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="280.0">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="309.0" text="Valitse labran jakauma" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="300.0" />
+                  <MenuButton fx:id="labraMenu" layoutX="13.0" layoutY="317.0" mnemonicParsing="false" text="Valitse jakauma" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="320.0">
+                    <items>
+                      <MenuItem fx:id="labrachoice1" mnemonicParsing="false" text="Action 1" />
+                      <MenuItem fx:id="labrachoice1" mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+                  <Label layoutX="14.0" layoutY="356.0" text="Anna jakauman vaihteluväli" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="360.0" />
+                  <TextField fx:id="labraJakaumaVaihteluTxtField" layoutX="15.0" layoutY="386.0" text="Anna vaihteluväli" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="380.0" />
+                  <Label layoutX="35.0" layoutY="430.0" text="Simuloinnin käynnistys:" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="430.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="53.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleAloitaSimulointi" text="Aloita simulointi" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="457.0" />
+                  <ButtonBar layoutX="6.0" layoutY="494.0" prefHeight="40.0" prefWidth="170.0">
+                    <buttons>
+                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Nopeuta" />
+                      <Button mnemonicParsing="false" prefHeight="25.0" text="Hidasta" />
+                    </buttons>
+                  </ButtonBar>
+               </children>
+            </AnchorPane>
+          <AnchorPane prefHeight="573.0" prefWidth="299.0">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Simulaation visualisointi:" textFill="#575656" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Pane fx:id="visualisointiPane" layoutX="69.0" layoutY="174.0" prefHeight="573.0" prefWidth="337.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="573.0" prefWidth="296.0">
+               <children>
+                  <Pane fx:id="tuloksetPane" layoutX="42.0" layoutY="54.0" prefHeight="519.0" prefWidth="316.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                  <Label text="Tulokset:" textFill="#575656" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </center>
+</BorderPane>
