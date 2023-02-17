@@ -4,18 +4,15 @@ import java.util.Map;
 
 public interface IKontrolleriVtoM {
 	// Rajapinta, joka tarjotaan moottorille:
-	// hakee annetut arvot ja kutsuu moottorin start metodia
-	public void kaynnistaSimulointi();
-	
+	// hakee annetut arvot
 	public int haeYlaakarienLkm();
 
 	public int haeElaakarienLkm();
 
 	public double haeLabJakauma();
-	
-	public Map<String, Integer> haePalvelupisteet();
-	
-	public void hidasta();
 
-	public void nopeuta();
+	public Map<String, Integer> haePalvelupisteet();
+
+	public void visualisoiAsiakas();
+
 }
