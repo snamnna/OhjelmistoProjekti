@@ -185,7 +185,7 @@ public class TESTISimulaationGUI extends Application implements ISimulaattorinUI
 	@Override
 	public double getSimulointiAika() {
 		//Saadaan textfieldist
-		return 0;
+		return Double.parseDouble(simulointiAikaTxtField.getText());
 	}
 
 	@Override
