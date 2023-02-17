@@ -121,4 +121,10 @@ public class OmaMoottori extends Moottori implements IMoottori {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void setViive(long viive) {
+		// TODO Auto-generated method stub
+		
+	}
 }
