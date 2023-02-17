@@ -109,7 +109,7 @@ public class TESTISimulaationGUI extends Application implements ISimulaattorinUI
 	private void handleAloitaSimulointi() {
 		// tsekkaa, jos input on ok.
 		if (isInputValid()) {
-			moottori.aja(); //Tällä aloitetaan simulointi??
+			kontrolleri.kaynnistaSimulointi();
 		}
 	}
 	@FXML
