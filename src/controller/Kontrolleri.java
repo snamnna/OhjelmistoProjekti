@@ -32,7 +32,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	@Override
 	public void kaynnistaSimulointi() {
 		// TODO Auto-generated method stub
-		moottori = new OmaMoottori(); // luodaan uusi moottorisäie jokaista simulointia varten
+		moottori = new OmaMoottori(this); // luodaan uusi moottorisäie jokaista simulointia varten
 		moottori.setSimulointiaika(ui.getSimulointiAika());
 		moottori.setViive(ui.getViive()); //Matias muokkaa moottoria?
 		ui.getVisualisointi().tyhjennaNaytto();
