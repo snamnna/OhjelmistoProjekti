@@ -72,7 +72,7 @@ public class TESTISimulaationGUI extends Application implements ISimulaattorinUI
 		private boolean nopeutaClicked = false;
 	    
 	//Kontrollerin esittely (tarvitaan käyttöliittymässä)
-	private IKontrolleriVtoM kontrolleri;
+	private IKontrolleriMtoV kontrolleri;
 	private OmaMoottori moottori = new OmaMoottori();
 	private IVisualisointi naytto;
 	
