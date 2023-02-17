@@ -7,4 +7,5 @@ public interface IMoottori {
 	public void setYlaakarienLkm(); //asetettavat palvelupisteet
 	public void setElaakarienLkm();
 	//tarvitaanko muita?
+	public void setViive(long viive);
 }
