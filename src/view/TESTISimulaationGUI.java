@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
+import ch.makery.address.util.DateUtil;
 import controller.*;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -21,6 +22,7 @@ import simu.model.OmaMoottori;
 import javafx.scene.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.*;
 import javafx.scene.text.*;
 
@@ -44,15 +46,36 @@ public class TESTISimulaationGUI extends Application implements ISimulaattorinUI
 	    private TextField labraJakaumaVaihteluTxtField;
 	    @FXML
 	    private Pane visualisointiPane;
+	    
 	    @FXML
 	    private Pane tuloksetPane;
+	    @FXML
+	    private Label simuloinninKokonaisaikaLabel;
+	    @FXML
+	    private Label asiakkaitaPalveltuLabel;
+	    @FXML
+	    private Label yLaakareitaLabel; // = yLaakarienLkm ?
+	    @FXML
+	    private Label eLaakareitaLabel; // = eLaakarienLkm ?
+	    @FXML
+	    private Label labraKayntejaLabel;
+	    @FXML
+	    private Label kayttoAsteLabel;
+	    @FXML
+	    private Label suoritustehoLabel;
 	    
+	    private Button kaynnistaButton;
+		private Button hidastaButton;
+		private Button nopeutaButton;
+		
+		private boolean hidastaClicked = false;
+		private boolean nopeutaClicked = false;
 	    
 	//Kontrollerin esittely (tarvitaan käyttöliittymässä)
 	private IKontrolleriVtoM kontrolleri;
 	private OmaMoottori moottori = new OmaMoottori();
 	private IVisualisointi naytto;
-
+	
 	@Override
 	public void init() {
 		kontrolleri = new Kontrolleri(this);
@@ -65,6 +88,10 @@ public class TESTISimulaationGUI extends Application implements ISimulaattorinUI
 			
 		      Parent root = FXMLLoader.load(getClass().getResource("gui.fxml"));
 			
+		      // näin vai metodien kautta?
+		    //hidastaButton.setOnAction(e -> kontrolleri.hidasta());
+		    //nopeutaButton.setOnAction(e -> kontrolleri.nopeuta());
+		      
 			Scene scene = new Scene(root);
 			
 			primaryStage.setTitle("Päivystyssimulaattori");
@@ -80,17 +107,51 @@ public class TESTISimulaationGUI extends Application implements ISimulaattorinUI
 	
 	@FXML
 	private void handleAloitaSimulointi() {
-		moottori.aja(); //Tällä aloitetaan simulointi??
+		// tsekkaa, jos input on ok.
+		if (isInputValid()) {
+			moottori.aja(); //Tällä aloitetaan simulointi??
+		}
 	}
 	@FXML
 	private void handleNopeuta() {
 		//tää pitää viel tehdä, esimerkin mukaan?
+		nopeutaClicked = true;
+		if (nopeutaClicked) {
+			kontrolleri.nopeuta();
+		}
 	}
 	@FXML 
 	private void handleHidasta() {
 		//esimerkin mukaan?
+		hidastaClicked = true;
+		if (hidastaClicked) {
+			kontrolleri.hidasta();
+		}
 	}
 	
+	/**
+     * File -> New : luodaan uusi simulaatio
+     */
+    @FXML
+    private void handleNew() {
+        // settii
+    }
+    
+    /**
+     * Opens an about dialog.
+     */
+    @FXML
+    private void handleAbout() {
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	alert.setTitle("Päivystyssimulaattori");
+    	alert.setHeaderText("About");
+    	alert.setContentText("Authors: Sanna Lohkovuori, Matias Niemelä, Edvard Nivala, Tuisku Närhi");
+
+    	alert.showAndWait();
+    }
+    
+    // Save, Save As, Open... etc. metodit jos otetaan käyttöön?
+    
 	//rajapinnalta saadut metodit
 	@Override
 	public IVisualisointi getVisualisointi() {
@@ -137,12 +198,63 @@ public class TESTISimulaationGUI extends Application implements ISimulaattorinUI
 		//tätä käytetään siihen handleen aika varmaan
 		return 0;
 	}
-	// JavaFX-sovelluksen (käyttöliittymän) käynnistäminen
+	
+	/**
+     * Tsekataan textfieldien input.
+     * 
+     * @return true jos ok
+     */
+    private boolean isInputValid() {
+        String errorMessage = "";
 
-	public static void main(String[] args) {
+        if (simulointiAikaTxtField.getText() == null || simulointiAikaTxtField.getText().length() == 0) {
+            errorMessage += "Syötä numero!\n"; 
+        }
+        else {
+            // koita parse numero intiksi.
+            try {
+                Integer.parseInt(simulointiAikaTxtField.getText());
+            } catch (NumberFormatException e) {
+                errorMessage += "Vääränlainen syöttö. Syötä kokonaisluku!\n"; 
+            }
+        }
+        if (yLaakarienLkmTxtField.getText() == null || yLaakarienLkmTxtField.getText().length() == 0) {
+            errorMessage += "Syötä numero!\n"; 
+        } else {
+            // koita parse numero intiksi.
+            try {
+                Integer.parseInt(yLaakarienLkmTxtField.getText());
+            } catch (NumberFormatException e) {
+                errorMessage += "Vääränlainen syöttö. Syötä kokonaisluku!\n"; 
+            }
+        }
+        if (eLaakarienLkmTxtField.getText() == null || eLaakarienLkmTxtField.getText().length() == 0) {
+            errorMessage += "Syötä numero!\n"; 
+        } else {
+            // koita parse numero intiksi.
+            try {
+                Integer.parseInt(eLaakarienLkmTxtField.getText());
+            } catch (NumberFormatException e) {
+                errorMessage += "Vääränlainen syöttö. Syötä kokonaisluku!\n"; 
+            }
+        }
+        if (errorMessage.length() == 0) {
+            return true;
+        } else {
+            // Show the error message.
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Invalid Fields");
+            alert.setHeaderText("Please correct invalid fields");
+            alert.setContentText(errorMessage);
+            
+            alert.showAndWait();
+            
+            return false;
+        }
+    }
+    
+    // JavaFX-sovelluksen (käyttöliittymän) käynnistäminen
+    public static void main(String[] args) {
 		launch(args);
 	}
-
-	
 }
-
