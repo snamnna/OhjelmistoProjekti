@@ -162,13 +162,13 @@ public class TESTISimulaationGUI extends Application implements ISimulaattorinUI
 	@Override
 	public int getYlaakarienLkm() {
 		//tänne textfieldist se määrä mikä saadaan tietty käyttäjält! 
-		return 0;
+		return Integer.parseInt(yLaakarienLkmTxtField.getText());
 	}
 
 	@Override
 	public int getElaakarienLkm() {
 		//tänne sama homma, textfieldist
-		return 0;
+		return Integer.parseInt(eLaakarienLkmTxtField.getText());
 	}
 
 	@Override
