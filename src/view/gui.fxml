@@ -11,9 +11,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TESTISimulaationGUI">
    <top>
@@ -21,6 +23,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleNew" text="New" />
+                  <MenuItem mnemonicParsing="false" text="Save" />
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
@@ -31,7 +35,7 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
             </items>
           </Menu>
         </menus>
@@ -84,8 +88,8 @@
                   <Button layoutX="53.0" layoutY="457.0" mnemonicParsing="false" onAction="#handleAloitaSimulointi" text="Aloita simulointi" AnchorPane.leftAnchor="53.0" AnchorPane.topAnchor="457.0" />
                   <ButtonBar layoutX="6.0" layoutY="494.0" prefHeight="40.0" prefWidth="170.0">
                     <buttons>
-                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Nopeuta" />
-                      <Button mnemonicParsing="false" prefHeight="25.0" text="Hidasta" />
+                        <Button mnemonicParsing="false" onAction="#handleNopeuta" prefHeight="25.0" prefWidth="98.0" text="Nopeuta" />
+                      <Button mnemonicParsing="false" onAction="#handleHidasta" prefHeight="25.0" text="Hidasta" />
                     </buttons>
                   </ButtonBar>
                </children>
@@ -102,7 +106,47 @@
             </AnchorPane>
             <AnchorPane prefHeight="573.0" prefWidth="296.0">
                <children>
-                  <Pane fx:id="tuloksetPane" layoutX="42.0" layoutY="54.0" prefHeight="519.0" prefWidth="316.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0" />
+                  <Pane fx:id="tuloksetPane" layoutX="42.0" layoutY="54.0" prefHeight="519.0" prefWidth="316.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                     <children>
+                        <GridPane layoutX="8.0" layoutY="14.0" prefHeight="309.0" prefWidth="300.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Simuloinnin kokonaisaika" />
+                              <Label text="Yleislääkäreitä" GridPane.rowIndex="2" />
+                              <Label text="Erikoislääkäreitä" GridPane.rowIndex="3" />
+                              <Label text="Laboratoriokäyntejä" GridPane.rowIndex="4" />
+                              <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
+                              <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                              <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                              <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                              <Label text="Käyttöaste (utilization)" GridPane.rowIndex="5" />
+                              <Label text="Suoritusteho (throughput)" GridPane.rowIndex="6" />
+                              <Label text="Label" GridPane.rowIndex="7" />
+                              <Label text="Label" GridPane.rowIndex="8" />
+                              <Label text="Asiakkaita palveltu" GridPane.rowIndex="1" />
+                              <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+                              <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                              <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+                              <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+                              <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+                           </children>
+                        </GridPane>
+                     </children></Pane>
                   <Label text="Tulokset:" textFill="#575656" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <font>
                         <Font name="System Bold" size="14.0" />
