@@ -7,23 +7,23 @@ import simu.model.Asiakas;
 import simu.model.TapahtumanTyyppi;
 
 public interface IPalvelupiste {
-    void lisaaJonoon(Asiakas a);
+	void lisaaJonoon(Asiakas a);
 
-    Asiakas otaJonosta();
+	Asiakas otaJonosta();
 
-    boolean onJonossa();
+	boolean onJonossa();
 
-    boolean onVarattu();
+	boolean onVarattu();
 
-    void aloitaPalvelu();
+	void aloitaPalvelu();
 
-    void siirraAsiakas(Tapahtuma tapahtuma, Map<Integer, IPalvelupiste> palvelupisteet);
-    
-    TapahtumanTyyppi getSkeduloitavanTapahtumanTyyppi();
+	void siirraAsiakas(Tapahtuma tapahtuma, Map<Integer, IPalvelupiste> palvelupisteet);
 
-    Tapahtuma getViimeisinTapahtuma();
-    
-    int getID();
+	TapahtumanTyyppi getSkeduloitavanTapahtumanTyyppi();
 
-    String getJonoString();
+	Tapahtuma getViimeisinTapahtuma();
+
+	int getID();
+
+	String getJonoString();
 }
