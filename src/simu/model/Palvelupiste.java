@@ -11,47 +11,59 @@ import simu.model.util.IPalvelupiste;
 // Palvelupistekohtaiset toiminnallisuudet, laskutoimitukset (+ tarvittavat muuttujat) ja raportointi koodattava
 public abstract class Palvelupiste implements IPalvelupiste {
 
-    protected LinkedList<Asiakas> jono; // Tietorakennetoteutus
+	protected LinkedList<Asiakas> jono; // Tietorakennetoteutus
 
-    protected final ContinuousGenerator generator;
-    protected final Tapahtumalista tapahtumalista;
-    protected final TapahtumanTyyppi skeduloitavanTapahtumanTyyppi;
+	protected final ContinuousGenerator generator;
+	protected final Tapahtumalista tapahtumalista;
+	protected final TapahtumanTyyppi skeduloitavanTapahtumanTyyppi;
 
-    protected Tapahtuma viimeisinLuotuTapahtuma = new Tapahtuma(TapahtumanTyyppi.ELLABARR, 0);
+	protected Tapahtuma viimeisinLuotuTapahtuma = new Tapahtuma(TapahtumanTyyppi.ELLABARR, 0);
 
-    ContinuousGenerator jakauma;
+	protected final int ID;
 
+	private static int seuraavaID = 1;
 
-    //JonoStartegia strategia; //optio: asiakkaiden järjestys
+	ContinuousGenerator jakauma;
 
-    protected boolean varattu = false;
+	// JonoStartegia strategia; //optio: asiakkaiden järjestys
 
-    public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
-        this.tapahtumalista = tapahtumalista;
-        this.generator = generator;
-        this.skeduloitavanTapahtumanTyyppi = tyyppi;
-        jono = new LinkedList<>();
-    }
+	protected boolean varattu = false;
 
-    public void lisaaJonoon(Asiakas a) {   // Jonon 1. asiakas aina palvelussa
-        jono.add(a);
-    }
+	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
+		this.tapahtumalista = tapahtumalista;
+		this.generator = generator;
+		this.skeduloitavanTapahtumanTyyppi = tyyppi;
+		ID = getSeuraavaID();
+		jono = new LinkedList<>();
+	}
 
-    public Asiakas otaJonosta() {  // Poistetaan palvelussa ollut
-        varattu = false;
-        return jono.poll();
-    }
+	private int getSeuraavaID() {
+		return seuraavaID++;
+	}
 
-    public boolean onVarattu() {
-        return varattu;
-    }
+	public int getID() {
+		return ID;
+	}
 
-    public boolean onJonossa() {
-        return !jono.isEmpty();
-    }
+	public void lisaaJonoon(Asiakas a) { // Jonon 1. asiakas aina palvelussa
+		jono.add(a);
+	}
 
-    public Tapahtuma getViimeisinTapahtuma() {
-        return viimeisinLuotuTapahtuma;
-    }
+	public Asiakas otaJonosta() { // Poistetaan palvelussa ollut
+		varattu = false;
+		return jono.poll();
+	}
+
+	public boolean onVarattu() {
+		return varattu;
+	}
+
+	public boolean onJonossa() {
+		return !jono.isEmpty();
+	}
+
+	public Tapahtuma getViimeisinTapahtuma() {
+		return viimeisinLuotuTapahtuma;
+	}
 
 }
