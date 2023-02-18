@@ -1,5 +1,9 @@
 package simu.framework;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import controller.IKontrolleriVtoM;
 import simu.model.util.IPalvelupiste;
 
@@ -11,13 +15,15 @@ public abstract class Moottori extends Thread implements IMoottori {
 	private Kello kello;
 
 	protected Tapahtumalista tapahtumalista;
-	protected IPalvelupiste[] palvelupisteet;
+//	protected IPalvelupiste[] palvelupisteet;
+	protected Map<String, Map<Integer, IPalvelupiste>> palvelupisteet;
 	protected IKontrolleriVtoM kontrolleri;
 
 	public Moottori(IKontrolleriVtoM kontrolleri) {
 		this.kontrolleri = kontrolleri;
 		kello = Kello.getInstance();
 		tapahtumalista = new Tapahtumalista();
+		palvelupisteet = new HashMap<>();
 	}
 
 	public void setSimulointiaika(double aika) {
