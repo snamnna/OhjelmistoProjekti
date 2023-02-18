@@ -16,8 +16,9 @@ public abstract class Palvelupiste implements IPalvelupiste {
 	protected final ContinuousGenerator generator;
 	protected final Tapahtumalista tapahtumalista;
 	protected final TapahtumanTyyppi skeduloitavanTapahtumanTyyppi;
+	private final static int INITIAL_TAPAHTUMA_ID = -1;
 
-	protected Tapahtuma viimeisinLuotuTapahtuma = new Tapahtuma(TapahtumanTyyppi.ELLABARR, 0);
+	protected Tapahtuma viimeisinLuotuTapahtuma = new Tapahtuma(TapahtumanTyyppi.ELLABARR, 0, INITIAL_TAPAHTUMA_ID);
 
 	protected final int ID;
 
