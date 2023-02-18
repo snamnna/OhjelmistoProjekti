@@ -12,21 +12,17 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 
 	private ISimulaattorinUI ui;
 	private IMoottori moottori;
-	
-	
-	
+
 	public Kontrolleri(ISimulaattorinUI ui) {
 		this.ui = ui;
-		//Tähän lisää?
+		// Tähän lisää?
 	}
-	
-	
-	public void visualisoiAsiakas(){
-		/* Platform.runLater(new Runnable() {
-			public void run() {
-				 ui.getVisualisointi.uusiAsiakas();
-			}
-		}); */
+
+	public void visualisoiAsiakas() {
+		/*
+		 * Platform.runLater(new Runnable() { public void run() {
+		 * ui.getVisualisointi.uusiAsiakas(); } });
+		 */
 	}
 
 	@Override
@@ -34,14 +30,14 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 		// TODO Auto-generated method stub
 		moottori = new OmaMoottori(this); // luodaan uusi moottorisäie jokaista simulointia varten
 		moottori.setSimulointiaika(ui.getSimulointiAika());
-		moottori.setViive(ui.getViive()); //Matias muokkaa moottoria?
+		moottori.setViive(ui.getViive()); // Matias muokkaa moottoria?
 		ui.getVisualisointi().tyhjennaNaytto();
-		((Thread)moottori).start();
+		((Thread) moottori).start();
 	}
 
 	@Override
 	public int haeYlaakarienLkm() {
-		return 	ui.getYlaakarienLkm();
+		return ui.getYlaakarienLkm();
 	}
 
 	@Override
@@ -53,29 +49,30 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	public double haeLabJakauma() {
 		return ui.getLabraJakauma();
 	}
-	
+
 	@Override
 	public Map<String, Integer> haePalvelupisteet() {
 		Map<String, Integer> palvelupisteet = new HashMap<>();
-		palvelupisteet.put("SAIRAANHOITAJA", 1); //Kovakoodattu 1 koska sairaanhoitajia aina vain 1
+		palvelupisteet.put("SAIRAANHOITAJA", 1); // Kovakoodattu 1 koska sairaanhoitajia aina vain 1
 		palvelupisteet.put("YLaakari", haeYlaakarienLkm());
 		palvelupisteet.put("ELaakari", haeElaakarienLkm());
-		palvelupisteet.put("Labra", 1); //Kovakoodattu 1 koska labroja aina vain 1
+		palvelupisteet.put("Labra", 1); // Kovakoodattu 1 koska labroja aina vain 1
 		return palvelupisteet;
 	}
 
 	@Override
 	public void haeLoppuaika(double aika) {
-		//return moottori.getLoppuAika(); Matias hoitaa?
+		// return moottori.getLoppuAika(); Matias hoitaa?
 	}
 
 	@Override
 	public void hidasta() {
-		//moottori.setViive((long)(moottori.getViive()*1.10)); Tähän tarvitaan moottoria
+		// moottori.setViive((long)(moottori.getViive()*1.10)); Tähän tarvitaan
+		// moottoria
 	}
 
 	@Override
 	public void nopeuta() {
-		//moottori.setViive((long)(moottori.getViive()*0.9)); Tarvitaan moottoria
+		// moottori.setViive((long)(moottori.getViive()*0.9)); Tarvitaan moottoria
 	}
- }
+}
