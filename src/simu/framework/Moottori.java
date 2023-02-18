@@ -1,7 +1,6 @@
 package simu.framework;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import controller.IKontrolleriVtoM;
@@ -15,7 +14,6 @@ public abstract class Moottori extends Thread implements IMoottori {
 	private Kello kello;
 
 	protected Tapahtumalista tapahtumalista;
-//	protected IPalvelupiste[] palvelupisteet;
 	protected Map<Integer, IPalvelupiste> palvelupisteet;
 	protected IKontrolleriVtoM kontrolleri;
 
@@ -48,7 +46,8 @@ public abstract class Moottori extends Thread implements IMoottori {
 	}
 
 	private void yritaCTapahtumat() {
-		for (IPalvelupiste p : palvelupisteet) {
+		for (Integer key : palvelupisteet.keySet()) {
+			IPalvelupiste p = palvelupisteet.get(key);
 			if (!p.onVarattu() && p.onJonossa()) {
 				p.aloitaPalvelu();
 			}
