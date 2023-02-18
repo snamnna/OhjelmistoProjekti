@@ -53,7 +53,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	@Override
 	public Map<String, Integer> haePalvelupisteet() {
 		Map<String, Integer> palvelupisteet = new HashMap<>();
-		palvelupisteet.put("SAIRAANHOITAJA", 1); // Kovakoodattu 1 koska sairaanhoitajia aina vain 1
+		palvelupisteet.put("Sairaanhoitaja", 1); // Kovakoodattu 1 koska sairaanhoitajia aina vain 1
 		palvelupisteet.put("YLaakari", haeYlaakarienLkm());
 		palvelupisteet.put("ELaakari", haeElaakarienLkm());
 		palvelupisteet.put("Labra", 1); // Kovakoodattu 1 koska labroja aina vain 1
