@@ -13,6 +13,11 @@ public class Tapahtuma implements Comparable<Tapahtuma> {
 		this.aika = aika;
 		this.palvelupisteID = palvelupisteID;
 	}
+	
+	public Tapahtuma(TapahtumanTyyppi tyyppi, double aika) {
+		this.tyyppi = tyyppi;
+		this.aika = aika;
+	}
 
 	public void setPalvelupisteID(int ID) {
 		this.palvelupisteID = ID;
