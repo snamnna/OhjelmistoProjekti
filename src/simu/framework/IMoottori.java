@@ -3,7 +3,7 @@ package simu.framework;
 public interface IMoottori {
 	// Kontrolleri käyttää tätä rajapintaa
 	public void setSimulointiaika(double aika);
-	public void setLabJakauma(); //asetettava jakauma
+	protected void setLabJakauma(); //asetettava jakauma
 	public void setYlaakarienLkm(); //asetettavat palvelupisteet
 	public void setElaakarienLkm();
 	//tarvitaanko muita?
