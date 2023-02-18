@@ -16,7 +16,7 @@ public abstract class Moottori extends Thread implements IMoottori {
 
 	protected Tapahtumalista tapahtumalista;
 //	protected IPalvelupiste[] palvelupisteet;
-	protected Map<String, Map<Integer, IPalvelupiste>> palvelupisteet;
+	protected Map<Integer, IPalvelupiste> palvelupisteet;
 	protected IKontrolleriVtoM kontrolleri;
 
 	public Moottori(IKontrolleriVtoM kontrolleri) {
