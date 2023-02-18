@@ -8,6 +8,7 @@ import simu.framework.Tapahtumalista;
 import simu.framework.Trace;
 import simu.model.util.IPalvelupiste;
 
+import java.util.Map;
 import java.util.Random;
 
 public class Sairaanhoitaja extends Palvelupiste {
@@ -24,12 +25,12 @@ public class Sairaanhoitaja extends Palvelupiste {
         double palveluaika = generator.sample();
         // arvo meneekö erikoislääkärille vai yleislääkärille
         Tapahtuma tapahtuma = new Tapahtuma(random.nextBoolean() ? TapahtumanTyyppi.YLARR : TapahtumanTyyppi.ELARR,
-                Kello.getInstance().getAika() + palveluaika);
+                Kello.getInstance().getAika() + palveluaika, this.ID);
         tapahtumalista.lisaa(tapahtuma);
         viimeisinLuotuTapahtuma = tapahtuma;
     }
 
-    public void siirraAsiakas(Tapahtuma tapahtuma, IPalvelupiste[] palvelupisteet) {
+    public void siirraAsiakas(Tapahtuma tapahtuma, Map<Integer, IPalvelupiste> palvelupisteet) {
         lisaaJonoon(new Asiakas());
     }
 
