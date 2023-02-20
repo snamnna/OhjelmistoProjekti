@@ -14,5 +14,7 @@ public interface IKontrolleriVtoM {
 	public Map<String, Integer> haePalvelupisteet();
 
 	public void visualisoiAsiakas();
+	
+	public Map<String, Integer> haePalvelupisteetTest();
 
 }
