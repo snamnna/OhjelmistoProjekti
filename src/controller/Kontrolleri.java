@@ -34,6 +34,16 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 		ui.getVisualisointi().tyhjennaNaytto();
 		((Thread) moottori).start();
 	}
+	
+	public void kaynnistaSimulointiTest() {
+		moottori = new OmaMoottori(this, true);
+		moottori.setSimulointiaika(1000);
+		moottori.setViive(50);
+		
+//		ui.getVisualisointi().tyhjennaNaytto();
+		
+		((Thread) moottori).start();
+	}
 
 	@Override
 	public int haeYlaakarienLkm() {
@@ -59,20 +69,28 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 		palvelupisteet.put("Labra", 1); // Kovakoodattu 1 koska labroja aina vain 1
 		return palvelupisteet;
 	}
+	
+	public Map<String, Integer> haePalvelupisteetTest() {
+		Map<String, Integer> palvelupisteet = new HashMap<>();
+		palvelupisteet.put("Sairaanhoitaja", 1); // Kovakoodattu 1 koska sairaanhoitajia aina vain 1
+		palvelupisteet.put("YLaakari", 1);
+		palvelupisteet.put("ELaakari", 1);
+		palvelupisteet.put("Labra", 1); // Kovakoodattu 1 koska labroja aina vain 1
+		return palvelupisteet;
+	}
 
 	@Override
 	public void haeLoppuaika(double aika) {
-		// return moottori.getLoppuAika(); Matias hoitaa?
+//		 return moottori.getLoppuAika();
 	}
 
 	@Override
 	public void hidasta() {
-		// moottori.setViive((long)(moottori.getViive()*1.10)); Tähän tarvitaan
-		// moottoria
+		 moottori.setViive((long)(moottori.getViive()*1.10));
 	}
 
 	@Override
 	public void nopeuta() {
-		// moottori.setViive((long)(moottori.getViive()*0.9)); Tarvitaan moottoria
+		 moottori.setViive((long)(moottori.getViive()*0.9));
 	}
 }
