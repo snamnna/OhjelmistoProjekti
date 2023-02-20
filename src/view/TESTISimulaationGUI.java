@@ -1,30 +1,21 @@
 package view;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.DecimalFormat;
-
-import ch.makery.address.util.DateUtil;
-import controller.*;
+import controller.IKontrolleriMtoV;
+import controller.Kontrolleri;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import simu.framework.Trace;
-import simu.framework.Trace.Level;
-import simu.model.OmaMoottori;
-import javafx.scene.*;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.*;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.*;
-import javafx.scene.text.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 
 
@@ -73,7 +64,6 @@ public class TESTISimulaationGUI extends Application implements ISimulaattorinUI
 	    
 	//Kontrollerin esittely (tarvitaan käyttöliittymässä)
 	private IKontrolleriMtoV kontrolleri;
-	private OmaMoottori moottori = new OmaMoottori();
 	private IVisualisointi naytto;
 	
 	@Override
