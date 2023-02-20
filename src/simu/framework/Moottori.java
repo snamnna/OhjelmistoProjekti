@@ -64,6 +64,11 @@ public abstract class Moottori extends Thread implements IMoottori {
 
 	private void viive() {
 		Trace.out(Trace.Level.INFO, "Viive: " + viive);
+		try {
+			sleep(viive);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public long getViive() {
