@@ -10,6 +10,7 @@ import simu.model.util.IPalvelupiste;
 
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Sairaanhoitaja extends Palvelupiste {
     public Sairaanhoitaja(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
@@ -19,7 +20,7 @@ public class Sairaanhoitaja extends Palvelupiste {
 
     // Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
     public void aloitaPalvelu() {
-        Random random = new Random();
+    	ThreadLocalRandom random = ThreadLocalRandom.current();
         Trace.out(Trace.Level.INFO, "Aloitetaan uusi palvelu asiakkaalle " + jono.peek().getId());
         varattu = true;
         double palveluaika = generator.sample();

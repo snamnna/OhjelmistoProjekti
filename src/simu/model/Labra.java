@@ -10,6 +10,7 @@ import simu.model.util.IPalvelupiste;
 
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static simu.model.OmaMoottori.*;
 
@@ -21,7 +22,7 @@ public class Labra extends Palvelupiste {
 
 	@Override
 	public void aloitaPalvelu() {
-		Random random = new Random();
+		ThreadLocalRandom random = ThreadLocalRandom.current();
 		Asiakas asiakas = jono.peek();
 		// arvo palveluaika
 		Trace.out(Trace.Level.INFO, "Aloitetaan uusi palvelu asiakkaalle " + asiakas.getId());

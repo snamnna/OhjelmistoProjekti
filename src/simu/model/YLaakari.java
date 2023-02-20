@@ -10,6 +10,7 @@ import simu.model.util.IPalvelupiste;
 
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class YLaakari extends Palvelupiste {
 
@@ -20,7 +21,7 @@ public class YLaakari extends Palvelupiste {
 
 	@Override
 	public void aloitaPalvelu() {
-		Random random = new Random();
+		ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		// arvo palveluaika
 		Trace.out(Trace.Level.INFO, "Aloitetaan uusi palvelu asiakkaalle " + jono.peek().getId());
