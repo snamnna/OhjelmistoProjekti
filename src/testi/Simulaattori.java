@@ -1,4 +1,5 @@
 package testi;
+import controller.Kontrolleri;
 import simu.framework.*;
 import simu.framework.Trace.Level;
 import simu.model.OmaMoottori;
@@ -6,10 +7,8 @@ import simu.model.OmaMoottori;
 public class Simulaattori { //Tekstipohjainen
 
 	public static void main(String[] args) {
-		
 		Trace.setTraceLevel(Level.INFO);
-		Moottori m = new OmaMoottori();
-		m.setSimulointiaika(1000);
-		m.aja();
+		Kontrolleri k = new Kontrolleri(null);
+		k.kaynnistaSimulointiTest();
 	}
 }
