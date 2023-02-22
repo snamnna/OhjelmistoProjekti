@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulaattori.view.SimulaattoriController">
+   <children>
+      <Label layoutX="24.0" layoutY="24.0" text="Simulaation visualisointi:" textFill="#575656" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <AnchorPane fx:id="parentPane" layoutY="42.0" minWidth="-Infinity" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
+         <children>
+            <Canvas fx:id="visualisointiCanvas" height="350.0" width="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
