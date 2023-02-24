@@ -3,7 +3,6 @@ package simulaattori.simu.model;
 import simulaattori.simu.framework.Kello;
 import simulaattori.simu.framework.Trace;
 
-// eetun kommentti
 
 // TODO:
 // Asiakas koodataan simulointimallin edellyttämällä tavalla (data!)
@@ -14,9 +13,14 @@ public class Asiakas {
 	private static int i = 1;
 	private static long sum = 0;
 	private boolean labrassaKayty = false;
+	//tallennetaan viimeisin annettu id tuloksia varten
+	private static int viimeisinID;
+	
 	
 	public Asiakas(){
 	    id = i++;
+	    //viimeisin id sama arvo, kuin id, eli i
+	    viimeisinID = i;
 	    
 		saapumisaika = Kello.getInstance().getAika();
 		Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo "+saapumisaika);
@@ -56,5 +60,9 @@ public class Asiakas {
 		sum += (poistumisaika-saapumisaika);
 		double keskiarvo = sum/id;
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
+	}
+
+	public static int getViimeisinID() {
+		return viimeisinID;
 	}
 }

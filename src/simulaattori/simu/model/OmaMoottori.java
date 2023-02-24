@@ -18,6 +18,10 @@ public class OmaMoottori extends Moottori {
 	private final Saapumisprosessi saapumisprosessi;
 	private Map<TapahtumanTyyppi, List<IPalvelupiste>> tyyppiToPalveluPMap;
 	private Boolean test = false;
+	
+	//luodaan tulos-olio ja departuret muuttuja tuloksien antamista varten
+	private Tulos tulokset = new Tulos(this);
+	private int departuret;
 
 	public OmaMoottori(IKontrolleriVtoM kontrolleri) {
 		super(kontrolleri);
@@ -65,6 +69,12 @@ public class OmaMoottori extends Moottori {
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t) { // B-vaiheen tapahtumat
 		TapahtumanTyyppi tyyppi = t.getTyyppi();
+		
+		//otetaan lasku departure tyyppisistä tapahtumista tuloksia varten
+		if(tyyppi == TapahtumanTyyppi.ELDEP || tyyppi == TapahtumanTyyppi.LABRA_DEPARTURE || tyyppi == TapahtumanTyyppi.YLDEP) {
+			departuret++;
+		}
+		
 		for (IPalvelupiste p : palvelupisteet.values()) {
 			System.out.println(p.getJonoString());
 		}
@@ -112,7 +122,12 @@ public class OmaMoottori extends Moottori {
 		// luodaanko tulokset tulos-luokassa ja sieltä sitten jotenkin tänne ja
 		// eteenpäin uille?
 		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
-		System.out.println("Tulokset ... puuttuvat vielä");
+		System.out.println("Saapuneet asiakkaat: " + tulokset.getArrivalCount());
+		System.out.println("Palveltujen asiakkaiden määrä: " + tulokset.getCompletedCount());
+	}
+	//deprature tapahtumien määrä tulos-luokalle.
+	public int getDeparturet() {
+		return departuret;
 	}
 
 	public void setLabJakauma() {
