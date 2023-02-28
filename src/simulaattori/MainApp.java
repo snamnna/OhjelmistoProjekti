@@ -4,7 +4,6 @@ import javafx.scene.layout.AnchorPane;
 import simulaattori.controller.IKontrolleriMtoV;
 import simulaattori.controller.Kontrolleri;
 import simulaattori.simu.model.OmaMoottori;
-import simulaattori.simu.model.Tulos;
 import simulaattori.simu.model.TulosDAO;
 import simulaattori.view.*;
 import javafx.application.Application;
@@ -15,17 +14,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import entity.Tulos;
+
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
     public static void main(String[] args) {
     	
-    	
-    	TulosDAO dao = new TulosDAO();
-    	
         launch(MainApp.class);
         
-        Tulos tulokset = new Tulos();
     }
 
+    private TulosDAO dao = new TulosDAO();
     private Stage primaryStage;
     private BorderPane rootLayout;
     private KayttajatiedotController kayttajatiedotController;
@@ -114,6 +112,9 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+        Tulos tulokset = new Tulos();
+        dao.vieTulos(new Tulos());
     }
 
 

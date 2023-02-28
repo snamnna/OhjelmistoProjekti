@@ -1,6 +1,7 @@
 package simulaattori.simu.model;
 
 import eduni.distributions.Negexp;
+import entity.Tulos;
 import simulaattori.simu.framework.*;
 import simulaattori.simu.model.util.FPalvelupiste;
 import simulaattori.simu.model.util.IPalvelupiste;

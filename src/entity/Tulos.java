@@ -1,7 +1,13 @@
-package simulaattori.simu.model;
+package entity;
 
 import jakarta.persistence.*;
 import simulaattori.simu.framework.Kello;
+import simulaattori.simu.model.Asiakas;
+import simulaattori.simu.model.ELaakari;
+import simulaattori.simu.model.Labra;
+import simulaattori.simu.model.OmaMoottori;
+import simulaattori.simu.model.Sairaanhoitaja;
+import simulaattori.simu.model.YLaakari;
 
 
 @Entity

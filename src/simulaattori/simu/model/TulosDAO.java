@@ -1,5 +1,6 @@
 package simulaattori.simu.model;
 
+import entity.Tulos;
 import jakarta.persistence.*;
 
 public class TulosDAO {
@@ -19,6 +20,6 @@ public class TulosDAO {
 		em.getTransaction().begin();
 		em.persist(tulos);
 		em.getTransaction().commit();
+		System.out.println("Tulokset viety");
 	}
-	
 }
