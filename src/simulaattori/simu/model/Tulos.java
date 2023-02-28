@@ -1,10 +1,20 @@
 package simulaattori.simu.model;
 
+import jakarta.persistence.*;
+
+
+@Entity
+@Table(name="tulokset")
 public class Tulos {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id")
+	private int id;
 	
 	private int arrivalCount;
 	private int completedCount;
-	private double time;
+	private double simTime;
 	private double busyTime;
 	private double responseTime;
 	private double waitingTime;
@@ -15,6 +25,8 @@ public class Tulos {
 	private double averageWaitingTime;
 
 	private OmaMoottori moottori;
+
+	public Tulos() {}
 	
 	public Tulos(OmaMoottori moottori) {
 		this.moottori = moottori;
@@ -39,7 +51,7 @@ public class Tulos {
 	//Simuloinnin kokonaisaika T
 	public double getKokonaisaika() {
 		//haetaanko mainappista?
-		return time;
+		return simTime;
 	}
 	
 	//Busy time B, palvelupistekohtainen aktiiviaika
@@ -65,7 +77,7 @@ public class Tulos {
 	
 	//Throughput X, suoritusteho X=C/T
 	public double getThroughput() {
-		throughput = completedCount/time;
+		throughput = completedCount/simTime;
 		return throughput;
 	}
 	
@@ -83,7 +95,7 @@ public class Tulos {
 	
 	//Keskimääräinen jononpituus N
 	public double getAverageWaitingTime() {
-		averageWaitingTime = waitingTime/time;
+		averageWaitingTime = waitingTime/simTime;
 		return averageWaitingTime;
 	}
 }

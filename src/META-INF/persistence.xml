@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             version="3.0"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+ <persistence-unit name="DevSimulaatio" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <properties>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/simulaattori"/>
+      <property name="jakarta.persistence.jdbc.user" value="dbuser"/>
+      <property name="jakarta.persistence.jdbc.password" value="dbpass"/>
+      <property name="jakarta.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
+      <property name="hibernate.show_sql" value="true" />
+      <property name="hibernate.dialect" value ="org.hibernate.dialect.MySQLInnoDBDialect" />
+    </properties>
+  </persistence-unit>
+</persistence>
+
