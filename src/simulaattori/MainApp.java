@@ -19,11 +19,16 @@ import entity.Tulos;
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
     public static void main(String[] args) {
     	
+    	TulosDAO dao = new TulosDAO();
+    	
         launch(MainApp.class);
+        
+        Tulos tulokset = new Tulos();
+        dao.vieTulos(new Tulos());
         
     }
 
-    private TulosDAO dao = new TulosDAO();
+   
     private Stage primaryStage;
     private BorderPane rootLayout;
     private KayttajatiedotController kayttajatiedotController;
@@ -113,8 +118,7 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
             e.printStackTrace();
         }
         
-        Tulos tulokset = new Tulos();
-        dao.vieTulos(new Tulos());
+        
     }
 
 

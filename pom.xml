@@ -21,6 +21,14 @@
           <release>17</release>
         </configuration>
       </plugin>
+      <plugin>
+ <groupId>org.openjfx</groupId>
+ <artifactId>javafx-maven-plugin</artifactId>
+ <version>0.0.8</version>
+ <configuration>
+ <mainClass>ch.package.Main</mainClass>
+ </configuration>
+ </plugin> 
     </plugins>
   </build>
   <dependencies>
@@ -43,5 +51,30 @@
         <artifactId>mysql-connector-java</artifactId>
         <version>8.0.32</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
+ <dependency>
+ <groupId>org.openjfx</groupId>
+ <artifactId>javafx</artifactId>
+ <version>11</version>
+ <type>pom</type>
+ </dependency>
+ <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-graphics -->
+ <dependency>
+ <groupId>org.openjfx</groupId>
+ <artifactId>javafx-graphics</artifactId>
+ <version>11</version>
+ </dependency>
+ <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+ <dependency>
+ <groupId>org.openjfx</groupId>
+ <artifactId>javafx-fxml</artifactId>
+ <version>11</version>
+ </dependency>
+ <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
+ <dependency>
+ <groupId>org.openjfx</groupId>
+ <artifactId>javafx-controls</artifactId>
+ <version>11</version>
+ </dependency> 
   </dependencies>
 </project>

@@ -10,7 +10,7 @@ public class MAriaDBConnector {
 	public static EntityManager getInstance() {
 		if(em==null) {
 			if(emf==null) {
-				emf = Persistence.createEntityManagerFactory("DevSimulaatio");
+				emf = Persistence.createEntityManagerFactory("DevPU");
 			}
 			em = emf.createEntityManager();
 		}
