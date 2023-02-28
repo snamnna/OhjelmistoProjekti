@@ -12,6 +12,8 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ELaakari extends Palvelupiste {
+	
+	private static double kokPalveluaika;
 
 	public ELaakari(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
 		super(generator, tapahtumalista, tyyppi);
@@ -35,6 +37,7 @@ public class ELaakari extends Palvelupiste {
 		}
 		tapahtumalista.lisaa(tapahtuma);
 		viimeisinLuotuTapahtuma = tapahtuma;
+		kokPalveluaika =+ palveluaika;
 	}
 
 	@Override
@@ -52,5 +55,9 @@ public class ELaakari extends Palvelupiste {
 
 	public String getJonoString() {
 		return jono.toString() + "\n elaakari";
+	}
+	
+	public static double getKokPalveluaika() {
+		return kokPalveluaika;
 	}
 }

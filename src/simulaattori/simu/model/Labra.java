@@ -12,6 +12,9 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Labra extends Palvelupiste {
+	
+	private static double kokPalveluaika;
+	
 	public Labra(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
 		super(generator, tapahtumalista, tyyppi);
 		jakauma = new Normal(0.5, 0.5);
@@ -40,6 +43,7 @@ public class Labra extends Palvelupiste {
 		viimeisinLuotuTapahtuma = tapahtuma;
 		tapahtumalista.lisaa(tapahtuma);
 		jono.peek().setLabrakaynti(true);
+		kokPalveluaika =+ palveluaika;
 	}
 
 	@Override
@@ -63,6 +67,10 @@ public class Labra extends Palvelupiste {
 
 	public String getJonoString() {
 		return jono.toString() + "\n labra";
+	}
+	
+	public static double getKokPalveluaika() {
+		return kokPalveluaika;
 	}
 }
 

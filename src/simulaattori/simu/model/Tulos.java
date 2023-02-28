@@ -1,6 +1,7 @@
 package simulaattori.simu.model;
 
 import jakarta.persistence.*;
+import simulaattori.simu.framework.Kello;
 
 
 @Entity
@@ -23,6 +24,8 @@ public class Tulos {
 	private double utilization;
 	private double averageResponseTime;
 	private double averageWaitingTime;
+	
+	Kello kello = Kello.getInstance();
 
 	private OmaMoottori moottori;
 
@@ -30,6 +33,10 @@ public class Tulos {
 	
 	public Tulos(OmaMoottori moottori) {
 		this.moottori = moottori;
+		completedCount = moottori.getDeparturet();
+		arrivalCount = Asiakas.getViimeisinID();
+		simTime = kello.getAika();
+		busyTime = ELaakari.getKokPalveluaika() + YLaakari.getKokPalveluaika() + Sairaanhoitaja.getKokPalveluaika() + Labra.getKokPalveluaika();
 	}
 
 
@@ -50,12 +57,13 @@ public class Tulos {
 	
 	//Simuloinnin kokonaisaika T
 	public double getKokonaisaika() {
-		//haetaanko mainappista?
+		simTime = kello.getAika();
 		return simTime;
 	}
 	
 	//Busy time B, palvelupistekohtainen aktiiviaika
 	public double getBusyTime() {
+		busyTime = ELaakari.getKokPalveluaika() + YLaakari.getKokPalveluaika() + Sairaanhoitaja.getKokPalveluaika() + Labra.getKokPalveluaika();
 		return busyTime;
 	}
 	

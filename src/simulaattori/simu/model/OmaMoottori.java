@@ -121,9 +121,10 @@ public class OmaMoottori extends Moottori {
 	protected void tulokset() {
 		// luodaanko tulokset tulos-luokassa ja sieltä sitten jotenkin tänne ja
 		// eteenpäin uille?
-		System.out.println("Simulointi päättyi kello " + Kello.getInstance().getAika());
+		System.out.println("Simuloinnin kokonaisaika " + tulokset.getKokonaisaika());
 		System.out.println("Saapuneet asiakkaat: " + tulokset.getArrivalCount());
 		System.out.println("Palveltujen asiakkaiden määrä: " + tulokset.getCompletedCount());
+		System.out.println("Kokonais busy time " + tulokset.getBusyTime());
 	}
 	//deprature tapahtumien määrä tulos-luokalle.
 	public int getDeparturet() {
