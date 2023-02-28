@@ -3,6 +3,7 @@ package simulaattori;
 import javafx.scene.layout.AnchorPane;
 import simulaattori.controller.IKontrolleriMtoV;
 import simulaattori.controller.Kontrolleri;
+import simulaattori.simu.model.OmaMoottori;
 import simulaattori.simu.model.Tulos;
 import simulaattori.simu.model.TulosDAO;
 import simulaattori.view.*;
@@ -17,15 +18,12 @@ import java.io.IOException;
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
     public static void main(String[] args) {
     	
-    	Tulos tulokset;
+    	
     	TulosDAO dao = new TulosDAO();
     	
         launch(MainApp.class);
         
-    	//kokeiltiin hakee tuloksii tietokannasta ja tulostaa pari tietoa
-    	tulokset = dao.haeTulos(1);
-    	
-    	System.out.println(tulokset.getArrivalCount());
+        Tulos tulokset = new Tulos();
     }
 
     private Stage primaryStage;

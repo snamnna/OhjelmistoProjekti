@@ -7,12 +7,12 @@ import simulaattori.simu.framework.Kello;
 @Entity
 @Table(name="tulokset")
 public class Tulos {
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-	
+
 	private int arrivalCount;
 	private int completedCount;
 	private double simTime;
@@ -24,19 +24,17 @@ public class Tulos {
 	private double utilization;
 	private double averageResponseTime;
 	private double averageWaitingTime;
-	
+
 	Kello kello = Kello.getInstance();
 
-	private OmaMoottori moottori;
-
-	public Tulos() {}
-	
-	public Tulos(OmaMoottori moottori) {
-		this.moottori = moottori;
-		completedCount = moottori.getDeparturet();
+	public Tulos() {
+		completedCount = OmaMoottori.departuret;
 		arrivalCount = Asiakas.getViimeisinID();
 		simTime = kello.getAika();
 		busyTime = ELaakari.getKokPalveluaika() + YLaakari.getKokPalveluaika() + Sairaanhoitaja.getKokPalveluaika() + Labra.getKokPalveluaika();
+		throughput = completedCount/simTime;
+		utilization = busyTime / simTime;
+		serviceTime = busyTime/completedCount;
 	}
 
 
@@ -48,62 +46,67 @@ public class Tulos {
 	//Completed count, C kokonaismäärä palveltuja asiakkaita (departuret)
 	public int getCompletedCount() {
 		//voidaan myös tehä setterillä, en ollut varma mikä ois paras systeemi niin tein suoraan tänne
-		completedCount = moottori.getDeparturet();
+		completedCount = OmaMoottori.departuret;
 		return completedCount;
 	}
-	
-	//HUOM: tästä alaspäin en oikein tiennyt miten tehdä näitä kun koodi aika erilaista kuin esimerkeissä
-	//enkä miettimisenkään jälkeen oikein keksinyt mitään. Sorii -Tuisku
-	
+
 	//Simuloinnin kokonaisaika T
 	public double getKokonaisaika() {
 		simTime = kello.getAika();
 		return simTime;
 	}
-	
-	//Busy time B, palvelupistekohtainen aktiiviaika
+
+	//Busy time B, palvelupisteiden aktiiviaika
 	public double getBusyTime() {
 		busyTime = ELaakari.getKokPalveluaika() + YLaakari.getKokPalveluaika() + Sairaanhoitaja.getKokPalveluaika() + Labra.getKokPalveluaika();
 		return busyTime;
 	}
-	
-	//Response time Ri palvelupisteen läpimenoaika
-	public double getResponseTime() {
-		return responseTime;
-	}
-	
-	//Waiting time W, kokonaisoleskeluaika palvelupisteessä 
-	//(kaikkien asiakkaiden läpimenoaikojen summa)
-	public double getWaitingTime() {
-		return waitingTime;
-	}
-	
+
 	//Utilization U, palvelupisteen käyttöaste
 	public double getUtilization() {
+		utilization = busyTime / simTime;
 		return utilization;
 	}
-	
+
 	//Throughput X, suoritusteho X=C/T
 	public double getThroughput() {
 		throughput = completedCount/simTime;
 		return throughput;
 	}
-	
+
 	//Service time S, palvelupisteen keskimääräinen palveluaika
 	public double getServiceTime() {
 		serviceTime = busyTime/completedCount;
 		return serviceTime;
 	}
+
 	
+	
+	
+	
+	
+	//TODO: Keksi kuinka
+
 	//Response time R, keskimääräinen palvelupisteen läpimenoaika
 	public double getAverageResponseTime() {
 		averageResponseTime = waitingTime/completedCount;
 		return averageResponseTime;
 	}
-	
+
 	//Keskimääräinen jononpituus N
 	public double getAverageWaitingTime() {
 		averageWaitingTime = waitingTime/simTime;
 		return averageWaitingTime;
+	}
+
+	//Response time Ri palvelupisteen läpimenoaika
+	public double getResponseTime() {
+		return responseTime;
+	}
+
+	//Waiting time W, kokonaisoleskeluaika palvelupisteessä 
+	//(kaikkien asiakkaiden läpimenoaikojen summa)
+	public double getWaitingTime() {
+		return waitingTime;
 	}
 }

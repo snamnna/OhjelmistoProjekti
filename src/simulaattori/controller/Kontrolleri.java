@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javafx.application.Platform;
 import simulaattori.simu.framework.IMoottori;
+import simulaattori.simu.framework.Moottori;
 import simulaattori.simu.model.OmaMoottori;
 import simulaattori.view.ISimulaattorinUI;
 
@@ -93,5 +94,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	@Override
 	public void nopeuta() {
 		 moottori.setViive((long)(moottori.getViive()*0.9));
+	}
+	
+	public Moottori getMoottori() {
+		return (Moottori) moottori;
 	}
 }

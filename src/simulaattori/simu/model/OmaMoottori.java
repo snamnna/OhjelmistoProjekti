@@ -20,8 +20,8 @@ public class OmaMoottori extends Moottori {
 	private Boolean test = false;
 	
 	//luodaan tulos-olio ja departuret muuttuja tuloksien antamista varten
-	private Tulos tulokset = new Tulos(this);
-	private int departuret;
+	private Tulos tulokset = new Tulos();
+	public static int departuret;
 
 	public OmaMoottori(IKontrolleriVtoM kontrolleri) {
 		super(kontrolleri);
