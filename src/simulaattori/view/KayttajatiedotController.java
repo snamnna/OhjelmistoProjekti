@@ -77,6 +77,10 @@ public class KayttajatiedotController {
     public Integer getLabraLkm() {
         return Integer.parseInt(sairaanhoitajaLkmTextField.getText());
     }
+    
+    public Integer setELaakarienLkm() {
+    	return 5;
+    }
 
     private boolean isInputValid() {
         String errorMessage = "";

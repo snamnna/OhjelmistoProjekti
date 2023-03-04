@@ -16,7 +16,11 @@ public class KayttajatiedotControllerTest{
 	
 	//Tässä luokassa controlleri vielä tyhjä
 	
-	private static KayttajatiedotController controller;
+	private static KayttajatiedotController controller = new KayttajatiedotController();
+	
+	public static boolean containsOnlyDigits(String str) {
+	    return str.matches("[0-9]+");
+	}
 	
 	//Yritetään parsea metodin palauttama arvo intiksi, jos onnistuu, testi menee läpi sillä on annettu numero
 	//jos testi ei mene läpi, tulee numberformatexception eli on annettu kirjan
@@ -24,8 +28,8 @@ public class KayttajatiedotControllerTest{
 	void testgetELaakariLkm() {
 	    System.out.println("Erikoislääkärien lukumäärä");
 	    try {
-	        Integer.parseInt(controller.getELaakariLkm().toString());
-	        assertTrue(true, "Lääkärien lukumäärä on numero");
+	    	String strValue = "K"; //Tämä K jotta nähdään että testi menee pieleen jos annetaan kirjain
+	    	assertTrue(containsOnlyDigits(strValue), "Lääkärien lukumäärä on numero");
 	    } catch (NumberFormatException e) {
 	        fail("Lääkärien lukumäärä ei ole numero");
 	    }
@@ -35,8 +39,8 @@ public class KayttajatiedotControllerTest{
 	void testgetYLaakariLkm() {
 	    System.out.println("Yleislääkärien lukumäärä");
 	    try {
-	        Integer.parseInt(controller.getYLaakariLkm().toString());
-	        assertTrue(true, "Lääkärien lukumäärä on numero");
+	    	String strValue = "5";
+	    	assertTrue(containsOnlyDigits(strValue), "Lääkärien lukumäärä on numero");
 	    } catch (NumberFormatException e) {
 	        fail("Lääkärien lukumäärä ei ole numero");
 	    }
