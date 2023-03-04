@@ -7,7 +7,7 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/simulaattori"/>
-      <property name="jakarta.persistence.jdbc.user" value="dbuser"/>
+      <property name="jakarta.persistence.jdbc.user" value="dbuser22"/>
       <property name="jakarta.persistence.jdbc.password" value="dbpass"/>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

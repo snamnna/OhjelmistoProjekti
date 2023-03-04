@@ -31,6 +31,7 @@ public class Tulos {
 	private double averageResponseTime;
 	private double averageWaitingTime;
 
+	@Transient
 	Kello kello = Kello.getInstance();
 
 	public Tulos() {
@@ -42,7 +43,9 @@ public class Tulos {
 		utilization = busyTime / simTime;
 		serviceTime = busyTime/completedCount;
 	}
-
+	public int getId() {
+		return id;
+	}
 
 	//Arrival count A, asiakkaiden  kokonaismäärä
 	public int getArrivalCount() {
@@ -85,10 +88,6 @@ public class Tulos {
 		serviceTime = busyTime/completedCount;
 		return serviceTime;
 	}
-
-	
-	
-	
 	
 	
 	//TODO: Keksi kuinka
@@ -115,4 +114,7 @@ public class Tulos {
 	public double getWaitingTime() {
 		return waitingTime;
 	}
+
+
+
 }

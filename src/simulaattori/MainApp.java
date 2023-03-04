@@ -26,6 +26,9 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         Tulos tulokset = new Tulos();
         dao.vieTulos(new Tulos());
         
+        Tulos kokeilu = dao.haeTulos(1);
+        System.out.println(kokeilu.getArrivalCount());
+        
     }
 
    
