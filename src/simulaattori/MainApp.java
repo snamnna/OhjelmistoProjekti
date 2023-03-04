@@ -19,23 +19,15 @@ import entity.Tulos;
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
     public static void main(String[] args) {
     	
-    	TulosDAO dao = new TulosDAO();
-    	
         launch(MainApp.class);
         
-        Tulos tulokset = new Tulos();
-        dao.vieTulos(new Tulos());
-        
-        Tulos kokeilu = dao.haeTulos(1);
-        System.out.println(kokeilu.getArrivalCount());
-        
     }
-
    
     private Stage primaryStage;
     private BorderPane rootLayout;
     private KayttajatiedotController kayttajatiedotController;
     private SimulaattoriController simuController;
+    private static TuloksetController tulosController;
     private IKontrolleriMtoV kontrolleri;
 
     public void start(Stage primaryStage) {
@@ -115,8 +107,13 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("resources/Tulokset.fxml"));
             AnchorPane tulokset = (AnchorPane) loader.load();
-
+            
             rootLayout.setRight(tulokset);
+            
+            //Give the controller access to the main app
+            tulosController = loader.getController();
+            tulosController.setMainApp(this);
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -165,12 +162,11 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 
     @Override
     public void setLoppuaika(double aika) {
-
+    	
     }
-
-    @Override
+    
     public void setTulokset() {
-
+    	tulosController.setTulokset();
     }
 
     @Override

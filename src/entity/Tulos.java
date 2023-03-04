@@ -1,6 +1,7 @@
 package entity;
 
 import jakarta.persistence.*;
+import simulaattori.MainApp;
 import simulaattori.simu.framework.Kello;
 import simulaattori.simu.model.Asiakas;
 import simulaattori.simu.model.ELaakari;
@@ -8,6 +9,7 @@ import simulaattori.simu.model.Labra;
 import simulaattori.simu.model.OmaMoottori;
 import simulaattori.simu.model.Sairaanhoitaja;
 import simulaattori.simu.model.YLaakari;
+import simulaattori.view.KayttajatiedotController;
 
 
 @Entity
@@ -18,17 +20,24 @@ public class Tulos {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-
+	
+	private int yleislääkärit;
+	private int erikoislääkärit;
+	private int labraArrivalit;
 	private int arrivalCount;
 	private int completedCount;
 	private double simTime;
 	private double busyTime;
-	private double responseTime;
-	private double waitingTime;
 	private double serviceTime;
 	private double throughput;
 	private double utilization;
+	@Transient
+	private double responseTime;
+	@Transient
+	private double waitingTime;
+	@Transient
 	private double averageResponseTime;
+	@Transient
 	private double averageWaitingTime;
 
 	@Transient
@@ -42,6 +51,8 @@ public class Tulos {
 		throughput = completedCount/simTime;
 		utilization = busyTime / simTime;
 		serviceTime = busyTime/completedCount;
+		labraArrivalit = OmaMoottori.labrat;
+		
 	}
 	public int getId() {
 		return id;
@@ -88,7 +99,10 @@ public class Tulos {
 		serviceTime = busyTime/completedCount;
 		return serviceTime;
 	}
-	
+	//labrakäyntien määrä
+	public int getLabraArrivalit() {
+		return OmaMoottori.labrat;
+	}
 	
 	//TODO: Keksi kuinka
 

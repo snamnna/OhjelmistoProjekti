@@ -5,6 +5,7 @@ import entity.Tulos;
 import simulaattori.simu.framework.*;
 import simulaattori.simu.model.util.FPalvelupiste;
 import simulaattori.simu.model.util.IPalvelupiste;
+import simulaattori.view.TuloksetController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import simulaattori.MainApp;
 import simulaattori.controller.IKontrolleriVtoM;
 
 public class OmaMoottori extends Moottori {
@@ -23,6 +25,7 @@ public class OmaMoottori extends Moottori {
 	//luodaan tulos-olio ja departuret muuttuja tuloksien antamista varten
 	private Tulos tulokset = new Tulos();
 	public static int departuret;
+	public static int labrat;
 
 	public OmaMoottori(IKontrolleriVtoM kontrolleri) {
 		super(kontrolleri);
@@ -75,7 +78,10 @@ public class OmaMoottori extends Moottori {
 		if(tyyppi == TapahtumanTyyppi.ELDEP || tyyppi == TapahtumanTyyppi.LABRA_DEPARTURE || tyyppi == TapahtumanTyyppi.YLDEP) {
 			departuret++;
 		}
-		
+		//Lasketaan myös labrakäynnit tuloksia varten
+		if(tyyppi == TapahtumanTyyppi.LABRA_ARRIVAL) {
+			labrat++;
+		}
 		for (IPalvelupiste p : palvelupisteet.values()) {
 			System.out.println(p.getJonoString());
 		}
@@ -120,8 +126,7 @@ public class OmaMoottori extends Moottori {
 
 	@Override
 	protected void tulokset() {
-		// luodaanko tulokset tulos-luokassa ja sieltä sitten jotenkin tänne ja
-		// eteenpäin uille?
+		//TODO: Tähän pitäs saada nyt kutsuttuu sitä mainAppin setTulokset mut en taas onnistu
 		System.out.println("Simuloinnin kokonaisaika " + tulokset.getKokonaisaika());
 		System.out.println("Saapuneet asiakkaat: " + tulokset.getArrivalCount());
 		System.out.println("Palveltujen asiakkaiden määrä: " + tulokset.getCompletedCount());

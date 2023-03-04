@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minWidth="-Infinity" prefHeight="573.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minWidth="-Infinity" prefHeight="573.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulaattori.view.TuloksetController">
    <children>
       <Label text="Tulokset:" textFill="#575656" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
          <font>
@@ -27,29 +27,22 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <Label text="Simuloinnin kokonaisaika" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+            <Label fx:id="kokonaisaika" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
             <Label text="Asiakkaita palveltu" GridPane.rowIndex="1" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label fx:id="palveltu" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             <Label text="Yleislääkäreitä" GridPane.rowIndex="2" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label fx:id="ylaakarit" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
             <Label text="Erikoislääkäreitä" GridPane.rowIndex="3" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label fx:id="eLaakarit" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
             <Label text="Laboratoriokäyntejä" GridPane.rowIndex="4" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+            <Label fx:id="labroja" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
             <Label text="Käyttöaste (utilization)" GridPane.rowIndex="5" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <Label text="Suoritusteho (throughput)" GridPane.rowIndex="6" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Label text="Label" GridPane.rowIndex="7" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-            <Label text="Label" GridPane.rowIndex="8" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+            <Label fx:id="utilization" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Label text="Kesimääräinen palveluaika" GridPane.rowIndex="6" />
+            <Label fx:id="serviceTime" text="serviceTime" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </children>
