@@ -2,6 +2,7 @@ package simulaattori.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.input.MouseEvent;
 import simulaattori.MainApp;
 
 public class RootLayoutController {
@@ -25,4 +26,12 @@ public class RootLayoutController {
 		alert.setContentText("Authors: Sanna Lohkovuori, Matias Niemelä, Edvard Nivala, Tuisku Närhi");
 		alert.showAndWait();
 	}
+	
+	
+	// avaa Tietovarastoikkunan
+	@FXML
+	public void handleShowTietovarasto() {
+		//mainApp.showTietovarasto();
+	}
+	
 }
