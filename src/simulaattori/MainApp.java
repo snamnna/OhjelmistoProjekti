@@ -3,18 +3,14 @@ package simulaattori;
 import javafx.scene.layout.AnchorPane;
 import simulaattori.controller.IKontrolleriMtoV;
 import simulaattori.controller.Kontrolleri;
-import simulaattori.simu.model.OmaMoottori;
-import simulaattori.simu.model.TulosDAO;
 import simulaattori.view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-
-import entity.Tulos;
 
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
     public static void main(String[] args) {
@@ -117,9 +113,25 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
-        
     }
+    /*
+    public void showTietovarasto() {
+    	try {
+    		FXMLLoader loader = new FXMLLoader();
+        	loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
+        	Parent root = loader.load();
+        	
+        	tietovarastoController = loader.getController();
+        	
+        	Scene scene = new Scene(root);
+        	Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Tietovarasto");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    } */
 
 
     public void startSimulaattori() {
