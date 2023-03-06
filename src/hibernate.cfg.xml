@@ -3,16 +3,16 @@
     "-//Hibernate/Hibernate Configuration DTD//EN"
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/simulaattori</property>
-    <property name="hibernate.connection.username">dbuser22</property>
-    <property name="hibernate.connection.password">dbpass</property>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.hbm2ddl.auto">update</property>
-    <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.format_sql">true</property>
-    <property name="current_session_context_class">thread</property>
-    <mapping class="entity.Tulos"/>
-  </session-factory>
+	<session-factory>
+		<property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/simulaattori</property>
+		<property name="hibernate.connection.username">dbuser</property>
+		<property name="hibernate.connection.password">dbpass</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="current_session_context_class">thread</property>
+		<mapping class="entity.Tulos" />
+	</session-factory>
 </hibernate-configuration>
