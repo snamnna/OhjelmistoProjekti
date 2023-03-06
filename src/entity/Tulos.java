@@ -20,19 +20,29 @@ public class Tulos {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
+	@Column(name="arrivalCount")
+	private int arrivalCount;
+	@Column(name="completedCount")
+	private int completedCount;
+	@Column(name="simTime")
+	private double simTime;
+	@Column(name="busyTime")
+	private double busyTime;
+	@Column(name="serviceTime")
+	private double serviceTime;
+	@Column(name="throughput")
+	private double throughput;
+	@Column(name="utilization")
+	private double utilization;
+	@Column(name="averageResponseTime")
+	private double averageResponseTime;
+	@Column(name="averageWaitingTime")
+	private double averageWaitingTime;
+	
 	private int yleislääkärit; //pitää viel kattoo miten haetaan et saadaan tietokantaan
 	private int erikoislääkärit; //Sama homma
 	private int labraArrivalit;
-	private int arrivalCount;
-	private int completedCount;
-	private double simTime;
-	private double busyTime;
-	private double serviceTime;
-	private double throughput;
-	private double utilization;
 	private double waitingTime;
-	private double averageResponseTime;
-	private double averageWaitingTime;
 	//Transienttina, jotta hibernate ei huomioisi tyhjää muuttujaa
 	@Transient
 	private double responseTime;
