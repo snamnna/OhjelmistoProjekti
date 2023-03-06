@@ -21,6 +21,10 @@ public class TuloksetController {
 	private Label utilization;
 	@FXML
 	private Label serviceTime;
+	@FXML
+	private Label averageResponseTime;
+	@FXML
+	private Label averageWaitingTime;
 	
 	
 	private MainApp mainApp;
@@ -30,9 +34,8 @@ public class TuloksetController {
 	}
 	
 	@FXML
-	public void setTulokset() {
-		Tulos tulokset = new Tulos();
-		
+	public void setTulokset(Tulos tulokset) {
+
 		eLaakarit.setText(Integer.toString(mainApp.getElaakarienLkm()));
 		ylaakarit.setText(Integer.toString(mainApp.getYlaakarienLkm()));
 		palveltu.setText(Integer.toString(tulokset.getCompletedCount()));

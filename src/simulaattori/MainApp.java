@@ -12,6 +12,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+import entity.Tulos;
+
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
     public static void main(String[] args) {
     	
@@ -176,9 +178,10 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
     public void setLoppuaika(double aika) {
     	
     }
-    
-    public void setTulokset() {
-    	tulosController.setTulokset();
+    @Override
+    public void setTulokset(Tulos tulokset) {
+    	System.out.println("toimiiko mainAppp tulos");
+    	tulosController.setTulokset(tulokset);
     }
 
     @Override
@@ -190,4 +193,6 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
     public long getViive() {
         return kayttajatiedotController.getViive();
     }
+
+
 }

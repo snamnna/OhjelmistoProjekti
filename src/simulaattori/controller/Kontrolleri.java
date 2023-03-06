@@ -3,6 +3,7 @@ package simulaattori.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import entity.Tulos;
 import javafx.application.Platform;
 import simulaattori.simu.framework.IMoottori;
 import simulaattori.simu.framework.Moottori;
@@ -98,5 +99,10 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	
 	public Moottori getMoottori() {
 		return (Moottori) moottori;
+	}
+
+	@Override
+	public void setTulokset(Tulos tulokset) {
+		ui.setTulokset(tulokset);
 	}
 }

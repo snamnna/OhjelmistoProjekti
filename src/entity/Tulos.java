@@ -20,9 +20,8 @@ public class Tulos {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-	
-	private int yleislääkärit;
-	private int erikoislääkärit;
+	private int yleislääkärit; //pitää viel kattoo miten haetaan et saadaan tietokantaan
+	private int erikoislääkärit; //Sama homma
 	private int labraArrivalit;
 	private int arrivalCount;
 	private int completedCount;
@@ -31,14 +30,12 @@ public class Tulos {
 	private double serviceTime;
 	private double throughput;
 	private double utilization;
+	private double waitingTime;
+	private double averageResponseTime;
+	private double averageWaitingTime;
+	//Transienttina, jotta hibernate ei huomioisi tyhjää muuttujaa
 	@Transient
 	private double responseTime;
-	@Transient
-	private double waitingTime;
-	@Transient
-	private double averageResponseTime;
-	@Transient
-	private double averageWaitingTime;
 
 	@Transient
 	Kello kello = Kello.getInstance();
@@ -51,7 +48,10 @@ public class Tulos {
 		throughput = completedCount/simTime;
 		utilization = busyTime / simTime;
 		serviceTime = busyTime/completedCount;
-		labraArrivalit = OmaMoottori.labrat;
+		labraArrivalit = OmaMoottori.labrat;		
+		waitingTime = Asiakas.getWaitingTime();
+		averageResponseTime = waitingTime/completedCount;
+		averageWaitingTime = waitingTime/simTime;
 		
 	}
 	public int getId() {
@@ -103,31 +103,31 @@ public class Tulos {
 	public int getLabraArrivalit() {
 		return OmaMoottori.labrat;
 	}
-	
-	//TODO: Keksi kuinka
-
-	//Response time R, keskimääräinen palvelupisteen läpimenoaika
+	//Waiting time W, kokonaisoleskeluaika palvelupisteissä 
+	//(kaikkien asiakkaiden läpimenoaikojen summa)
+	public double getWaitingTime() {
+		waitingTime = Asiakas.getWaitingTime();
+		return waitingTime;
+	}
+	//Response time R, keskimääräinen palvelupisteiden läpimenoaika
 	public double getAverageResponseTime() {
 		averageResponseTime = waitingTime/completedCount;
 		return averageResponseTime;
 	}
-
 	//Keskimääräinen jononpituus N
 	public double getAverageWaitingTime() {
 		averageWaitingTime = waitingTime/simTime;
 		return averageWaitingTime;
 	}
+	
+	//TODO: HALUTAANKO YKSITTÄISEN PALVELUPISTEEN LÄPIMENOAIKAA? NYT ON JO KESKIARVO KAIKILLE -tuisku
 
 	//Response time Ri palvelupisteen läpimenoaika
 	public double getResponseTime() {
 		return responseTime;
 	}
 
-	//Waiting time W, kokonaisoleskeluaika palvelupisteessä 
-	//(kaikkien asiakkaiden läpimenoaikojen summa)
-	public double getWaitingTime() {
-		return waitingTime;
-	}
+
 
 
 

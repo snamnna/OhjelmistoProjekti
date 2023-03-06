@@ -2,6 +2,8 @@ package simulaattori.controller;
 
 import java.util.Map;
 
+import entity.Tulos;
+
 public interface IKontrolleriVtoM {
 	// Rajapinta, joka tarjotaan moottorille:
 	// hakee annetut arvot
@@ -12,6 +14,8 @@ public interface IKontrolleriVtoM {
 	int haeSairaanhoitajaLkm();
 
 	int haeLabraLkm();
+	
+	void setTulokset(Tulos tulokset);
 
 	Map<String, Integer> haePalvelupisteet();
 

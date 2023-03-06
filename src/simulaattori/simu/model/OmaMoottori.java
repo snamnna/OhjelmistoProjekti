@@ -126,11 +126,13 @@ public class OmaMoottori extends Moottori {
 
 	@Override
 	protected void tulokset() {
-		//TODO: Tähän pitäs saada nyt kutsuttuu sitä mainAppin setTulokset mut en taas onnistu
-		System.out.println("Simuloinnin kokonaisaika " + tulokset.getKokonaisaika());
-		System.out.println("Saapuneet asiakkaat: " + tulokset.getArrivalCount());
-		System.out.println("Palveltujen asiakkaiden määrä: " + tulokset.getCompletedCount());
-		System.out.println("Kokonais busy time " + tulokset.getBusyTime());
+		//Nää printataan? en saa muokattuu kuitenkaan ja vaik kommentois pois näiden printtaukset näkyy, en tajuu :DD -Tuiksu
+//		System.out.println("Simuloinnin kokonaisaika " + tulokset.getKokonaisaika());
+//		System.out.println("Saapuneet asiakkaat: " + tulokset.getArrivalCount());
+//		System.out.println("Palveltujen asiakkaiden määrä: " + tulokset.getCompletedCount());
+//		System.out.println("Kokonais busy time " + tulokset.getBusyTime());
+		Tulos tulokset = new Tulos();
+		kontrolleri.setTulokset(tulokset);
 	}
 	//deprature tapahtumien määrä tulos-luokalle.
 	public int getDeparturet() {

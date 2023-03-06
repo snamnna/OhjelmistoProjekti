@@ -10,6 +10,7 @@ public class Asiakas {
 	private double saapumisaika;
 	private double poistumisaika;
 	private final int id;
+	private static double waitingTime;
 	private static int i = 1;
 	private static long sum = 0;
 	private boolean labrassaKayty = false;
@@ -64,5 +65,9 @@ public class Asiakas {
 
 	public static int getViimeisinID() {
 		return viimeisinID;
+	}
+	public static double getWaitingTime() {
+		waitingTime = sum/viimeisinID;
+		return waitingTime;
 	}
 }
