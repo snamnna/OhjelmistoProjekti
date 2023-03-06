@@ -1,12 +1,11 @@
 package simulaattori.view;
 
-import entity.Tulos;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import simulaattori.MainApp;
 
 public class TuloksetController {
-	
+
 	@FXML
 	private Label eLaakarit;
 	@FXML
@@ -25,40 +24,47 @@ public class TuloksetController {
 	private Label averageResponseTime;
 	@FXML
 	private Label averageWaitingTime;
-	
-	
+
 	private MainApp mainApp;
 
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-	
-	@FXML
-	public void setTulokset() {
-		Tulos tulokset = new Tulos();
-		System.out.println("tuloksien kokeilu konsoliin koska ei saa niit guihin toimii");
-		System.out.println("e-lääkärit" + mainApp.getElaakarienLkm());
-		System.out.println("y-läälärit" + mainApp.getYlaakarienLkm());
-		System.out.println("palveltuja" + tulokset.getCompletedCount());
-		System.out.println("kokonaisaika " + tulokset.getKokonaisaika());
-		System.out.println("labroja" + tulokset.getLabraArrivalit());
-		System.out.println("utilization " + tulokset.getUtilization());
-		System.out.println("serviceTime" + tulokset.getServiceTime());
-		System.out.println("waiting time " + tulokset.getAverageWaitingTime());
-		
-		//kokonaisaika.setText("kokeillaan");
-//		palveltu.setText("kokeillaan");
-//		eLaakarit.setText(Integer.toString(mainApp.getElaakarienLkm()));
-//		ylaakarit.setText(Integer.toString(mainApp.getYlaakarienLkm()));
-//		palveltu.setText(Integer.toString(tulokset.getCompletedCount()));
-//		kokonaisaika.setText(Double.toString(tulokset.getKokonaisaika()));
-//		labroja.setText(Integer.toString(tulokset.getLabraArrivalit()));
-//		utilization.setText(Double.toString(tulokset.getUtilization()));
-//		serviceTime.setText(Double.toString(tulokset.getServiceTime()));
-		
-	
+
+	public void seteLaakarit(String eLaakarit) {
+		this.eLaakarit.setText(eLaakarit);
 	}
-	
-	
+
+	public void setYlaakarit(String ylaakarit) {
+		this.ylaakarit.setText(ylaakarit);
+	}
+
+	public void setPalveltu(String palveltu) {
+		this.palveltu.setText(palveltu);
+	}
+
+	public void setKokonaisaika(String kokonaisaika) {
+		this.kokonaisaika.setText(kokonaisaika);
+	}
+
+	public void setLabroja(String labroja) {
+		this.labroja.setText(labroja);
+	}
+
+	public void setUtilization(String utilization) {
+		this.utilization.setText(utilization);
+	}
+
+	public void setServiceTime(String serviceTime) {
+		this.serviceTime.setText(serviceTime);
+	}
+
+	public void setAverageResponseTime(String averageResponseTime) {
+		this.averageResponseTime.setText(averageResponseTime);
+	}
+
+	public void setAverageWaitingTime(String averageWaitingTime) {
+		this.averageWaitingTime.setText(averageWaitingTime);
+	}
 
 }
