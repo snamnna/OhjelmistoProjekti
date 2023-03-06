@@ -1,7 +1,5 @@
 package simulaattori.view;
 
-import entity.Tulos;
-
 public interface ISimulaattorinUI {
 
 	int getYlaakarienLkm();
@@ -17,10 +15,26 @@ public interface ISimulaattorinUI {
 	// Kontrolleri antaa käyttöliittymälle tuloksia, joita Moottori tuottaa
 	void setLoppuaika(double aika);
 
-	void setTulokset(); // asetetaan tulokset näkyville, tähän pitää selvittää mitä tyyppiä jne
-
 	// Kontrolleri tarvitsee
 	SimulaattoriController getVisualisointi();
-	
+
 	long getViive();
+
+	void setKokonaisaika(String aika);
+
+	void setPalveltu(String lkm);
+
+	void setELaakarienLkm(String lkm);
+
+	void setYLaakarienLkm(String lkm);
+
+	void setLabrakaynteja(String lkm);
+
+	void setKayttoaste(String kayttoaste);
+
+	void setKeskimaarainenPalveluaika(String aika);
+
+	void setLapimenoAika(String aika);
+
+	void setKeskimaarainenJonotusaika(String aika);
 }
