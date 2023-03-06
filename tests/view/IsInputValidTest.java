@@ -2,6 +2,8 @@ package view;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.awt.TextField;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import simulaattori.view.KayttajatiedotController;
@@ -11,9 +13,9 @@ class IsInputValidTest {
 	
     static KayttajatiedotController controller;
     
-    static JTextField aikaTextField = new JTextField();
-    static JTextField yLaakariLkmTextField = new JTextField();
-    static JTextField eLaakariLkmTextField = new JTextField();
+    static TextField aikaTextField = new TextField();
+    static TextField yLaakariLkmTextField = new TextField();
+    static TextField eLaakariLkmTextField = new TextField();
     
     @BeforeAll
     static void setUpBeforeClass(){
