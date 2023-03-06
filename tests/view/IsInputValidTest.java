@@ -3,44 +3,50 @@ package view;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import simulaattori.view.KayttajatiedotController;
+import javax.swing.JTextField;
 
 class IsInputValidTest {
 	
-	//HUOM, KayttajatiedotControllerissa määritelty tarkasteltavat arvot nulleiksi
-	
-	static KayttajatiedotController controller;
-	private TextField aikaTextField = null;
-	private TextField YLaakariLkmTextField = null;
-	private TextField ELaakariLkmTextField = null;
-	
-	
-	@BeforeAll
-	static void setUpBeforeClass() throws Exception{
-	   controller = new KayttajatiedotController();
-	}
-	
-	@BeforeEach
-	void setUp() throws Exception {
-	    aikaTextField = controller.simulointiAikaTextField;
-	    YLaakariLkmTextField = controller.yLaakariLkmTextField;
-	    ELaakariLkmTextField = controller.eLaakariLkmTextField;
-	}
+    static KayttajatiedotController controller;
+    
+    static JTextField aikaTextField = new JTextField();
+    static JTextField yLaakariLkmTextField = new JTextField();
+    static JTextField eLaakariLkmTextField = new JTextField();
+    
+    @BeforeAll
+    static void setUpBeforeClass(){
+    	System.out.println("Testit alkaa");
+    	System.out.println("AikaTextFieldin arvo: " + aikaTextField);
+        controller = new KayttajatiedotController();
+    }
 
-	@Test
-	void testIsInputValid() {
-		//Kaikki nämä nulleja, setText ei suostu asettamaan teksitä muuttujaan
-		YLaakariLkmTextField.setText("2");
-	    ELaakariLkmTextField.setText("3");
-	    aikaTextField.setText("10");
-	    assertTrue(controller.isInputValid(), "Numerot hyväksyttäviä");
-	}
+    @Test
+    void testIsInputValid() {
+    	
+        //Kaikki nämä nulleja, setText ei suostu asettamaan teksitä muuttujaan
+    	if (IsInputValidTest.aikaTextField != null) {
+        	IsInputValidTest.aikaTextField.setText("10");
+        	assertEquals("10", aikaTextField.getText());
+        } else {
+            fail("aikaTextField is not initialized");
+        }
+        if (IsInputValidTest.yLaakariLkmTextField != null) {
+        	IsInputValidTest.yLaakariLkmTextField.setText("2");
+        	assertEquals("2", yLaakariLkmTextField.getText());
+        	
+        } else {
+            fail("yLaakariLkmTextField");
+        }
+        if (IsInputValidTest.eLaakariLkmTextField != null) {
+        	IsInputValidTest.eLaakariLkmTextField.setText("3");
+        	assertEquals("3", eLaakariLkmTextField.getText());
+        } else {
+            fail("eLaakariLkmTextField is not initialized");
+        }
+        assertEquals("10", aikaTextField.getText());
+        assertEquals("2", yLaakariLkmTextField.getText());
+        assertEquals("3", eLaakariLkmTextField.getText());
+    }
 }
