@@ -41,6 +41,9 @@ public class Tulos {
 	
 	private int yleislääkärit; //pitää viel kattoo miten haetaan et saadaan tietokantaan
 	private int erikoislääkärit; //Sama homma
+	private int sairaanhoitajat;
+	private int labrat;
+	
 	private int labraArrivalit;
 	private double waitingTime;
 	//Transienttina, jotta hibernate ei huomioisi tyhjää muuttujaa
@@ -64,9 +67,39 @@ public class Tulos {
 		averageWaitingTime = waitingTime/simTime;
 		
 	}
+	
+	//setterit ja getterit palvelupisteiden määrän asettamiseksi ja saamiseksi
+	public int getYleislääkärit() {
+		return yleislääkärit;
+	}
+	public void setYleislääkärit(int yleislääkärit) {
+		this.yleislääkärit = yleislääkärit;
+	}
+	public int getErikoislääkärit() {
+		return erikoislääkärit;
+	}
+	public void setErikoislääkärit(int erikoislääkärit) {
+		this.erikoislääkärit = erikoislääkärit;
+	}
+	public int getSairaanhoitajat() {
+		return sairaanhoitajat;
+	}
+	public void setSairaanhoitajat(int sairaanhoitajat) {
+		this.sairaanhoitajat = sairaanhoitajat;
+	}
+	public int getLabrat() {
+		return labrat;
+	}
+	public void setLabrat(int labrat) {
+		this.labrat = labrat;
+	}
+	
+	
 	public int getId() {
 		return id;
 	}
+	
+	//getterit eri suureiden saamiseksi
 
 	//Arrival count A, asiakkaiden  kokonaismäärä
 	public int getArrivalCount() {
