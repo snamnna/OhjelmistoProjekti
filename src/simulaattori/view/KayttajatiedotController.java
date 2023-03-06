@@ -10,16 +10,16 @@ import simulaattori.MainApp;
 public class KayttajatiedotController {
 
     @FXML
-    private TextField eLaakariLkmTextField;
+	public TextField eLaakariLkmTextField = null;
 
     @FXML
-    private TextField simulointiAikaTextField;
+	public TextField simulointiAikaTextField = null;
 
     @FXML
     private TextField simulointiViiveTextField;
 
     @FXML
-    private TextField yLaakariLkmTextField;
+	public TextField yLaakariLkmTextField = null;
 
     @FXML
     private CheckBox enableAdvancedCheckBox;
@@ -77,12 +77,8 @@ public class KayttajatiedotController {
     public Integer getLabraLkm() {
         return Integer.parseInt(sairaanhoitajaLkmTextField.getText());
     }
-    
-    public Integer setELaakarienLkm() {
-    	return 5;
-    }
 
-    private boolean isInputValid() {
+    public boolean isInputValid() {
         String errorMessage = "";
 
         if (simulointiAikaTextField.getText() == null || simulointiAikaTextField.getText().length() == 0) {
