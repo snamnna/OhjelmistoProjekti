@@ -15,7 +15,7 @@ public interface IKontrolleriVtoM {
 
 	int haeLabraLkm();
 	
-	void setTulokset(Tulos tulokset);
+	void setTulokset();
 
 	Map<String, Integer> haePalvelupisteet();
 

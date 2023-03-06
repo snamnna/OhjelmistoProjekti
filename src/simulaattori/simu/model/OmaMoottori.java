@@ -131,8 +131,7 @@ public class OmaMoottori extends Moottori {
 //		System.out.println("Saapuneet asiakkaat: " + tulokset.getArrivalCount());
 //		System.out.println("Palveltujen asiakkaiden määrä: " + tulokset.getCompletedCount());
 //		System.out.println("Kokonais busy time " + tulokset.getBusyTime());
-		Tulos tulokset = new Tulos();
-		kontrolleri.setTulokset(tulokset);
+		kontrolleri.setTulokset();
 	}
 	//deprature tapahtumien määrä tulos-luokalle.
 	public int getDeparturet() {

@@ -46,7 +46,7 @@
             <Label text="Kesimääräinen palveluaika" GridPane.rowIndex="6" />
             <Label GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
             <Label text="Keskimääräinen läpimenoaika (palvelupisteiden)" wrapText="true" GridPane.rowIndex="7" />
-            <Label fx:id="serviceTIme" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label fx:id="serviceTime" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Label fx:id="averageResponseTime" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label text="Keskimääräinen jonotusaika" GridPane.rowIndex="8" />
             <Label fx:id="averageWaitingTime" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" />

@@ -34,15 +34,27 @@ public class TuloksetController {
 	}
 	
 	@FXML
-	public void setTulokset(Tulos tulokset) {
-
-		eLaakarit.setText(Integer.toString(mainApp.getElaakarienLkm()));
-		ylaakarit.setText(Integer.toString(mainApp.getYlaakarienLkm()));
-		palveltu.setText(Integer.toString(tulokset.getCompletedCount()));
-		kokonaisaika.setText(Double.toString(tulokset.getKokonaisaika()));
-		labroja.setText(Integer.toString(tulokset.getLabraArrivalit()));
-		utilization.setText(Double.toString(tulokset.getUtilization()));
-		serviceTime.setText(Double.toString(tulokset.getServiceTime()));
+	public void setTulokset() {
+		Tulos tulokset = new Tulos();
+		System.out.println("tuloksien kokeilu konsoliin koska ei saa niit guihin toimii");
+		System.out.println("e-lääkärit" + mainApp.getElaakarienLkm());
+		System.out.println("y-läälärit" + mainApp.getYlaakarienLkm());
+		System.out.println("palveltuja" + tulokset.getCompletedCount());
+		System.out.println("kokonaisaika " + tulokset.getKokonaisaika());
+		System.out.println("labroja" + tulokset.getLabraArrivalit());
+		System.out.println("utilization " + tulokset.getUtilization());
+		System.out.println("serviceTime" + tulokset.getServiceTime());
+		System.out.println("waiting time " + tulokset.getAverageWaitingTime());
+		
+		//kokonaisaika.setText("kokeillaan");
+//		palveltu.setText("kokeillaan");
+//		eLaakarit.setText(Integer.toString(mainApp.getElaakarienLkm()));
+//		ylaakarit.setText(Integer.toString(mainApp.getYlaakarienLkm()));
+//		palveltu.setText(Integer.toString(tulokset.getCompletedCount()));
+//		kokonaisaika.setText(Double.toString(tulokset.getKokonaisaika()));
+//		labroja.setText(Integer.toString(tulokset.getLabraArrivalit()));
+//		utilization.setText(Double.toString(tulokset.getUtilization()));
+//		serviceTime.setText(Double.toString(tulokset.getServiceTime()));
 		
 	
 	}
