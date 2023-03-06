@@ -10,16 +10,16 @@ import simulaattori.MainApp;
 public class KayttajatiedotController {
 
     @FXML
-	public TextField eLaakariLkmTextField = null;
+	public TextField eLaakariLkmTextField;
 
     @FXML
-	public TextField simulointiAikaTextField = null;
+	public TextField simulointiAikaTextField;
 
     @FXML
     private TextField simulointiViiveTextField;
 
     @FXML
-	public TextField yLaakariLkmTextField = null;
+	public TextField yLaakariLkmTextField;
 
     @FXML
     private CheckBox enableAdvancedCheckBox;

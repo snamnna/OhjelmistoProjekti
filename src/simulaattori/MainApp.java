@@ -181,7 +181,6 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
     }
     @Override
     public void setTulokset () {
-    	System.out.println("toimiiko mainAppp tulos");
     	tulosController.setTulokset();
     }
 
