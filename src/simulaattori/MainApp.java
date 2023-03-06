@@ -6,193 +6,244 @@ import simulaattori.controller.Kontrolleri;
 import simulaattori.simu.model.TulosDAO;
 import simulaattori.view.*;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.List;
 
 import entity.Tulos;
 
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
-    public static void main(String[] args) {
-    	
-        launch(MainApp.class);
-        
-    }
-   
-    private Stage primaryStage;
-    private BorderPane rootLayout;
-    private KayttajatiedotController kayttajatiedotController;
-    private SimulaattoriController simuController;
-    private static TuloksetController tulosController;
-    private static TietovarastoController tietovarastoController;
-    private IKontrolleriMtoV kontrolleri;
 
-    public void start(Stage primaryStage) {
-    	this.primaryStage = primaryStage;
-    	this.primaryStage.setTitle("Päivystyssimulaattori");
-        kontrolleri = new Kontrolleri(this);
-        
-        
+	private TulosDAO tulosDao = new TulosDAO();
+	private ObservableList<Tulos> listTulos = FXCollections.observableArrayList();
+	private Stage primaryStage;
+	private BorderPane rootLayout;
+	private KayttajatiedotController kayttajatiedotController;
+	private SimulaattoriController simuController;
+	private static TuloksetController tulosController;
+	private static TietovarastoController tietovarastoController;
+	private IKontrolleriMtoV kontrolleri;
+	
+	public MainApp() {
+		Tulos[] tulokset = tulosDao.getTulokset();
+		for (int i = 0; i < tulokset.length; i++) {
+			listTulos.add(tulokset[i]);
+		}
+	}
 
-    	initRootLayout();
-        showKayttajatiedot();
-        showSimulaattori();
-        showTulokset();
-        showTietovarasto();
-        this.primaryStage.sizeToScene();
-    }
+	public void start(Stage primaryStage) {
+		this.primaryStage = primaryStage;
+		this.primaryStage.setTitle("Päivystyssimulaattori");
+		kontrolleri = new Kontrolleri(this);
 
-    private void initRootLayout() {
-        try {
-            // Load root layout from fxml file.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("resources/RootLayout.fxml"));
+		initRootLayout();
+		showKayttajatiedot();
+		showSimulaattori();
+		showTulokset();
+		showTietovarasto();
+		this.primaryStage.sizeToScene();
+	}
 
-            rootLayout = (BorderPane) loader.load();
-            // Show the scene containing the root layout.
-            Scene scene = new Scene(rootLayout);
-            primaryStage.setScene(scene);
+	private void initRootLayout() {
+		try {
+			// Load root layout from fxml file.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("resources/RootLayout.fxml"));
 
-            // Give the application.controller access to the main app.
-            RootLayoutController controller = loader.getController();
-            controller.setMain(this);
+			rootLayout = (BorderPane) loader.load();
+			// Show the scene containing the root layout.
+			Scene scene = new Scene(rootLayout);
+			primaryStage.setScene(scene);
 
-            primaryStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+			// Give the application.controller access to the main app.
+			RootLayoutController controller = loader.getController();
+			controller.setMain(this);
 
-    }
+			primaryStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-    public void showKayttajatiedot() {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("resources/Kayttajatiedot.fxml"));
-            AnchorPane kayttajatiedot = (AnchorPane) loader.load();
-            rootLayout.setLeft(kayttajatiedot);
+	}
 
-            // Give the controller access to the main app.
-            kayttajatiedotController = loader.getController();
-            kayttajatiedotController.setMainApp(this);
+	public void showKayttajatiedot() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("resources/Kayttajatiedot.fxml"));
+			AnchorPane kayttajatiedot = (AnchorPane) loader.load();
+			rootLayout.setLeft(kayttajatiedot);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+			// Give the controller access to the main app.
+			kayttajatiedotController = loader.getController();
+			kayttajatiedotController.setMainApp(this);
 
-    public void showSimulaattori() {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("resources/Simulaattori.fxml"));
-            AnchorPane simulaattori = (AnchorPane) loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(simulaattori);
+	public void showSimulaattori() {
+		try {
+			// Load person overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("resources/Simulaattori.fxml"));
+			AnchorPane simulaattori = (AnchorPane) loader.load();
 
-            // Give the controller access to the main app.
-            simuController = loader.getController();
-            simuController.setMainApp(this);
+			// Set person overview into the center of root layout.
+			rootLayout.setCenter(simulaattori);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+			// Give the controller access to the main app.
+			simuController = loader.getController();
+			simuController.setMainApp(this);
 
-    public void showTulokset() {
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("resources/Tulokset.fxml"));
-            AnchorPane tulokset = (AnchorPane) loader.load();
-            
-            rootLayout.setRight(tulokset);
-            
-            //Give the controller access to the main app
-            tulosController = loader.getController();
-            tulosController.setMainApp(this);
-            
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void showTietovarasto() {
-    	try {
-    		FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
-        	AnchorPane tietovarasto = (AnchorPane) loader.load();
-        	
-        	rootLayout.setBottom(tietovarasto);
-        	
-        	tietovarastoController = loader.getController();
-        	tietovarastoController.setMainApp(this);
-        	
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
+	public void showTulokset() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("resources/Tulokset.fxml"));
+			AnchorPane tulokset = (AnchorPane) loader.load();
 
-    public void startSimulaattori() {
-        simuController.tyhjennaNaytto();
-        kontrolleri.kaynnistaSimulointi();
-    }
+			rootLayout.setRight(tulokset);
 
-    public void hidastaSimulaattoria() {
-        kontrolleri.hidasta();
-    }
+			// Give the controller access to the main app
+			tulosController = loader.getController();
+			tulosController.setMainApp(this);
 
-    public void nopeutaSimulaattoria() {
-        kontrolleri.nopeuta();
-    }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    @Override
-    public double getSimulointiAika() {
-        return kayttajatiedotController.getSimulointiAika();
-    }
+	public void showTietovarasto() {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
+			AnchorPane tietovarasto = (AnchorPane) loader.load();
 
-    @Override
-    public int getYlaakarienLkm() {
-        return kayttajatiedotController.getYLaakariLkm();
-    }
+			rootLayout.setBottom(tietovarasto);
 
-    @Override
-    public int getElaakarienLkm() {
-        return kayttajatiedotController.getELaakariLkm();
-    }
+			tietovarastoController = loader.getController();
+			tietovarastoController.setMainApp(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    @Override
-    public int getLabraLkm() {
-        return kayttajatiedotController.getLabraLkm();
-    }
+	public void startSimulaattori() {
+		simuController.tyhjennaNaytto();
+		kontrolleri.kaynnistaSimulointi();
+	}
 
-    @Override
-    public int getSairaanhoitajaLkm() {
-        return kayttajatiedotController.getSairaanhoitajaLkm();
-    }
+	public void hidastaSimulaattoria() {
+		kontrolleri.hidasta();
+	}
 
-    @Override
-    public void setLoppuaika(double aika) {
-    	
-    }
-    @Override
-    public void setTulokset () {
-    	tulosController.setTulokset();
-    }
+	public void nopeutaSimulaattoria() {
+		kontrolleri.nopeuta();
+	}
+	
+	public ObservableList<Tulos> getTulokset() {
+		return listTulos;
+	}
 
-    @Override
-    public SimulaattoriController getVisualisointi() {
-        return simuController;
-    }
+	@Override
+	public double getSimulointiAika() {
+		return kayttajatiedotController.getSimulointiAika();
+	}
 
-    @Override
-    public long getViive() {
-        return kayttajatiedotController.getViive();
-    }
+	@Override
+	public int getYlaakarienLkm() {
+		return kayttajatiedotController.getYLaakariLkm();
+	}
 
+	@Override
+	public int getElaakarienLkm() {
+		return kayttajatiedotController.getELaakariLkm();
+	}
 
+	@Override
+	public int getLabraLkm() {
+		return kayttajatiedotController.getLabraLkm();
+	}
+
+	@Override
+	public int getSairaanhoitajaLkm() {
+		return kayttajatiedotController.getSairaanhoitajaLkm();
+	}
+
+	@Override
+	public void setLoppuaika(double aika) {
+
+	}
+
+	@Override
+	public SimulaattoriController getVisualisointi() {
+		return simuController;
+	}
+
+	@Override
+	public long getViive() {
+		return kayttajatiedotController.getViive();
+	}
+
+	@Override
+	public void setKokonaisaika(String aika) {
+		tulosController.setKokonaisaika(aika);
+	}
+
+	@Override
+	public void setPalveltu(String lkm) {
+		tulosController.setPalveltu(lkm);
+	}
+
+	@Override
+	public void setELaakarienLkm(String lkm) {
+		tulosController.seteLaakarit(lkm);
+	}
+
+	@Override
+	public void setYLaakarienLkm(String lkm) {
+		tulosController.setYlaakarit(lkm);
+	}
+
+	@Override
+	public void setLabrakaynteja(String lkm) {
+		tulosController.setLabroja(lkm);
+	}
+
+	@Override
+	public void setKayttoaste(String kayttoaste) {
+		tulosController.setUtilization(kayttoaste);
+	}
+
+	@Override
+	public void setKeskimaarainenPalveluaika(String aika) {
+		tulosController.setAverageResponseTime(aika);
+	}
+
+	@Override
+	public void setLapimenoAika(String aika) {
+		tulosController.setServiceTime(aika);
+	}
+
+	@Override
+	public void setKeskimaarainenJonotusaika(String aika) {
+		tulosController.setAverageWaitingTime(aika);
+	}
+
+	public static void main(String[] args) {
+		launch(MainApp.class);
+	}
 }
