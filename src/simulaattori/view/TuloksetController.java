@@ -36,7 +36,7 @@ public class TuloksetController {
 	@FXML
 	public void setTulokset() {
 		Tulos tulokset = new Tulos();
-		System.out.println("Tulokset asetettais nyt jos toimis, alla kokeillaan toimiiks tulokset oikein konsolis");
+		System.out.println("tuloksien kokeilu konsoliin koska ei saa niit guihin toimii");
 		System.out.println("e-lääkärit" + mainApp.getElaakarienLkm());
 		System.out.println("y-läälärit" + mainApp.getYlaakarienLkm());
 		System.out.println("palveltuja" + tulokset.getCompletedCount());
@@ -45,6 +45,9 @@ public class TuloksetController {
 		System.out.println("utilization " + tulokset.getUtilization());
 		System.out.println("serviceTime" + tulokset.getServiceTime());
 		System.out.println("waiting time " + tulokset.getAverageWaitingTime());
+		
+		//kokonaisaika.setText("kokeillaan");
+//		palveltu.setText("kokeillaan");
 //		eLaakarit.setText(Integer.toString(mainApp.getElaakarienLkm()));
 //		ylaakarit.setText(Integer.toString(mainApp.getYlaakarienLkm()));
 //		palveltu.setText(Integer.toString(tulokset.getCompletedCount()));
