@@ -14,13 +14,29 @@ public interface IKontrolleriVtoM {
 	int haeSairaanhoitajaLkm();
 
 	int haeLabraLkm();
-	
-	void setTulokset();
 
 	Map<String, Integer> haePalvelupisteet();
 
 	void visualisoiAsiakas();
 	
 	Map<String, Integer> haePalvelupisteetTest();
+	
+	void setKokonaisaika(String aika);
+	
+	void setPalveltu(String lkm);
+	
+	void setELaakarienLkm(String lkm);
+	
+	void setYLaakarienLkm(String lkm);
+	
+	void setLabrakaynteja(String lkm);
+	
+	void setKayttoaste(String kayttoaste);
+	
+	void setKeskimaarainenPalveluaika(String aika);
+	
+	void setLapimenoAika(String aika);
+	
+	void setKeskimaarainenJonotusaika(String aika);
 
 }
