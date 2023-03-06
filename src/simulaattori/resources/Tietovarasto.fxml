@@ -5,22 +5,40 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulaattori.view.TietovarastoController">
-   <children>
-      <TableView fx:id="table_tulokset" layoutX="300.0" layoutY="100.0" prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <columns>
-          <TableColumn fx:id="col_id" prefWidth="38.666688323020935" text="ID" />
-          <TableColumn fx:id="col_aika" prefWidth="67.33337020874023" text="Aika" />
-            <TableColumn fx:id="col_eLaakarit" prefWidth="71.33332061767578" text="ErikoisL" />
-            <TableColumn fx:id="col_yleisLaakarit" prefWidth="55.99993896484375" text="YleisL" />
-            <TableColumn fx:id="col_labrakaynnit" prefWidth="69.33329772949219" text="Labrassa" />
-            <TableColumn fx:id="col_saapuneet" prefWidth="70.00006103515625" text="Saapuneet" />
-            <TableColumn fx:id="col_palveltu" prefWidth="76.0" text="Palveltu" />
-            <TableColumn fx:id="col_busyTime" prefWidth="84.66671752929688" text="BusyTime" />
-            <TableColumn fx:id="col_throughput" prefWidth="83.33331298828125" text="Throughput" />
-            <TableColumn fx:id="col_utilization" prefWidth="86.666748046875" text="Utilization" />
-            <TableColumn fx:id="col_serviceTime" prefWidth="104.6666259765625" text="ServiceTime" />
-        </columns>
-      </TableView>
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+	prefWidth="800.0" xmlns="http://javafx.com/javafx/19"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="simulaattori.view.TietovarastoController">
+	<children>
+		<TableView fx:id="table_tulokset" layoutX="300.0"
+			layoutY="100.0" prefHeight="400.0" prefWidth="800.0"
+			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<columns>
+				<TableColumn fx:id="col_id"
+					prefWidth="38.666688323020935" text="ID" />
+				<TableColumn fx:id="col_aika"
+					prefWidth="67.33337020874023" text="Aika" />
+				<TableColumn fx:id="col_eLaakarit"
+					prefWidth="71.33332061767578" text="ErikoisL" />
+				<TableColumn fx:id="col_yleisLaakarit"
+					prefWidth="55.99993896484375" text="YleisL" />
+				<TableColumn fx:id="col_labrakaynnit"
+					prefWidth="69.33329772949219" text="Labrassa" />
+				<TableColumn fx:id="col_saapuneet"
+					prefWidth="70.00006103515625" text="Saapuneet" />
+				<TableColumn fx:id="col_palveltu" prefWidth="76.0"
+					text="Palveltu" />
+				<TableColumn fx:id="col_busyTime"
+					prefWidth="84.66671752929688" text="BusyTime" />
+				<TableColumn fx:id="col_throughput"
+					prefWidth="83.33331298828125" text="Throughput" />
+				<TableColumn fx:id="col_utilization"
+					prefWidth="86.666748046875" text="Utilization" />
+				<TableColumn fx:id="col_serviceTime"
+					prefWidth="104.6666259765625" text="ServiceTime" />
+			</columns>
+		</TableView>
+	</children>
 </AnchorPane>

@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import simulaattori.simu.model.TulosDAO;
 
 public class TietovarastoController {
@@ -37,10 +38,12 @@ public class TietovarastoController {
     @FXML
     private TableColumn<Tulos, Double> col_serviceTime;
     
+    private Stage dialogStage;
+    
     ObservableList<Tulos> listTulos = FXCollections.observableArrayList();;
     
     @FXML
-    private void initialize() {
+	public void initialize() {
     	col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         col_aika.setCellValueFactory(new PropertyValueFactory<>("simTime"));
 
@@ -52,5 +55,9 @@ public class TietovarastoController {
 
         //  set it as the items of the tableview using the setItems() method.
         table_tulokset.setItems(tulosObservableList);
+    }
+    
+    public void setDialogStage(Stage dialogStage) {
+    	this.dialogStage = dialogStage;
     }
 }

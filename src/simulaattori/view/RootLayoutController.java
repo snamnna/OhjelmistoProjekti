@@ -31,7 +31,7 @@ public class RootLayoutController {
 	// avaa Tietovarastoikkunan
 	@FXML
 	public void handleShowTietovarasto() {
-		//mainApp.showTietovarasto();
+		mainApp.showTietovarasto();
 	}
 	
 }
