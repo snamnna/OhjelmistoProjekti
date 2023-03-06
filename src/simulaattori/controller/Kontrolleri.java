@@ -17,11 +17,10 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 
 	public Kontrolleri(ISimulaattorinUI ui) {
 		this.ui = ui;
-		// Tähän lisää?
 	}
 
 	public void visualisoiAsiakas() {
-		 Platform.runLater(() -> ui.getVisualisointi().uusiAsiakas());
+		Platform.runLater(() -> ui.getVisualisointi().uusiAsiakas());
 	}
 
 	@Override
@@ -32,14 +31,14 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 		ui.getVisualisointi().tyhjennaNaytto();
 		((Thread) moottori).start();
 	}
-	
+
 	public void kaynnistaSimulointiTest() {
 		moottori = new OmaMoottori(this, true);
 		moottori.setSimulointiaika(1000);
 		moottori.setViive(50);
-		
+
 //		ui.getVisualisointi().tyhjennaNaytto();
-		
+
 		((Thread) moottori).start();
 	}
 
@@ -72,7 +71,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 		palvelupisteet.put("Labra", haeLabraLkm());
 		return palvelupisteet;
 	}
-	
+
 	public Map<String, Integer> haePalvelupisteetTest() {
 		Map<String, Integer> palvelupisteet = new HashMap<>();
 		palvelupisteet.put("Sairaanhoitaja", 1); // Kovakoodattu 1 koska sairaanhoitajia aina vain 1
@@ -89,20 +88,60 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 
 	@Override
 	public void hidasta() {
-		 moottori.setViive((long)(moottori.getViive()*1.10));
+		moottori.setViive((long) (moottori.getViive() * 1.10));
 	}
 
 	@Override
 	public void nopeuta() {
-		 moottori.setViive((long)(moottori.getViive()*0.9));
+		moottori.setViive((long) (moottori.getViive() * 0.9));
 	}
-	
+
 	public Moottori getMoottori() {
 		return (Moottori) moottori;
 	}
 
 	@Override
-	public void setTulokset() {
-		ui.setTulokset();
+	public void setKokonaisaika(String aika) {
+		Platform.runLater(() -> ui.setKokonaisaika(aika));
+	}
+
+	@Override
+	public void setPalveltu(String lkm) {
+		Platform.runLater(() -> ui.setPalveltu(lkm));
+	}
+
+	@Override
+	public void setELaakarienLkm(String lkm) {
+		Platform.runLater(() -> ui.setELaakarienLkm(lkm));
+	}
+
+	@Override
+	public void setYLaakarienLkm(String lkm) {
+		Platform.runLater(() -> ui.setYLaakarienLkm(lkm));
+	}
+
+	@Override
+	public void setLabrakaynteja(String lkm) {
+		Platform.runLater(() -> ui.setLabrakaynteja(lkm));
+	}
+
+	@Override
+	public void setKayttoaste(String kayttoaste) {
+		Platform.runLater(() -> ui.setKayttoaste(kayttoaste));
+	}
+
+	@Override
+	public void setKeskimaarainenPalveluaika(String aika) {
+		Platform.runLater(() -> ui.setKeskimaarainenPalveluaika(aika));
+	}
+
+	@Override
+	public void setLapimenoAika(String aika) {
+		Platform.runLater(() -> ui.setLapimenoAika(aika));
+	}
+
+	@Override
+	public void setKeskimaarainenJonotusaika(String aika) {
+		Platform.runLater(() -> ui.setKeskimaarainenJonotusaika(aika));
 	}
 }
