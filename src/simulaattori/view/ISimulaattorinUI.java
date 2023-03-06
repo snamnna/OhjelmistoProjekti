@@ -17,7 +17,7 @@ public interface ISimulaattorinUI {
 	// Kontrolleri antaa käyttöliittymälle tuloksia, joita Moottori tuottaa
 	void setLoppuaika(double aika);
 
-	void setTulokset(Tulos tulokset); // asetetaan tulokset näkyville, tähän pitää selvittää mitä tyyppiä jne
+	void setTulokset(); // asetetaan tulokset näkyville, tähän pitää selvittää mitä tyyppiä jne
 
 	// Kontrolleri tarvitsee
 	SimulaattoriController getVisualisointi();

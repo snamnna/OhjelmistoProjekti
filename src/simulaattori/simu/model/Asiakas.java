@@ -60,6 +60,7 @@ public class Asiakas {
 		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " viipyi: " +(poistumisaika-saapumisaika));
 		sum += (poistumisaika-saapumisaika);
 		double keskiarvo = sum/id;
+		waitingTime = keskiarvo;
 		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
 	}
 
@@ -67,7 +68,6 @@ public class Asiakas {
 		return viimeisinID;
 	}
 	public static double getWaitingTime() {
-		waitingTime = sum/viimeisinID;
 		return waitingTime;
 	}
 }

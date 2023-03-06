@@ -102,7 +102,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	}
 
 	@Override
-	public void setTulokset(Tulos tulokset) {
-		ui.setTulokset(tulokset);
+	public void setTulokset() {
+		ui.setTulokset();
 	}
 }
