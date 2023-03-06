@@ -116,24 +116,25 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
             e.printStackTrace();
         }
     }
-    /*
+    
     public void showTietovarasto() {
     	try {
-    		FXMLLoader loader = new FXMLLoader();
-        	loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
-        	Parent root = loader.load();
+    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/Tietovarasto.fxml"));
+        	Parent root = (Parent) loader.load();
         	
-        	tietovarastoController = loader.getController();
-        	
-        	Scene scene = new Scene(root);
         	Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Tietovarasto");
+        	stage.setTitle("Tietovarasto");
+        	Scene scene = new Scene(root);
+        	stage.setScene(scene);
+        	
+        	TietovarastoController controller = loader.getController();
+        	controller.setDialogStage(stage);
+        	
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    } */
+    }
 
 
     public void startSimulaattori() {
