@@ -1,6 +1,7 @@
 package entity;
 
 import jakarta.persistence.*;
+import javafx.beans.property.SimpleIntegerProperty;
 import simulaattori.MainApp;
 import simulaattori.simu.framework.Kello;
 import simulaattori.simu.model.Asiakas;
@@ -172,6 +173,56 @@ public class Tulos {
 
 
 
+	public SimpleIntegerProperty getIdProperty() {
+		return new SimpleIntegerProperty(id);
+	}
 
+	public Integer getArrivalCountProperty() {
+		return arrivalCount;
+	}
+	
+	public Integer getCompletedCountProperty() {
+		return completedCount;
+	}
+
+	public Double getKokonaisaikaProperty() {
+		return simTime;
+	}
+
+	public Double getBusyTimeProperty() {
+		return busyTime;
+	}
+
+	public Double getUtilizationProperty() {
+		return utilization;
+	}
+
+	public Double getThroughputProperty() {
+		return throughput;
+	}
+
+	public Double getServiceTimeProperty() {
+		return serviceTime;
+	}
+
+	public Integer getLabraArrivalitProperty() {
+		return labraArrivalit;
+	}
+
+	public Double getWaitingTimeProperty() {
+		return waitingTime;
+	}
+
+	public Double getAverageResponseTimeProperty() {
+		return averageResponseTime;
+	}
+
+	public Double getAverageWaitingTimeProperty() {
+		return averageWaitingTime;
+	}
+
+	public Double getResponseTimeProperty() {
+		return responseTime;
+	}
 
 }
