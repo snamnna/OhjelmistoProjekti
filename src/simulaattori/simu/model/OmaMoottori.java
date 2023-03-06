@@ -5,7 +5,6 @@ import entity.Tulos;
 import simulaattori.simu.framework.*;
 import simulaattori.simu.model.util.FPalvelupiste;
 import simulaattori.simu.model.util.IPalvelupiste;
-import simulaattori.view.TuloksetController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -126,12 +125,13 @@ public class OmaMoottori extends Moottori {
 
 	@Override
 	protected void tulokset() {
-		//Nää printataan? en saa muokattuu kuitenkaan ja vaik kommentois pois näiden printtaukset näkyy, en tajuu :DD -Tuiksu
-//		System.out.println("Simuloinnin kokonaisaika " + tulokset.getKokonaisaika());
-//		System.out.println("Saapuneet asiakkaat: " + tulokset.getArrivalCount());
-//		System.out.println("Palveltujen asiakkaiden määrä: " + tulokset.getCompletedCount());
-//		System.out.println("Kokonais busy time " + tulokset.getBusyTime());
-		kontrolleri.setTulokset();
+		kontrolleri.setKokonaisaika(Double.toString(tulokset.getKokonaisaika()));
+		kontrolleri.setLabrakaynteja(Integer.toString(tulokset.getLabraArrivalit()));
+		kontrolleri.setPalveltu(Integer.toString(tulokset.getCompletedCount()));
+		kontrolleri.setKeskimaarainenPalveluaika(Double.toString(tulokset.getAverageResponseTime()));
+		kontrolleri.setKeskimaarainenJonotusaika(Double.toString(tulokset.getAverageWaitingTime()));
+		kontrolleri.setLapimenoAika(Double.toString(tulokset.getServiceTime()));
+		kontrolleri.setKayttoaste(Double.toString(tulokset.getUtilization()));
 	}
 	//deprature tapahtumien määrä tulos-luokalle.
 	public int getDeparturet() {
