@@ -3,6 +3,7 @@ package simulaattori;
 import javafx.scene.layout.AnchorPane;
 import simulaattori.controller.IKontrolleriMtoV;
 import simulaattori.controller.Kontrolleri;
+import simulaattori.simu.model.TulosDAO;
 import simulaattori.view.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +27,7 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
     private KayttajatiedotController kayttajatiedotController;
     private SimulaattoriController simuController;
     private static TuloksetController tulosController;
+    private static TietovarastoController tietovarastoController;
     private IKontrolleriMtoV kontrolleri;
 
     public void start(Stage primaryStage) {
@@ -39,6 +41,7 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         showKayttajatiedot();
         showSimulaattori();
         showTulokset();
+        showTietovarasto();
         this.primaryStage.sizeToScene();
     }
 
@@ -119,18 +122,15 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
     
     public void showTietovarasto() {
     	try {
-    		FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/Tietovarasto.fxml"));
-        	Parent root = (Parent) loader.load();
+    		FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
+        	AnchorPane tietovarasto = (AnchorPane) loader.load();
         	
-        	Stage stage = new Stage();
-        	stage.setTitle("Tietovarasto");
-        	Scene scene = new Scene(root);
-        	stage.setScene(scene);
+        	rootLayout.setBottom(tietovarasto);
         	
-        	TietovarastoController controller = loader.getController();
-        	controller.setDialogStage(stage);
+        	tietovarastoController = loader.getController();
+        	tietovarastoController.setMainApp(this);
         	
-            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
