@@ -1,80 +1,111 @@
 package simulaattori.view;
 
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import org.hibernate.Session;
-
 import entity.Tulos;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import simulaattori.MainApp;
-import simulaattori.simu.model.TulosDAO;
 
 public class TietovarastoController {
-	
+
 	@FXML
-    private TableView<Tulos> table_tulokset;
+	private TableView<Tulos> table_tulokset;
 	@FXML
-    private TableColumn<Tulos, Integer> col_id;
-    @FXML
-    private TableColumn<Tulos, Double> col_aika;
-    @FXML
-    private TableColumn<Tulos, Integer> col_eLaakarit;
-    @FXML
-    private TableColumn<Tulos, Integer> col_yleisLaakarit;
-    @FXML
-    private TableColumn<Tulos, Integer> col_labrakaynnit;
-    @FXML
-    private TableColumn<Tulos, Integer> col_saapuneet;
-    @FXML
-    private TableColumn<Tulos, Integer> col_palveltu;
-    @FXML
-    private TableColumn<Tulos, Double> col_busyTime;
-    @FXML
-    private TableColumn<Tulos, Double> col_throughput;
-    @FXML
-    private TableColumn<Tulos, Double> col_utilization;
-    @FXML
-    private TableColumn<Tulos, Double> col_serviceTime;
-    
-    private MainApp mainApp;
-    
-    ObservableList<Tulos> listTulos = FXCollections.observableArrayList();
-    
-    @FXML
-    public void setMainApp(MainApp mainApp) {
-    	this.mainApp = mainApp;
-    }
-    
-    /*
-    @FXML
+	private TableColumn<Tulos, Integer> col_id;
+	@FXML
+	private TableColumn<Tulos, Double> col_aika;
+	@FXML
+	private TableColumn<Tulos, Integer> col_eLaakarit;
+	@FXML
+	private TableColumn<Tulos, Integer> col_yleisLaakarit;
+	@FXML
+	private TableColumn<Tulos, Integer> col_labrakaynnit;
+	@FXML
+	private TableColumn<Tulos, Integer> col_saapuneet;
+	@FXML
+	private TableColumn<Tulos, Integer> col_palveltu;
+	@FXML
+	private TableColumn<Tulos, Double> col_busyTime;
+	@FXML
+	private TableColumn<Tulos, Double> col_throughput;
+	@FXML
+	private TableColumn<Tulos, Double> col_utilization;
+	@FXML
+	private TableColumn<Tulos, Double> col_serviceTime;
+
+	private MainApp mainApp;
+
+	@FXML
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+		table_tulokset.setItems(mainApp.getTulokset());
+	}
+
+	@FXML
 	public void initialize() {
-    	col_id.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()));
-        col_aika.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSimTime()));
-        col_eLaakarit.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getErikoislaakarit()));
-        col_yleisLaakarit.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getYleislaakarit()));
-        col_labrakaynnit.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getLabraArrivalit()));
-        col_saapuneet.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getArrivalCount()));
-        col_palveltu.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCompletedCount()));
-        col_busyTime.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getBusyTime()));
-        col_throughput.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getThroughput()));
-        col_utilization.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getUtilization()));
-        col_serviceTime.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getServiceTime()));
+		col_id.setCellValueFactory(cellData -> {
+			Tulos tulos = cellData.getValue();
+			Integer id = tulos.getId();
+			return new ReadOnlyObjectWrapper<Integer>(id);
+		});
 
-        //  fetch the Tulos objects
-        List<Tulos> tulosList = TulosDAO.getAllTulokset();
-        
-        // convert the fetched list of Tulos objects to an observable list
-        ObservableList<Tulos> tulosObservableList = FXCollections.observableArrayList(tulosList);
+		col_aika.setCellValueFactory(cellData -> {
+			Tulos tulos = cellData.getValue();
+			Double aika = tulos.getKokonaisaikaProperty();
+			return new ReadOnlyObjectWrapper<Double>(aika);
+		});
 
-        //  set it as the items of the tableview using the setItems() method.
-        table_tulokset.setItems(tulosObservableList);
-    }
-    */
+		col_eLaakarit.setCellValueFactory(cellData -> {
+			Tulos tulos = cellData.getValue();
+//        	Integer lkm = tulos.getELaakarienLkm();
+//        	return new ReadOnlyObjectWrapper<Integer>(lkm);
+			return null;
+		});
+
+		col_yleisLaakarit.setCellValueFactory(cellData -> {
+			Tulos tulos = cellData.getValue();
+//        	Integer lkm = tulos.getELaakarienLkm();
+//        	return new ReadOnlyObjectWrapper<Integer>(lkm);
+			return null;
+		});
+
+		col_labrakaynnit.setCellValueFactory(cellData -> {
+			Tulos tulos = cellData.getValue();
+//        	Integer lkm = tulos.getELaakarienLkm();
+//        	return new ReadOnlyObjectWrapper<Integer>(lkm);
+			return null;
+		});
+
+		col_saapuneet.setCellValueFactory(cellData -> {
+			Tulos tulos = cellData.getValue();
+			Integer lkm = tulos.getArrivalCountProperty();
+			return new ReadOnlyObjectWrapper<Integer>(lkm);
+		});
+
+		col_palveltu.setCellValueFactory(cellData -> {
+			Integer lkm = cellData.getValue().getCompletedCountProperty();
+			return new ReadOnlyObjectWrapper<Integer>(lkm);
+		});
+
+		col_busyTime.setCellValueFactory(cellData -> {
+			Double busyTime = cellData.getValue().getBusyTimeProperty();
+			return new ReadOnlyObjectWrapper<Double>(busyTime);
+		});
+
+		col_throughput.setCellValueFactory(cellData -> {
+			Double throughput = cellData.getValue().getThroughputProperty();
+			return new ReadOnlyObjectWrapper<Double>(throughput);
+		});
+
+		col_utilization.setCellValueFactory(cellData -> {
+			Double utilization = cellData.getValue().getUtilizationProperty();
+			return new ReadOnlyObjectWrapper<Double>(utilization);
+		});
+
+		col_serviceTime.setCellValueFactory(cellData -> {
+			Double serviceTime = cellData.getValue().getServiceTimeProperty();
+			return new ReadOnlyObjectWrapper<Double>(serviceTime);
+		});
+	}
 }
