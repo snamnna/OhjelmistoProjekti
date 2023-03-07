@@ -132,6 +132,8 @@ public class OmaMoottori extends Moottori {
 		kontrolleri.setKeskimaarainenJonotusaika(Double.toString(tulokset.getAverageWaitingTime()));
 		kontrolleri.setLapimenoAika(Double.toString(tulokset.getServiceTime()));
 		kontrolleri.setKayttoaste(Double.toString(tulokset.getUtilization()));
+		
+		kontrolleri.simulointiPaattyi();
 	}
 	//deprature tapahtumien määrä tulos-luokalle.
 	public int getDeparturet() {
