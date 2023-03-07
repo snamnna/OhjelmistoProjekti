@@ -1,23 +1,27 @@
 package simulaattori;
 
-import javafx.scene.layout.AnchorPane;
-import simulaattori.controller.IKontrolleriMtoV;
-import simulaattori.controller.Kontrolleri;
-import simulaattori.simu.model.TulosDAO;
-import simulaattori.view.*;
+import java.io.IOException;
+
+
+import entity.Tulos;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.List;
-
-import entity.Tulos;
+import simulaattori.controller.IKontrolleriMtoV;
+import simulaattori.controller.Kontrolleri;
+import simulaattori.simu.model.TulosDAO;
+import simulaattori.view.ISimulaattorinUI;
+import simulaattori.view.KayttajatiedotController;
+import simulaattori.view.RootLayoutController;
+import simulaattori.view.SimulaattoriController;
+import simulaattori.view.TietovarastoController;
+import simulaattori.view.TuloksetController;
 
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
 
@@ -30,6 +34,7 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	private static TuloksetController tulosController;
 	private static TietovarastoController tietovarastoController;
 	private IKontrolleriMtoV kontrolleri;
+	private AnchorPane tietovarasto;
 	
 	public MainApp() {
 		Tulos[] tulokset = tulosDao.getTulokset();
@@ -38,9 +43,9 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 		}
 	}
 
-	public void start(Stage primaryStage) {
-		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Päivystyssimulaattori");
+	public void start(Stage stage) {
+		primaryStage = stage;
+		primaryStage.setTitle("Päivystyssimulaattori");
 		kontrolleri = new Kontrolleri(this);
 
 		initRootLayout();
@@ -48,7 +53,9 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 		showSimulaattori();
 		showTulokset();
 		showTietovarasto();
-		this.primaryStage.sizeToScene();
+		
+		primaryStage.sizeToScene();
+		primaryStage.show();
 	}
 
 	private void initRootLayout() {
@@ -65,8 +72,6 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 			// Give the application.controller access to the main app.
 			RootLayoutController controller = loader.getController();
 			controller.setMain(this);
-
-			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -127,18 +132,18 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	}
 
 	public void showTietovarasto() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
-			AnchorPane tietovarasto = (AnchorPane) loader.load();
-
-			rootLayout.setBottom(tietovarasto);
-
-			tietovarastoController = loader.getController();
-			tietovarastoController.setMainApp(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			try {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
+				tietovarasto = (AnchorPane) loader.load();
+				tietovarasto.setVisible(false);
+				tietovarasto.setManaged(false);
+				tietovarastoController = loader.getController();
+				tietovarastoController.setMainApp(this);	
+				rootLayout.setBottom(tietovarasto);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	}
 
 	public void startSimulaattori() {
@@ -243,6 +248,18 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 		tulosController.setAverageWaitingTime(aika);
 	}
 
+	public void closeTietovarasto() {
+		tietovarasto.setVisible(false);
+		tietovarasto.setManaged(false);
+		primaryStage.sizeToScene();
+	}
+	
+	public void openTietovarasto() {
+		tietovarasto.setVisible(true);
+		tietovarasto.setManaged(true);
+		primaryStage.sizeToScene();
+	}
+	
 	public static void main(String[] args) {
 		launch(MainApp.class);
 	}

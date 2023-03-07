@@ -35,6 +35,7 @@ public class TietovarastoController {
 	private TableColumn<Tulos, Double> col_serviceTime;
 
 	private MainApp mainApp;
+	private Boolean open = true;
 
 	@FXML
 	public void setMainApp(MainApp mainApp) {
@@ -107,5 +108,14 @@ public class TietovarastoController {
 			Double serviceTime = cellData.getValue().getServiceTimeProperty();
 			return new ReadOnlyObjectWrapper<Double>(serviceTime);
 		});
+	}
+	
+	public Boolean isOpen() {
+		return open;
+	}
+	
+	@FXML
+	private void handleClose() {
+		mainApp.closeTietovarasto();
 	}
 }
