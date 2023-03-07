@@ -19,7 +19,6 @@ public class OmaMoottori extends Moottori {
 
 	private final Saapumisprosessi saapumisprosessi;
 	private Map<TapahtumanTyyppi, List<IPalvelupiste>> tyyppiToPalveluPMap;
-	private Boolean test = false;
 	
 	//luodaan tulos-olio ja departuret muuttuja tuloksien antamista varten
 	private Tulos tulokset = new Tulos();
@@ -32,19 +31,12 @@ public class OmaMoottori extends Moottori {
 		tyyppiToPalveluPMap = new HashMap<>();
 	}
 
-	public OmaMoottori(IKontrolleriVtoM kontrolleri, Boolean testi) {
-		super(kontrolleri);
-		saapumisprosessi = new Saapumisprosessi(new Negexp(15, 5), tapahtumalista, TapahtumanTyyppi.ARR);
-		tyyppiToPalveluPMap = new HashMap<>();
-		this.test = testi;
-	}
-
 	@Override
 	protected void alustukset() {
 		Trace.setTraceLevel(Trace.Level.INFO);
 		// key on palvelupisteen tyyppi.
 		// arvona tietyn tyyppisten palvelupisteiden lukumäärä
-		Map<String, Integer> pPisteet = test ? kontrolleri.haePalvelupisteetTest() : kontrolleri.haePalvelupisteet();
+		Map<String, Integer> pPisteet = kontrolleri.haePalvelupisteet();
 
 		// palvelupisteiden alustus
 		for (String key : pPisteet.keySet()) {
