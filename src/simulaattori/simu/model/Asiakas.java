@@ -17,14 +17,21 @@ public class Asiakas {
 	//tallennetaan viimeisin annettu id tuloksia varten
 	private static int viimeisinID;
 	
+	private static int asiakasCount = 0;
+	
 	
 	public Asiakas(){
 	    id = i++;
 	    //viimeisin id sama arvo, kuin id, eli i
 	    viimeisinID = i;
+	    asiakasCount++;
 	    
 		saapumisaika = Kello.getInstance().getAika();
 		Trace.out(Trace.Level.INFO, "Uusi asiakas nro " + id + " saapui klo "+saapumisaika);
+	}
+	
+	public static int getAsiakasCount() {
+		return asiakasCount;
 	}
 
 	public double getPoistumisaika() {
