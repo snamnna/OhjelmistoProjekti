@@ -2,9 +2,10 @@ package simulaattori;
 
 import java.io.IOException;
 
-
 import entity.Tulos;
 import javafx.application.Application;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +26,6 @@ import simulaattori.view.TuloksetController;
 
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
 
-	private TulosDAO tulosDao = new TulosDAO();
 	private ObservableList<Tulos> listTulos = FXCollections.observableArrayList();
 	private Stage primaryStage;
 	private BorderPane rootLayout;
@@ -35,15 +35,16 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	private static TietovarastoController tietovarastoController;
 	private IKontrolleriMtoV kontrolleri;
 	private AnchorPane tietovarasto;
-	
+	private BooleanProperty simuloidaan = new SimpleBooleanProperty(false);
+
 	public MainApp() {
-		Tulos[] tulokset = tulosDao.getTulokset();
+		Tulos[] tulokset = TulosDAO.getInstance().getTulokset();
 		for (int i = 0; i < tulokset.length; i++) {
 			listTulos.add(tulokset[i]);
 		}
 	}
 
-	public void start(Stage stage) {
+	public void start(Stage stage) throws IOException {
 		primaryStage = stage;
 		primaryStage.setTitle("Päivystyssimulaattori");
 		kontrolleri = new Kontrolleri(this);
@@ -53,101 +54,94 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 		showSimulaattori();
 		showTulokset();
 		showTietovarasto();
-		
+
 		primaryStage.sizeToScene();
 		primaryStage.show();
 	}
 
-	private void initRootLayout() {
-		try {
-			// Load root layout from fxml file.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("resources/RootLayout.fxml"));
+	private void initRootLayout() throws IOException {
+		// Load root layout from fxml file.
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("resources/RootLayout.fxml"));
 
-			rootLayout = (BorderPane) loader.load();
-			// Show the scene containing the root layout.
-			Scene scene = new Scene(rootLayout);
-			primaryStage.setScene(scene);
+		rootLayout = (BorderPane) loader.load();
+		// Show the scene containing the root layout.
+		Scene scene = new Scene(rootLayout);
+		primaryStage.setScene(scene);
 
-			// Give the application.controller access to the main app.
-			RootLayoutController controller = loader.getController();
-			controller.setMain(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
+		// Give the application.controller access to the main app.
+		RootLayoutController controller = loader.getController();
+		controller.setMain(this);
 	}
 
-	public void showKayttajatiedot() {
-		try {
-			// Load person overview.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("resources/Kayttajatiedot.fxml"));
-			AnchorPane kayttajatiedot = (AnchorPane) loader.load();
-			rootLayout.setLeft(kayttajatiedot);
+	public void showKayttajatiedot() throws IOException {
+		// Load person overview.
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("resources/Kayttajatiedot.fxml"));
+		AnchorPane kayttajatiedot = (AnchorPane) loader.load();
+		rootLayout.setLeft(kayttajatiedot);
 
-			// Give the controller access to the main app.
-			kayttajatiedotController = loader.getController();
-			kayttajatiedotController.setMainApp(this);
+		// Give the controller access to the main app.
+		kayttajatiedotController = loader.getController();
+		kayttajatiedotController.setMainApp(this);
 
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		simuloidaan.addListener((observable, oldValue, newValue) -> {
+			kayttajatiedotController.disableTextFieldsAndStartButton(newValue);
+			if (kayttajatiedotController.isInputValid())
+				startSimulaattori();
+		});
 	}
 
-	public void showSimulaattori() {
-		try {
-			// Load person overview.
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("resources/Simulaattori.fxml"));
-			AnchorPane simulaattori = (AnchorPane) loader.load();
+	public void showSimulaattori() throws IOException {
+		// Load person overview.
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("resources/Simulaattori.fxml"));
+		AnchorPane simulaattori = (AnchorPane) loader.load();
 
-			// Set person overview into the center of root layout.
-			rootLayout.setCenter(simulaattori);
+		// Set person overview into the center of root layout.
+		rootLayout.setCenter(simulaattori);
 
-			// Give the controller access to the main app.
-			simuController = loader.getController();
-			simuController.setMainApp(this);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// Give the controller access to the main app.
+		simuController = loader.getController();
+		simuController.setMainApp(this);
 	}
 
-	public void showTulokset() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("resources/Tulokset.fxml"));
-			AnchorPane tulokset = (AnchorPane) loader.load();
+	public void showTulokset() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("resources/Tulokset.fxml"));
+		AnchorPane tulokset = (AnchorPane) loader.load();
 
-			rootLayout.setRight(tulokset);
+		rootLayout.setRight(tulokset);
 
-			// Give the controller access to the main app
-			tulosController = loader.getController();
-			tulosController.setMainApp(this);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// Give the controller access to the main app
+		tulosController = loader.getController();
+		tulosController.setMainApp(this);
 	}
 
-	public void showTietovarasto() {
-			try {
-				FXMLLoader loader = new FXMLLoader();
-				loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
-				tietovarasto = (AnchorPane) loader.load();
-				tietovarasto.setVisible(false);
-				tietovarasto.setManaged(false);
-				tietovarastoController = loader.getController();
-				tietovarastoController.setMainApp(this);	
-				rootLayout.setBottom(tietovarasto);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	public void showTietovarasto() throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
+		tietovarasto = (AnchorPane) loader.load();
+		tietovarasto.setVisible(false);
+		tietovarasto.setManaged(false);
+		tietovarastoController = loader.getController();
+		tietovarastoController.setMainApp(this);
+		rootLayout.setBottom(tietovarasto);
+	}
+
+	public BooleanProperty simuloidaanProperty() {
+		return simuloidaan;
+	}
+
+	public void setSimuloidaan(boolean value) {
+		simuloidaan.set(value);
+	}
+
+	public void startButtonClicked() {
+		setSimuloidaan(true);
 	}
 
 	public void startSimulaattori() {
-		simuController.tyhjennaNaytto();
 		kontrolleri.kaynnistaSimulointi();
 	}
 
@@ -158,7 +152,7 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	public void nopeutaSimulaattoria() {
 		kontrolleri.nopeuta();
 	}
-	
+
 	public ObservableList<Tulos> getTulokset() {
 		return listTulos;
 	}
@@ -254,14 +248,14 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 		kayttajatiedotController.enableSimControls();
 		primaryStage.sizeToScene();
 	}
-	
+
 	public void openTietovarasto() {
 		tietovarasto.setVisible(true);
 		tietovarasto.setManaged(true);
 		kayttajatiedotController.disableSimControls();
 		primaryStage.sizeToScene();
 	}
-	
+
 	public static void main(String[] args) {
 		launch(MainApp.class);
 	}

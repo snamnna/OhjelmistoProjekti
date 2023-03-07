@@ -42,8 +42,10 @@ public class KayttajatiedotController {
 
     @FXML
     public void handleKaynnista() {
-        System.out.println("Käynnistä");
-        if(isInputValid()) mainApp.startSimulaattori();
+    	System.out.println("klikattu");
+        if(isInputValid()) {
+        	mainApp.startButtonClicked();
+        }
     }
 
     @FXML
@@ -148,4 +150,14 @@ public class KayttajatiedotController {
     public long getViive() {
         return Long.parseLong(simulointiViiveTextField.getText());
     }
+
+	public void disableTextFieldsAndStartButton(boolean disabled) {
+		kaynnistaButton.setDisable(disabled);
+		sairaanhoitajaLkmTextField.setDisable(disabled);
+		yLaakariLkmTextField.setDisable(disabled);
+		eLaakariLkmTextField.setDisable(disabled);
+		labraLkmTextField.setDisable(disabled);
+		simulointiViiveTextField.setDisable(disabled);
+		simulointiAikaTextField.setDisable(disabled);
+	}
 }
