@@ -38,6 +38,7 @@ public class YLaakari extends Palvelupiste {
 		tapahtumalista.lisaa(tapahtuma);
 		viimeisinLuotuTapahtuma = tapahtuma;
 		kokPalveluaika =+ palveluaika;
+		addPalveluAikaToSumma(palveluaika);
 	}
 
 	@Override
@@ -48,6 +49,7 @@ public class YLaakari extends Palvelupiste {
 		case YLDEP -> {
 			asiakas.setPoistumisaika(Kello.getInstance().getAika());
 			asiakas.raportti();
+			departures++;
 		}
 		default -> throw new IllegalArgumentException("Unexpected value: " + tapahtuma.getTyyppi());
 		}

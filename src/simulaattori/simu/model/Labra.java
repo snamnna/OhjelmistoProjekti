@@ -14,10 +14,16 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Labra extends Palvelupiste {
 	
 	private static double kokPalveluaika;
+	private static int labraArrivals;
 	
+	public static int getLabraArrivalCount() {
+		return labraArrivals;
+	}
+
 	public Labra(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
 		super(generator, tapahtumalista, tyyppi);
 		jakauma = new Normal(0.5, 0.5);
+		labraArrivals = 0;
 	}
 
 	@Override
@@ -44,6 +50,7 @@ public class Labra extends Palvelupiste {
 		tapahtumalista.lisaa(tapahtuma);
 		jono.peek().setLabrakaynti(true);
 		kokPalveluaika =+ palveluaika;
+		addPalveluAikaToSumma(palveluaika);
 	}
 
 	@Override
@@ -54,12 +61,14 @@ public class Labra extends Palvelupiste {
 			if (palvelupisteet.get(tapahtuma.getPalvelupisteID()).getViimeisinTapahtuma().equals(tapahtuma)) {
 				Asiakas asiakas = palvelupisteet.get(tapahtuma.getPalvelupisteID()).otaJonosta();
 				lisaaJonoon(asiakas);
+				labraArrivals++;
 			}
 		}
 		case LABRA_DEPARTURE -> {
 			Asiakas asiakas = otaJonosta();
 			asiakas.setPoistumisaika(Kello.getInstance().getAika());
 			asiakas.raportti();
+			departures++;
 		}
 		default -> throw new IllegalArgumentException("Unexpected value: " + tapahtuma.getTyyppi());
 		}

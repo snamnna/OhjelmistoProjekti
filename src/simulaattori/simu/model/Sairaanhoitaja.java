@@ -32,6 +32,7 @@ public class Sairaanhoitaja extends Palvelupiste {
         tapahtumalista.lisaa(tapahtuma);
         viimeisinLuotuTapahtuma = tapahtuma;
         kokPalveluaika =+ palveluaika;
+        addPalveluAikaToSumma(palveluaika);
     }
 
     public void siirraAsiakas(Tapahtuma tapahtuma, Map<Integer, IPalvelupiste> palvelupisteet) {
