@@ -37,7 +37,6 @@ public class TietovarastoController {
 	private MainApp mainApp;
 	private Boolean open = true;
 
-	@FXML
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		table_tulokset.setItems(mainApp.getTulokset());
@@ -46,66 +45,58 @@ public class TietovarastoController {
 	@FXML
 	public void initialize() {
 		col_id.setCellValueFactory(cellData -> {
-			Tulos tulos = cellData.getValue();
-			Integer id = tulos.getId();
+			Integer id = cellData.getValue().getId();
 			return new ReadOnlyObjectWrapper<Integer>(id);
 		});
 
 		col_aika.setCellValueFactory(cellData -> {
-			Tulos tulos = cellData.getValue();
-			Double aika = tulos.getKokonaisaikaProperty();
+			Double aika = cellData.getValue().getKokonaisaika();
 			return new ReadOnlyObjectWrapper<Double>(aika);
 		});
 
 		col_eLaakarit.setCellValueFactory(cellData -> {
-			Tulos tulos = cellData.getValue();
-//        	Integer lkm = tulos.getELaakarienLkm();
-//        	return new ReadOnlyObjectWrapper<Integer>(lkm);
-			return null;
+        	Integer lkm = cellData.getValue().getErikoislääkärit();
+        	return new ReadOnlyObjectWrapper<Integer>(lkm);
 		});
 
 		col_yleisLaakarit.setCellValueFactory(cellData -> {
-			Tulos tulos = cellData.getValue();
-//        	Integer lkm = tulos.getELaakarienLkm();
-//        	return new ReadOnlyObjectWrapper<Integer>(lkm);
-			return null;
+        	Integer lkm = cellData.getValue().getYleislääkärit();
+        	return new ReadOnlyObjectWrapper<Integer>(lkm);
 		});
 
 		col_labrakaynnit.setCellValueFactory(cellData -> {
-			Tulos tulos = cellData.getValue();
-//        	Integer lkm = tulos.getELaakarienLkm();
-//        	return new ReadOnlyObjectWrapper<Integer>(lkm);
-			return null;
+        	Integer lkm = cellData.getValue().getLabraArrivalit();
+        	return new ReadOnlyObjectWrapper<Integer>(lkm);
 		});
 
 		col_saapuneet.setCellValueFactory(cellData -> {
 			Tulos tulos = cellData.getValue();
-			Integer lkm = tulos.getArrivalCountProperty();
+			Integer lkm = tulos.getArrivalCount();
 			return new ReadOnlyObjectWrapper<Integer>(lkm);
 		});
 
 		col_palveltu.setCellValueFactory(cellData -> {
-			Integer lkm = cellData.getValue().getCompletedCountProperty();
+			Integer lkm = cellData.getValue().getCompletedCount();
 			return new ReadOnlyObjectWrapper<Integer>(lkm);
 		});
 
 		col_busyTime.setCellValueFactory(cellData -> {
-			Double busyTime = cellData.getValue().getBusyTimeProperty();
+			Double busyTime = cellData.getValue().getBusyTime();
 			return new ReadOnlyObjectWrapper<Double>(busyTime);
 		});
 
 		col_throughput.setCellValueFactory(cellData -> {
-			Double throughput = cellData.getValue().getThroughputProperty();
+			Double throughput = cellData.getValue().getThroughput();
 			return new ReadOnlyObjectWrapper<Double>(throughput);
 		});
 
 		col_utilization.setCellValueFactory(cellData -> {
-			Double utilization = cellData.getValue().getUtilizationProperty();
+			Double utilization = cellData.getValue().getUtilization();
 			return new ReadOnlyObjectWrapper<Double>(utilization);
 		});
 
 		col_serviceTime.setCellValueFactory(cellData -> {
-			Double serviceTime = cellData.getValue().getServiceTimeProperty();
+			Double serviceTime = cellData.getValue().getServiceTime();
 			return new ReadOnlyObjectWrapper<Double>(serviceTime);
 		});
 	}
