@@ -46,7 +46,7 @@
                   <Label layoutX="10.0" layoutY="257.0" text="Laboratorioiden määrä" />
                   <TextField fx:id="labraLkmTextField" disable="true" layoutX="10.0" layoutY="279.0" promptText="Anna lukumäärä" text="1" />
                   <CheckBox fx:id="enableAdvancedCheckBox" mnemonicParsing="false" text="Enable kaikki" />
-                  <Button alignment="CENTER" contentDisplay="CENTER" minHeight="36.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleKaynnista" scaleShape="false" text="Aloita simulointi">
+                  <Button fx:id="kaynnistaButton" alignment="CENTER" contentDisplay="CENTER" minHeight="36.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleKaynnista" scaleShape="false" text="Aloita simulointi">
                      <VBox.margin>
                         <Insets left="58.0" top="42.0" />
                      </VBox.margin>
@@ -68,7 +68,7 @@
             </Label>
          </top>
          <bottom>
-            <ButtonBar>
+            <ButtonBar fx:id="simControls">
                <buttons>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleHidasta" text="Hidasta">
                      <opaqueInsets>

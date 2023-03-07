@@ -2,6 +2,8 @@ package simulaattori.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import simulaattori.MainApp;
@@ -29,6 +31,12 @@ public class KayttajatiedotController {
 
     @FXML
     private TextField sairaanhoitajaLkmTextField;
+    
+    @FXML
+    private Button kaynnistaButton;
+    
+    @FXML
+    private ButtonBar simControls;
 
     private MainApp mainApp;
 
@@ -48,6 +56,16 @@ public class KayttajatiedotController {
     public void handleNopeuta() {
         System.out.println("Nopeuta");
         mainApp.nopeutaSimulaattoria();
+    }
+    
+    public void disableSimControls() {
+    	kaynnistaButton.setDisable(true);
+    	simControls.setDisable(true);
+    }
+    
+    public void enableSimControls() {
+    	kaynnistaButton.setDisable(false);
+    	simControls.setDisable(false);
     }
 
     public void setMainApp(MainApp mainApp) {

@@ -251,12 +251,14 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	public void closeTietovarasto() {
 		tietovarasto.setVisible(false);
 		tietovarasto.setManaged(false);
+		kayttajatiedotController.enableSimControls();
 		primaryStage.sizeToScene();
 	}
 	
 	public void openTietovarasto() {
 		tietovarasto.setVisible(true);
 		tietovarasto.setManaged(true);
+		kayttajatiedotController.disableSimControls();
 		primaryStage.sizeToScene();
 	}
 	
