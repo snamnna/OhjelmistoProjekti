@@ -26,4 +26,8 @@ public interface IPalvelupiste {
 	int getID();
 
 	String getJonoString();
+	
+	Double getKaikkienPalveluAikojenSumma();
+	
+	int getDepartureLkm();
 }
