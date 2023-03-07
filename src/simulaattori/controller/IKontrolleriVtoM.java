@@ -38,5 +38,7 @@ public interface IKontrolleriVtoM {
 	void setLapimenoAika(String aika);
 	
 	void setKeskimaarainenJonotusaika(String aika);
+	
+	void simulointiPaattyi();
 
 }

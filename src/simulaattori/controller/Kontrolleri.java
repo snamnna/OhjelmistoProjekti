@@ -31,15 +31,9 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 		ui.getVisualisointi().tyhjennaNaytto();
 		((Thread) moottori).start();
 	}
-
-	public void kaynnistaSimulointiTest() {
-		moottori = new OmaMoottori(this, true);
-		moottori.setSimulointiaika(1000);
-		moottori.setViive(50);
-
-//		ui.getVisualisointi().tyhjennaNaytto();
-
-		((Thread) moottori).start();
+	
+	public void simulointiPaattyi() {
+		ui.setSimuloidaan(false);
 	}
 
 	@Override
