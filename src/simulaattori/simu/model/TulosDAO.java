@@ -50,6 +50,20 @@ public class TulosDAO {
 		em.getTransaction().commit();
 		System.out.println("Tulokset viety");
 	}
+	
+	public boolean createTulos(Tulos tulos) {
+		Session istunto = sf.getCurrentSession();
+		try {
+			istunto.beginTransaction();
+			istunto.merge(tulos);
+			istunto.getTransaction().commit();
+			return true;
+		} catch (Exception e) {
+			istunto.getTransaction().rollback();
+			e.printStackTrace();
+			return false;
+		}
+	 }
 
 	public Tulos[] getTulokset() {
 		List<Tulos> tulosList = null;
@@ -61,5 +75,22 @@ public class TulosDAO {
 			e.printStackTrace();
 		}
 		return tulosList.toArray(new Tulos[tulosList.size()]);
+	}
+	
+	public boolean deleteTulos(int id) {
+		try (Session istunto = sf.openSession()) {
+			istunto.beginTransaction();
+			Tulos tulos = (Tulos) istunto.get(Tulos.class, id);
+			if (tulos != null) {
+				istunto.remove(tulos);
+				istunto.getTransaction().commit();
+				System.out.println("Tulos-olio poistettu.");
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Tuloksen poisto epäonnistui.");
+		}
+		return false;
 	}
 }
