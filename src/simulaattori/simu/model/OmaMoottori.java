@@ -1,34 +1,33 @@
 package simulaattori.simu.model;
 
-import eduni.distributions.Negexp;
-import entity.Tulos;
-import simulaattori.simu.framework.*;
-import simulaattori.simu.model.util.FPalvelupiste;
-import simulaattori.simu.model.util.IPalvelupiste;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-import simulaattori.MainApp;
+import eduni.distributions.Negexp;
+import entity.Tulos;
 import simulaattori.controller.IKontrolleriVtoM;
+import simulaattori.simu.framework.Kello;
+import simulaattori.simu.framework.Moottori;
+import simulaattori.simu.framework.Saapumisprosessi;
+import simulaattori.simu.framework.Tapahtuma;
+import simulaattori.simu.framework.Trace;
+import simulaattori.simu.model.util.FPalvelupiste;
+import simulaattori.simu.model.util.IPalvelupiste;
 
 public class OmaMoottori extends Moottori {
 
 	private final Saapumisprosessi saapumisprosessi;
 	private Map<TapahtumanTyyppi, List<IPalvelupiste>> tyyppiToPalveluPMap;
+	private Tulos tulos;
 	
-	//luodaan tulos-olio ja departuret muuttuja tuloksien antamista varten
-	private Tulos tulokset = new Tulos();
-	public static int departuret;
-	public static int labrat;
-
 	public OmaMoottori(IKontrolleriVtoM kontrolleri) {
 		super(kontrolleri);
 		saapumisprosessi = new Saapumisprosessi(new Negexp(15, 5), tapahtumalista, TapahtumanTyyppi.ARR);
 		tyyppiToPalveluPMap = new HashMap<>();
+		tulos = new Tulos();
 	}
 
 	@Override
@@ -42,37 +41,28 @@ public class OmaMoottori extends Moottori {
 		for (String key : pPisteet.keySet()) {
 			TapahtumanTyyppi arrival = getTapahtumanTyyppi(key);
 			TapahtumanTyyppi departure = getTapahtumanTyyppi(key, false);
+			
+			// departure viittaa samaan listaan ku sitä vastaava arrival, esim YLDEP ja YLARR
 			tyyppiToPalveluPMap.putIfAbsent(arrival, new ArrayList<>());
-			// departure viittaa samaan listaan ku sitä vastaava arrival, esim YLDEP ja
-			// YLARR
 			tyyppiToPalveluPMap.putIfAbsent(departure, tyyppiToPalveluPMap.get(arrival));
 
-			// alustetaan tyypin palvelupisteet
+			// alustetaan palvelupisteet
 			for (int i = 0; i < pPisteet.get(key); i++) {
 				IPalvelupiste palvelupiste = FPalvelupiste.createPalvelupiste(arrival, tapahtumalista);
 				palvelupisteet.putIfAbsent(palvelupiste.getID(), palvelupiste);
 
-				// ei tarvitse lisätä myös tyyppiToPalveluPMap, koska se "osoittaa" jo valmiiksi
-				// samaan listaan
+				// ei tarvitse lisätä myös tyyppiToPalveluPMap, koska se "osoittaa" jo valmiiksi samaan listaan
 				tyyppiToPalveluPMap.get(arrival).add(palvelupiste);
 			}
 		}
-
-		saapumisprosessi.generoiSeuraava(); // Ensimmäinen saapuminen järjestelmään
+		// Ensimmäinen saapuminen järjestelmään
+		saapumisprosessi.generoiSeuraava(); 
 	}
 
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t) { // B-vaiheen tapahtumat
 		TapahtumanTyyppi tyyppi = t.getTyyppi();
-		
-		//otetaan lasku departure tyyppisistä tapahtumista tuloksia varten
-		if(tyyppi == TapahtumanTyyppi.ELDEP || tyyppi == TapahtumanTyyppi.LABRA_DEPARTURE || tyyppi == TapahtumanTyyppi.YLDEP) {
-			departuret++;
-		}
-		//Lasketaan myös labrakäynnit tuloksia varten
-		if(tyyppi == TapahtumanTyyppi.LABRA_ARRIVAL) {
-			labrat++;
-		}
+
 		for (IPalvelupiste p : palvelupisteet.values()) {
 			System.out.println(p.getJonoString());
 		}
@@ -90,7 +80,7 @@ public class OmaMoottori extends Moottori {
 		// jos asiakas saapuu ekaa kertaa simulaattoriin eli sen tapahtumatyyppi on ARR
 		// generoidaan seuraava saapuminen ja kutsutaan kontrollerin metodia, joka
 		// hoitaa visualisoinnin
-		if (onArrival(tyyppi)) {
+		if (tyyppi == TapahtumanTyyppi.ARR) {
 			saapumisprosessi.generoiSeuraava();
 			kontrolleri.visualisoiAsiakas();
 		}
@@ -111,39 +101,51 @@ public class OmaMoottori extends Moottori {
 		return getTapahtumanTyyppi(tyyppi, true);
 	}
 
-	private Boolean onArrival(TapahtumanTyyppi tyyppi) {
-		return tyyppi == TapahtumanTyyppi.ARR;
-	}
-
 	@Override
 	protected void tulokset() {
-		kontrolleri.setKokonaisaika(Double.toString(tulokset.getKokonaisaika()));
-		kontrolleri.setLabrakaynteja(Integer.toString(tulokset.getLabraArrivalit()));
-		kontrolleri.setPalveltu(Integer.toString(tulokset.getCompletedCount()));
-		kontrolleri.setKeskimaarainenPalveluaika(Double.toString(tulokset.getAverageResponseTime()));
-		kontrolleri.setKeskimaarainenJonotusaika(Double.toString(tulokset.getAverageWaitingTime()));
-		kontrolleri.setLapimenoAika(Double.toString(tulokset.getServiceTime()));
-		kontrolleri.setKayttoaste(Double.toString(tulokset.getUtilization()));
+		int sairaanhoitajaLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.ARR).size();
+		int yLaakariLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.YLARR).size();
+		int eLaakariLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.ELARR).size();
+		int labraLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.LABRA_ARRIVAL).size();
+		int arrivalCount = Asiakas.getAsiakasCount();
+		double loppuAika = Kello.getInstance().getAika();
+		double busyTime = tyyppiToPalveluPMap.get(TapahtumanTyyppi.ARR).get(0).getKaikkienPalveluAikojenSumma();
 		
+		int completedCount = 0;
+		for(IPalvelupiste palvelupiste : palvelupisteet.values()) {
+			completedCount += palvelupiste.getDepartureLkm();
+		}
+		
+		double throughput = completedCount / loppuAika;
+		double utilization = busyTime / loppuAika;
+		double serviceTime = busyTime / completedCount;
+		int labraArrivals = Labra.getLabraArrivalCount();
+		double waitingTime = Asiakas.getWaitingTime();
+		double averageResponseTime = waitingTime / completedCount;
+		double averageWaitingTime = waitingTime / loppuAika;
+		
+		tulos.setSairaanhoitajat(sairaanhoitajaLkm);
+		tulos.setYleislääkärit(yLaakariLkm);
+		tulos.setErikoislääkärit(eLaakariLkm);
+		tulos.setLabrat(labraLkm);
+		tulos.setArrivalCount(arrivalCount);
+		tulos.setSimTime(loppuAika);
+		tulos.setBusyTime(busyTime);
+		tulos.setCompletedCount(completedCount);
+		tulos.setThroughput(throughput);
+		tulos.setUtilization(utilization);
+		tulos.setServiceTime(serviceTime);
+		tulos.setLabraArrivalit(labraArrivals);
+		tulos.setWaitingTime(waitingTime);
+		tulos.setAverageResponseTime(averageResponseTime);
+		tulos.setAverageWaitingTime(averageWaitingTime);
+		
+		
+		// ilmoitetaan UIlle simulaation päättymisestä
 		kontrolleri.simulointiPaattyi();
 	}
-	//deprature tapahtumien määrä tulos-luokalle.
-	public int getDeparturet() {
-		return departuret;
-	}
-
-	public void setLabJakauma() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setElaakarienLkm() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void setYlaakarienLkm() {
-		// TODO Auto-generated method stub
-
+	
+	public Tulos getTulos() {
+		return tulos;
 	}
 }
