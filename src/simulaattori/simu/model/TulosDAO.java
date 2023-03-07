@@ -11,9 +11,10 @@ import jakarta.persistence.EntityManager;
 
 public class TulosDAO {
 
+	private static TulosDAO instance;
 	private static SessionFactory sf;
 
-	public TulosDAO() {
+	private TulosDAO() {
 		try {
 			sf = new Configuration().configure().buildSessionFactory();
 		} catch (Exception e) {
@@ -21,6 +22,15 @@ public class TulosDAO {
 			e.printStackTrace();
 			System.exit(-1);
 		}
+	}
+
+	public static TulosDAO getInstance() {
+		if (instance == null) {
+			synchronized (TulosDAO.class) {
+				instance = new TulosDAO();
+			}
+		}
+		return instance;
 	}
 
 	// Haetaan tulos tietokannasta
@@ -41,7 +51,7 @@ public class TulosDAO {
 		System.out.println("Tulokset viety");
 	}
 
-	public static Tulos[] getTulokset() {
+	public Tulos[] getTulokset() {
 		List<Tulos> tulosList = null;
 		try (Session istunto = sf.openSession();) {
 			istunto.beginTransaction();
