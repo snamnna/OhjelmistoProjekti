@@ -40,21 +40,21 @@ public class OmaMoottori extends Moottori {
 
 		// palvelupisteiden alustus
 		for (String key : pPisteet.keySet()) {
-			TapahtumanTyyppi tArrival = getTapahtumanTyyppi(key);
-			TapahtumanTyyppi tDeparture = getTapahtumanTyyppi(key, false);
-			tyyppiToPalveluPMap.putIfAbsent(tArrival, new ArrayList<>());
+			TapahtumanTyyppi arrival = getTapahtumanTyyppi(key);
+			TapahtumanTyyppi departure = getTapahtumanTyyppi(key, false);
+			tyyppiToPalveluPMap.putIfAbsent(arrival, new ArrayList<>());
 			// departure viittaa samaan listaan ku sitä vastaava arrival, esim YLDEP ja
 			// YLARR
-			tyyppiToPalveluPMap.putIfAbsent(tDeparture, tyyppiToPalveluPMap.get(tArrival));
+			tyyppiToPalveluPMap.putIfAbsent(departure, tyyppiToPalveluPMap.get(arrival));
 
 			// alustetaan tyypin palvelupisteet
 			for (int i = 0; i < pPisteet.get(key); i++) {
-				IPalvelupiste palvelupiste = FPalvelupiste.createPalvelupiste(tArrival, tapahtumalista);
+				IPalvelupiste palvelupiste = FPalvelupiste.createPalvelupiste(arrival, tapahtumalista);
 				palvelupisteet.putIfAbsent(palvelupiste.getID(), palvelupiste);
 
 				// ei tarvitse lisätä myös tyyppiToPalveluPMap, koska se "osoittaa" jo valmiiksi
 				// samaan listaan
-				tyyppiToPalveluPMap.get(tArrival).add(palvelupiste);
+				tyyppiToPalveluPMap.get(arrival).add(palvelupiste);
 			}
 		}
 
