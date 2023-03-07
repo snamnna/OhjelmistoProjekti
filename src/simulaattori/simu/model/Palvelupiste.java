@@ -12,21 +12,18 @@ import simulaattori.simu.model.util.IPalvelupiste;
 public abstract class Palvelupiste implements IPalvelupiste {
 
 	protected LinkedList<Asiakas> jono; // Tietorakennetoteutus
-
 	protected final ContinuousGenerator generator;
 	protected final Tapahtumalista tapahtumalista;
 	protected final TapahtumanTyyppi skeduloitavanTapahtumanTyyppi;
 	protected Tapahtuma viimeisinLuotuTapahtuma = new Tapahtuma(TapahtumanTyyppi.ELLABARR, 0);
-
 	protected final int ID;
-
 	private static int seuraavaID = 1;
-
 	ContinuousGenerator jakauma;
 
-	// JonoStartegia strategia; //optio: asiakkaiden järjestys
-
 	protected boolean varattu = false;
+	protected int departures;
+	
+	private static double kaikkienPalveluAikaSumma = 0;
 
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
 		this.tapahtumalista = tapahtumalista;
@@ -34,6 +31,15 @@ public abstract class Palvelupiste implements IPalvelupiste {
 		this.skeduloitavanTapahtumanTyyppi = tyyppi;
 		ID = getSeuraavaID();
 		jono = new LinkedList<>();
+		departures = 0;
+	}
+	
+	protected void addPalveluAikaToSumma(double aika) {
+		kaikkienPalveluAikaSumma += aika;
+	}
+	
+	public Double getKaikkienPalveluAikojenSumma() {
+		return kaikkienPalveluAikaSumma;
 	}
 
 	public TapahtumanTyyppi getSkeduloitavanTapahtumanTyyppi() {
@@ -48,11 +54,11 @@ public abstract class Palvelupiste implements IPalvelupiste {
 		return ID;
 	}
 
-	public void lisaaJonoon(Asiakas a) { // Jonon 1. asiakas aina palvelussa
+	public void lisaaJonoon(Asiakas a) {
 		jono.add(a);
 	}
 
-	public Asiakas otaJonosta() { // Poistetaan palvelussa ollut
+	public Asiakas otaJonosta() {
 		varattu = false;
 		return jono.poll();
 	}
@@ -67,6 +73,10 @@ public abstract class Palvelupiste implements IPalvelupiste {
 
 	public Tapahtuma getViimeisinTapahtuma() {
 		return viimeisinLuotuTapahtuma;
+	}
+	
+	public int getDepartureLkm() {
+		return departures;
 	}
 
 }
