@@ -37,4 +37,6 @@ public interface ISimulaattorinUI {
 	void setLapimenoAika(String aika);
 
 	void setKeskimaarainenJonotusaika(String aika);
+	
+	void setSimuloidaan(boolean value);
 }
