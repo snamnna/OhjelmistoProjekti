@@ -1,228 +1,267 @@
 package entity;
 
-import jakarta.persistence.*;
-import javafx.beans.property.SimpleIntegerProperty;
-import simulaattori.MainApp;
-import simulaattori.simu.framework.Kello;
-import simulaattori.simu.model.Asiakas;
-import simulaattori.simu.model.ELaakari;
-import simulaattori.simu.model.Labra;
-import simulaattori.simu.model.OmaMoottori;
-import simulaattori.simu.model.Sairaanhoitaja;
-import simulaattori.simu.model.YLaakari;
-import simulaattori.view.KayttajatiedotController;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
-@Table(name="tulokset")
+@Table(name = "tulokset")
 public class Tulos {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
-	@Column(name="arrivalCount")
+	@Column(name = "arrivalCount")
 	private int arrivalCount;
-	@Column(name="completedCount")
+	@Column(name = "completedCount")
 	private int completedCount;
-	@Column(name="simTime")
+	@Column(name = "simTime")
 	private double simTime;
-	@Column(name="busyTime")
+	@Column(name = "busyTime")
 	private double busyTime;
-	@Column(name="serviceTime")
+	@Column(name = "serviceTime")
 	private double serviceTime;
-	@Column(name="throughput")
+	@Column(name = "throughput")
 	private double throughput;
-	@Column(name="utilization")
+	@Column(name = "utilization")
 	private double utilization;
-	@Column(name="averageResponseTime")
+	@Column(name = "averageResponseTime")
 	private double averageResponseTime;
-	@Column(name="averageWaitingTime")
+	@Column(name = "averageWaitingTime")
 	private double averageWaitingTime;
-	
-	private int yleislääkärit; //pitää viel kattoo miten haetaan et saadaan tietokantaan
-	private int erikoislääkärit; //Sama homma
+	@Column(name = "yleislääkärit")
+	private int yleislääkärit; // pitää viel kattoo miten haetaan et saadaan tietokantaan
+	@Column(name = "erikoislääkärit")
+	private int erikoislääkärit; // Sama homma
+	@Column(name = "sairaanhoitajat")
 	private int sairaanhoitajat;
+	@Column(name = "labrat")
 	private int labrat;
-	
+	@Column(name = "labraArrivalit")
 	private int labraArrivalit;
+	@Column(name = "waitingTime")
 	private double waitingTime;
-	//Transienttina, jotta hibernate ei huomioisi tyhjää muuttujaa
+	// Transienttina, jotta hibernate ei huomioisi tyhjää muuttujaa
 	@Transient
 	private double responseTime;
-
-	@Transient
-	Kello kello = Kello.getInstance();
-
-	public Tulos() {
-		completedCount = OmaMoottori.departuret;
-		arrivalCount = Asiakas.getViimeisinID();
-		simTime = kello.getAika();
-		busyTime = ELaakari.getKokPalveluaika() + YLaakari.getKokPalveluaika() + Sairaanhoitaja.getKokPalveluaika() + Labra.getKokPalveluaika();
-		throughput = completedCount/simTime;
-		utilization = busyTime / simTime;
-		serviceTime = busyTime/completedCount;
-		labraArrivalit = OmaMoottori.labrat;		
-		waitingTime = Asiakas.getWaitingTime();
-		averageResponseTime = waitingTime/completedCount;
-		averageWaitingTime = waitingTime/simTime;
-		
-	}
-	
-	//setterit ja getterit palvelupisteiden määrän asettamiseksi ja saamiseksi
-	public int getYleislääkärit() {
-		return yleislääkärit;
-	}
-	public void setYleislääkärit(int yleislääkärit) {
-		this.yleislääkärit = yleislääkärit;
-	}
-	public int getErikoislääkärit() {
-		return erikoislääkärit;
-	}
-	public void setErikoislääkärit(int erikoislääkärit) {
-		this.erikoislääkärit = erikoislääkärit;
-	}
-	public int getSairaanhoitajat() {
-		return sairaanhoitajat;
-	}
-	public void setSairaanhoitajat(int sairaanhoitajat) {
-		this.sairaanhoitajat = sairaanhoitajat;
-	}
-	public int getLabrat() {
-		return labrat;
-	}
-	public void setLabrat(int labrat) {
-		this.labrat = labrat;
-	}
-	
 	
 	public int getId() {
 		return id;
 	}
 	
-	//getterit eri suureiden saamiseksi
+	/**
+	 * @param yleislääkärien lkm to set
+	 */
+	public void setYleislääkärit(int yleislääkärit) {
+		this.yleislääkärit = yleislääkärit;
+	}
 
-	//Arrival count A, asiakkaiden  kokonaismäärä
+	/**
+	 * @param erikoislääkärien lkm to set
+	 */
+	public void setErikoislääkärit(int erikoislääkärit) {
+		this.erikoislääkärit = erikoislääkärit;
+	}
+
+	/**
+	 * @param sairaanhoitajien lkm to set
+	 */
+	public void setSairaanhoitajat(int sairaanhoitajat) {
+		this.sairaanhoitajat = sairaanhoitajat;
+	}
+
+	/**
+	 * @param labrojen lkm to set
+	 */
+	public void setLabrat(int labrat) {
+		this.labrat = labrat;
+	}
+
+	/**
+	 * @param simulaatioon saapuneiden asiakkaiden määrä
+	 */
+	public void setArrivalCount(int arrivalCount) {
+		this.arrivalCount = arrivalCount;
+	}
+
+	/**
+	 * @param simun läpikulkeneiden asiakkaiden lkm
+	 */
+	public void setCompletedCount(int completedCount) {
+		this.completedCount = completedCount;
+	}
+
+	/**
+	 * @param simun ajoon kulunut aika
+	 */
+	public void setSimTime(double simTime) {
+		this.simTime = simTime;
+	}
+	
+	/**
+	 * @param kaikkien palvelupisteiden yhteenlaskettu palveluaika
+	 */
+	public void setBusyTime(double busyTime) {
+		this.busyTime = busyTime;
+	}
+
+	/**
+	 * @param labraan saapuneiden asiakkaiden lkm
+	 */
+	public void setLabraArrivalit(int labraArrivalit) {
+		this.labraArrivalit = labraArrivalit;
+	}
+
+	/**
+	 * @param waitingTime the waitingTime to set
+	 */
+	public void setWaitingTime(double waitingTime) {
+		this.waitingTime = waitingTime;
+	}
+
+	/**
+	 * @param responseTime the responseTime to set
+	 */
+	public void setResponseTime(double responseTime) {
+		this.responseTime = responseTime;
+	}
+	
+	/**
+	 * @param throughput the throughput to set
+	 */
+	public void setThroughput(double throughput) {
+		this.throughput = throughput;
+	}
+
+	/**
+	 * @param utilization the utilization to set
+	 */
+	public void setUtilization(double utilization) {
+		this.utilization = utilization;
+	}
+
+	/**
+	 * @param serviceTime the serviceTime to set
+	 */
+	public void setServiceTime(double serviceTime) {
+		this.serviceTime = serviceTime;
+	}
+	
+	/**
+	 * @param averageResponseTime the averageResponseTime to set
+	 */
+	public void setAverageResponseTime(double averageResponseTime) {
+		this.averageResponseTime = averageResponseTime;
+	}
+
+	/**
+	 * @param averageWaitingTime the averageWaitingTime to set
+	 */
+	public void setAverageWaitingTime(double averageWaitingTime) {
+		this.averageWaitingTime = averageWaitingTime;
+	}
+
+	// Arrival count A, asiakkaiden kokonaismäärä
 	public int getArrivalCount() {
-		arrivalCount = Asiakas.getViimeisinID();
 		return arrivalCount;
 	}
-	//Completed count, C kokonaismäärä palveltuja asiakkaita (departuret)
+
+	// Completed count, C kokonaismäärä palveltuja asiakkaita (departuret)
 	public int getCompletedCount() {
-		//voidaan myös tehä setterillä, en ollut varma mikä ois paras systeemi niin tein suoraan tänne
-		completedCount = OmaMoottori.departuret;
 		return completedCount;
 	}
 
-	//Simuloinnin kokonaisaika T
+	// Simuloinnin kokonaisaika T
 	public double getKokonaisaika() {
-		simTime = kello.getAika();
 		return simTime;
 	}
 
-	//Busy time B, palvelupisteiden aktiiviaika
+	// Busy time B, palvelupisteiden aktiiviaika
 	public double getBusyTime() {
-		busyTime = ELaakari.getKokPalveluaika() + YLaakari.getKokPalveluaika() + Sairaanhoitaja.getKokPalveluaika() + Labra.getKokPalveluaika();
 		return busyTime;
 	}
 
-	//Utilization U, palvelupisteen käyttöaste
+	// Utilization U, palvelupisteen käyttöaste
 	public double getUtilization() {
-		utilization = busyTime / simTime;
 		return utilization;
 	}
 
-	//Throughput X, suoritusteho X=C/T
+	// Throughput X, suoritusteho X=C/T
 	public double getThroughput() {
-		throughput = completedCount/simTime;
 		return throughput;
 	}
 
-	//Service time S, palvelupisteen keskimääräinen palveluaika
+	// Service time S, palvelupisteen keskimääräinen palveluaika
 	public double getServiceTime() {
-		serviceTime = busyTime/completedCount;
 		return serviceTime;
 	}
-	//labrakäyntien määrä
+
+	// labrakäyntien määrä
 	public int getLabraArrivalit() {
-		return OmaMoottori.labrat;
+		return labraArrivalit;
 	}
-	//Waiting time W, kokonaisoleskeluaika palvelupisteissä 
-	//(kaikkien asiakkaiden läpimenoaikojen summa)
+
+	// Waiting time W, kokonaisoleskeluaika palvelupisteissä
+	// (kaikkien asiakkaiden läpimenoaikojen summa)
 	public double getWaitingTime() {
-		waitingTime = Asiakas.getWaitingTime();
 		return waitingTime;
 	}
-	//Response time R, keskimääräinen palvelupisteiden läpimenoaika
+
+	// Response time R, keskimääräinen palvelupisteiden läpimenoaika
 	public double getAverageResponseTime() {
-		averageResponseTime = waitingTime/completedCount;
 		return averageResponseTime;
 	}
-	//Keskimääräinen jononpituus N
+
+	// Keskimääräinen jononpituus N
 	public double getAverageWaitingTime() {
-		averageWaitingTime = waitingTime/simTime;
 		return averageWaitingTime;
 	}
-	
-	//TODO: HALUTAANKO YKSITTÄISEN PALVELUPISTEEN LÄPIMENOAIKAA? NYT ON JO KESKIARVO KAIKILLE -tuisku
 
-	//Response time Ri palvelupisteen läpimenoaika
+	// TODO: HALUTAANKO YKSITTÄISEN PALVELUPISTEEN LÄPIMENOAIKAA? NYT ON JO
+	// KESKIARVO KAIKILLE -tuisku
+
+	// Response time Ri palvelupisteen läpimenoaika
 	public double getResponseTime() {
 		return responseTime;
 	}
 
-
-
-	public SimpleIntegerProperty getIdProperty() {
-		return new SimpleIntegerProperty(id);
-	}
-
-	public Integer getArrivalCountProperty() {
-		return arrivalCount;
-	}
-	
-	public Integer getCompletedCountProperty() {
-		return completedCount;
-	}
-
-	public Double getKokonaisaikaProperty() {
+	/**
+	 * @return simulaation kesto
+	 */
+	public double getSimTime() {
 		return simTime;
 	}
 
-	public Double getBusyTimeProperty() {
-		return busyTime;
+	/**
+	 * @return yleislääkärien lukumäärä
+	 */
+	public int getYleislääkärit() {
+		return yleislääkärit;
 	}
 
-	public Double getUtilizationProperty() {
-		return utilization;
+	/**
+	 * @return erikoislääkärien lukumäärä
+	 */
+	public int getErikoislääkärit() {
+		return erikoislääkärit;
 	}
 
-	public Double getThroughputProperty() {
-		return throughput;
+	/**
+	 * @return sairaanhoitajien lukumäärä
+	 */
+	public int getSairaanhoitajat() {
+		return sairaanhoitajat;
 	}
 
-	public Double getServiceTimeProperty() {
-		return serviceTime;
+	/**
+	 * @return laboratorioiden lukumäärä
+	 */
+	public int getLabrat() {
+		return labrat;
 	}
-
-	public Integer getLabraArrivalitProperty() {
-		return labraArrivalit;
-	}
-
-	public Double getWaitingTimeProperty() {
-		return waitingTime;
-	}
-
-	public Double getAverageResponseTimeProperty() {
-		return averageResponseTime;
-	}
-
-	public Double getAverageWaitingTimeProperty() {
-		return averageWaitingTime;
-	}
-
-	public Double getResponseTimeProperty() {
-		return responseTime;
-	}
-
 }
