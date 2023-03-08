@@ -19,8 +19,6 @@ public interface IKontrolleriVtoM {
 
 	void visualisoiAsiakas();
 	
-	Map<String, Integer> haePalvelupisteetTest();
-	
 	void setKokonaisaika(String aika);
 	
 	void setPalveltu(String lkm);
