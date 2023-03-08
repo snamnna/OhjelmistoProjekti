@@ -4,8 +4,10 @@ import entity.Tulos;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import simulaattori.MainApp;
+import simulaattori.simu.model.TulosDAO;
 
 public class TuloksetController {
 
@@ -27,6 +29,10 @@ public class TuloksetController {
 	private Label averageResponseTime;
 	@FXML
 	private Label averageWaitingTime;
+	@FXML
+	private Button tallennaButton;
+	@FXML 
+	private Button poistaButton;
 
 	private MainApp mainApp;
 	
@@ -45,6 +51,17 @@ public class TuloksetController {
 		    setAverageResponseTime(String.format("%.2f", newValue.getAverageResponseTime()));
 		    setAverageWaitingTime(String.format("%.2f", newValue.getAverageWaitingTime()));
 		});
+	}
+	
+	@FXML
+	public void tallennaTulos() {
+		System.out.println("Tallennetaan tulos tietokantaan");
+		mainApp.tallennaTulos(tulos.get());
+	}
+	
+	@FXML
+	public void poistaTulos() {
+		System.out.println("Poistetaan tulos");
 	}
 
 	public void setELaakarit(String eLaakarit) {
