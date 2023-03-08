@@ -55,18 +55,18 @@ public class TietovarastoController {
 		});
 
 		col_eLaakarit.setCellValueFactory(cellData -> {
-        	Integer lkm = cellData.getValue().getErikoislääkärit();
-        	return new ReadOnlyObjectWrapper<Integer>(lkm);
+			Integer lkm = cellData.getValue().getErikoislääkärit();
+			return new ReadOnlyObjectWrapper<Integer>(lkm);
 		});
 
 		col_yleisLaakarit.setCellValueFactory(cellData -> {
-        	Integer lkm = cellData.getValue().getYleislääkärit();
-        	return new ReadOnlyObjectWrapper<Integer>(lkm);
+			Integer lkm = cellData.getValue().getYleislääkärit();
+			return new ReadOnlyObjectWrapper<Integer>(lkm);
 		});
 
 		col_labrakaynnit.setCellValueFactory(cellData -> {
-        	Integer lkm = cellData.getValue().getLabraArrivalit();
-        	return new ReadOnlyObjectWrapper<Integer>(lkm);
+			Integer lkm = cellData.getValue().getLabraArrivalit();
+			return new ReadOnlyObjectWrapper<Integer>(lkm);
 		});
 
 		col_saapuneet.setCellValueFactory(cellData -> {
@@ -99,14 +99,26 @@ public class TietovarastoController {
 			Double serviceTime = cellData.getValue().getServiceTime();
 			return new ReadOnlyObjectWrapper<Double>(serviceTime);
 		});
+
+		table_tulokset.getSelectionModel().selectedItemProperty()
+				.addListener((observable, oldValue, newValue) -> mainApp.setTulos(newValue));
 	}
-	
+
 	public Boolean isOpen() {
 		return open;
 	}
-	
+
 	@FXML
 	private void handleClose() {
 		mainApp.closeTietovarasto();
+	}
+
+	public void removeTulos(Tulos tulos) {
+		table_tulokset.getItems().remove(tulos);
+	}
+
+	public void lisaaTulos(Tulos tulos) {
+		table_tulokset.getItems().add(tulos);
+		
 	}
 }
