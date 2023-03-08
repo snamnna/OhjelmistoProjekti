@@ -24,8 +24,6 @@ public interface IPalvelupiste {
 	Tapahtuma getViimeisinTapahtuma();
 
 	int getID();
-
-	String getJonoString();
 	
 	double getKaikkienPalveluAikojenSumma();
 	

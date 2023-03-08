@@ -23,7 +23,6 @@ public class ELaakari extends Palvelupiste {
 	public void aloitaPalvelu() {
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		// arvo palveluaika
-		Trace.out(Trace.Level.INFO, "Aloitetaan uusi palvelu asiakkaalle " + jono.peek().getId());
 		varattu = true;
 		double palveluaika = generator.sample();
 

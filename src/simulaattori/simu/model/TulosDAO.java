@@ -48,7 +48,6 @@ public class TulosDAO {
 		em.getTransaction().begin();
 		em.persist(tulos);
 		em.getTransaction().commit();
-		System.out.println("Tulokset viety");
 	}
 	
 	public boolean createTulos(Tulos tulos) {
@@ -84,12 +83,10 @@ public class TulosDAO {
 			if (tulos != null) {
 				istunto.remove(tulos);
 				istunto.getTransaction().commit();
-				System.out.println("Tulos-olio poistettu.");
 				return true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Tuloksen poisto epäonnistui.");
 		}
 		return false;
 	}

@@ -24,7 +24,6 @@ public class YLaakari extends Palvelupiste {
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		// arvo palveluaika
-		Trace.out(Trace.Level.INFO, "Aloitetaan uusi palvelu asiakkaalle " + jono.peek().getId());
 		varattu = true;
 		double palveluaika = generator.sample();
 		// Jakauma sille, että meneekö labraan vai kotiin
@@ -51,9 +50,5 @@ public class YLaakari extends Palvelupiste {
 		}
 		default -> throw new IllegalArgumentException("Unexpected value: " + tapahtuma.getTyyppi());
 		}
-	}
-
-	public String getJonoString() {
-		return jono.toString() + "\n YLaakari";
 	}
 }

@@ -42,7 +42,6 @@ public class KayttajatiedotController {
 
     @FXML
     public void handleKaynnista() {
-    	System.out.println("klikattu");
         if(isInputValid()) {
         	mainApp.startButtonClicked();
         }
@@ -50,13 +49,11 @@ public class KayttajatiedotController {
 
     @FXML
     public void handleHidasta() {
-        System.out.println("Hidasta");
         mainApp.hidastaSimulaattoria();
     }
 
     @FXML
     public void handleNopeuta() {
-        System.out.println("Nopeuta");
         mainApp.nopeutaSimulaattoria();
     }
 

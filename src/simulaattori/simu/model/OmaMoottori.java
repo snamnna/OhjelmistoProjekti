@@ -32,7 +32,7 @@ public class OmaMoottori extends Moottori {
 
 	@Override
 	protected void alustukset() {
-		Trace.setTraceLevel(Trace.Level.INFO);
+		Trace.setTraceLevel(Trace.Level.ERR);
 		Kello.getInstance().setAika(0);
 		Asiakas.resetAsiakasCount();
 		// key on palvelupisteen tyyppi.
@@ -67,10 +67,6 @@ public class OmaMoottori extends Moottori {
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t) { // B-vaiheen tapahtumat
 		TapahtumanTyyppi tyyppi = t.getTyyppi();
-
-		for (IPalvelupiste p : palvelupisteet.values()) {
-			System.out.println(p.getJonoString());
-		}
 		List<IPalvelupiste> pisteet = tyyppiToPalveluPMap.get(tyyppi);
 
 		// tällä hetkellä hakee randomisti vaan jonku tapahtumatyyppiä vastaavan

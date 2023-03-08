@@ -21,7 +21,6 @@ public class Sairaanhoitaja extends Palvelupiste {
     // Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
     public void aloitaPalvelu() {
     	ThreadLocalRandom random = ThreadLocalRandom.current();
-        Trace.out(Trace.Level.INFO, "Aloitetaan uusi palvelu asiakkaalle " + jono.peek().getId());
         varattu = true;
         double palveluaika = generator.sample();
         // arvo meneekö erikoislääkärille vai yleislääkärille
@@ -34,9 +33,5 @@ public class Sairaanhoitaja extends Palvelupiste {
 
     public void siirraAsiakas(Tapahtuma tapahtuma, Map<Integer, IPalvelupiste> palvelupisteet) {
         lisaaJonoon(new Asiakas());
-    }
-
-    public String getJonoString() {
-        return jono.toString() + "\n Sairaanhoitaja";
     }
 }

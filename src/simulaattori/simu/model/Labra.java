@@ -29,7 +29,6 @@ public class Labra extends Palvelupiste {
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 		Asiakas asiakas = jono.peek();
 		// arvo palveluaika
-		Trace.out(Trace.Level.INFO, "Aloitetaan uusi palvelu asiakkaalle " + asiakas.getId());
 		varattu = true;
 		double palveluaika = generator.sample();
 
