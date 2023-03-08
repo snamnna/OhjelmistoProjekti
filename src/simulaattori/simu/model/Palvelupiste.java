@@ -23,7 +23,7 @@ public abstract class Palvelupiste implements IPalvelupiste {
 	protected boolean varattu = false;
 	protected int departures;
 	
-	private static double kaikkienPalveluAikaSumma = 0;
+	private static long kaikkienPalveluAikaSumma;
 
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
 		this.tapahtumalista = tapahtumalista;
@@ -32,13 +32,14 @@ public abstract class Palvelupiste implements IPalvelupiste {
 		ID = getSeuraavaID();
 		jono = new LinkedList<>();
 		departures = 0;
+		kaikkienPalveluAikaSumma = 0;
 	}
 	
 	protected void addPalveluAikaToSumma(double aika) {
 		kaikkienPalveluAikaSumma += aika;
 	}
 	
-	public Double getKaikkienPalveluAikojenSumma() {
+	public long getKaikkienPalveluAikojenSumma() {
 		return kaikkienPalveluAikaSumma;
 	}
 
