@@ -42,6 +42,18 @@ public class TietovarastoController {
 		table_tulokset.setItems(mainApp.getTulokset());
 	}
 
+	public void removeTulos(Tulos tulos) {
+		table_tulokset.getItems().remove(tulos);
+	}
+
+	public void lisaaTulos(Tulos tulos) {
+		table_tulokset.getItems().add(tulos);
+	}
+	
+	public Boolean isOpen() {
+		return open;
+	}
+
 	@FXML
 	public void initialize() {
 		col_id.setCellValueFactory(cellData -> {
@@ -104,20 +116,8 @@ public class TietovarastoController {
 				.addListener((observable, oldValue, newValue) -> mainApp.setTulos(newValue));
 	}
 
-	public Boolean isOpen() {
-		return open;
-	}
-
 	@FXML
 	private void handleClose() {
 		mainApp.closeTietovarasto();
-	}
-
-	public void removeTulos(Tulos tulos) {
-		table_tulokset.getItems().remove(tulos);
-	}
-
-	public void lisaaTulos(Tulos tulos) {
-		table_tulokset.getItems().add(tulos);
 	}
 }
