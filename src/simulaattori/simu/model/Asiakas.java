@@ -33,6 +33,10 @@ public class Asiakas {
 	public static int getAsiakasCount() {
 		return asiakasCount;
 	}
+	
+	public static void resetAsiakasCount() {
+		asiakasCount = 0;
+	}
 
 	public double getPoistumisaika() {
 		return poistumisaika;

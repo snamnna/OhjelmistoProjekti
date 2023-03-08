@@ -34,6 +34,7 @@ public class OmaMoottori extends Moottori {
 	protected void alustukset() {
 		Trace.setTraceLevel(Trace.Level.INFO);
 		Kello.getInstance().setAika(0);
+		Asiakas.resetAsiakasCount();
 		// key on palvelupisteen tyyppi.
 		// arvona tietyn tyyppisten palvelupisteiden lukumäärä
 		Map<String, Integer> pPisteet = kontrolleri.haePalvelupisteet();
