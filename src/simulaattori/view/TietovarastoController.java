@@ -119,6 +119,5 @@ public class TietovarastoController {
 
 	public void lisaaTulos(Tulos tulos) {
 		table_tulokset.getItems().add(tulos);
-		
 	}
 }
