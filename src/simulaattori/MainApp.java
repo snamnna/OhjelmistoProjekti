@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -27,6 +26,7 @@ import simulaattori.view.TuloksetController;
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
 
 	private ObservableList<Tulos> listTulos = FXCollections.observableArrayList();
+	private TulosDAO tulosDAO;
 	private Stage primaryStage;
 	private BorderPane rootLayout;
 	private KayttajatiedotController kayttajatiedotController;
@@ -38,7 +38,8 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	private BooleanProperty simuloidaan = new SimpleBooleanProperty(false);
 
 	public MainApp() {
-		Tulos[] tulokset = TulosDAO.getInstance().getTulokset();
+		tulosDAO = TulosDAO.getInstance();
+		Tulos[] tulokset = tulosDAO.getTulokset();
 		for (int i = 0; i < tulokset.length; i++) {
 			listTulos.add(tulokset[i]);
 		}
@@ -259,6 +260,14 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 		primaryStage.sizeToScene();
 	}
 
+	public void tallennaTulos(Tulos tulos) {
+		tulosDAO.createTulos(tulos);
+	}
+	
+	public void poistaTulos(Tulos tulos) {
+		tulosDAO.deleteTulos(tulos.getId());
+	}
+	
 	public static void main(String[] args) {
 		launch(MainApp.class);
 	}
