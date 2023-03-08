@@ -1,5 +1,8 @@
 package simulaattori.view;
 
+import entity.Tulos;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import simulaattori.MainApp;
@@ -26,12 +29,25 @@ public class TuloksetController {
 	private Label averageWaitingTime;
 
 	private MainApp mainApp;
+	
+	private ObjectProperty<Tulos> tulos = new SimpleObjectProperty<>();
 
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
+		tulos.addListener((observable, oldValue, newValue) -> {
+			setELaakarit(Integer.toString(newValue.getErikoislääkärit()));
+			setYlaakarit(Integer.toString(newValue.getYleislääkärit()));
+			setLabroja(Integer.toString(newValue.getLabrat()));
+			setPalveltu(Integer.toString(newValue.getCompletedCount()));
+			setKokonaisaika(String.format("%.2f", newValue.getSimTime()));
+		    setUtilization(String.format("%.2f", newValue.getUtilization()));
+		    setServiceTime(String.format("%.2f", newValue.getServiceTime()));
+		    setAverageResponseTime(String.format("%.2f", newValue.getAverageResponseTime()));
+		    setAverageWaitingTime(String.format("%.2f", newValue.getAverageWaitingTime()));
+		});
 	}
 
-	public void seteLaakarit(String eLaakarit) {
+	public void setELaakarit(String eLaakarit) {
 		this.eLaakarit.setText(eLaakarit);
 	}
 
@@ -65,6 +81,12 @@ public class TuloksetController {
 
 	public void setAverageWaitingTime(String averageWaitingTime) {
 		this.averageWaitingTime.setText(averageWaitingTime);
+	}
+
+	public void setTulos(Tulos tulos) {
+		this.tulos.set(tulos);
+//		ObservableValue<Tulos> observableTulos = new SimpleObjectProperty<>(tulos);
+//		this.tulos = observableTulos;
 	}
 
 }
