@@ -120,4 +120,8 @@ public class TietovarastoController {
 	private void handleClose() {
 		mainApp.closeTietovarasto();
 	}
+	
+	public void disableTuloksetTable(boolean disable) {
+		table_tulokset.setDisable(disable);
+	}
 }

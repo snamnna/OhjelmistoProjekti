@@ -13,22 +13,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="simulaattori.view.TietovarastoController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulaattori.view.TietovarastoController">
 	<children>
-		<Separator focusTraversable="false" minHeight="-Infinity"
-			prefHeight="10.0" AnchorPane.leftAnchor="0.0"
-			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-		<VBox alignment="TOP_RIGHT" minHeight="-Infinity"
-			minWidth="-Infinity" AnchorPane.bottomAnchor="0.0"
-			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-			AnchorPane.topAnchor="10.0">
+		<Separator focusTraversable="false" minHeight="-Infinity" prefHeight="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+		<VBox alignment="TOP_RIGHT" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
 			<children>
 				<AnchorPane>
-					<MenuBar AnchorPane.bottomAnchor="0.0"
-						AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-						AnchorPane.topAnchor="0.0">
+					<MenuBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 						<menus>
 							<Menu mnemonicParsing="false" text="File">
 								<items>
@@ -51,28 +42,17 @@
 
 				<TableView fx:id="table_tulokset">
 					<columns>
-						<TableColumn fx:id="col_id"
-							prefWidth="38.666688323020935" text="ID" />
-						<TableColumn fx:id="col_aika"
-							prefWidth="67.33337020874023" text="Aika" />
-						<TableColumn fx:id="col_eLaakarit"
-							prefWidth="71.33332061767578" text="ErikoisL" />
-						<TableColumn fx:id="col_yleisLaakarit"
-							prefWidth="55.99993896484375" text="YleisL" />
-						<TableColumn fx:id="col_labrakaynnit"
-							prefWidth="69.33329772949219" text="Labrassa" />
-						<TableColumn fx:id="col_saapuneet"
-							prefWidth="70.00006103515625" text="Saapuneet" />
-						<TableColumn fx:id="col_palveltu" prefWidth="76.0"
-							text="Palveltu" />
-						<TableColumn fx:id="col_busyTime"
-							prefWidth="84.66671752929688" text="BusyTime" />
-						<TableColumn fx:id="col_throughput"
-							prefWidth="83.33331298828125" text="Throughput" />
-						<TableColumn fx:id="col_utilization"
-							prefWidth="86.666748046875" text="Utilization" />
-						<TableColumn fx:id="col_serviceTime"
-							prefWidth="104.6666259765625" text="ServiceTime         " />
+						<TableColumn fx:id="col_id" prefWidth="38.666688323020935" text="ID" />
+						<TableColumn fx:id="col_aika" prefWidth="67.33337020874023" text="Aika" />
+						<TableColumn fx:id="col_eLaakarit" prefWidth="71.33332061767578" text="ErikoisL" />
+						<TableColumn fx:id="col_yleisLaakarit" prefWidth="55.99993896484375" text="YleisL" />
+						<TableColumn fx:id="col_labrakaynnit" prefWidth="69.33329772949219" text="Labrassa" />
+						<TableColumn fx:id="col_saapuneet" prefWidth="70.00006103515625" text="Saapuneet" />
+						<TableColumn fx:id="col_palveltu" prefWidth="76.0" text="Palveltu" />
+						<TableColumn fx:id="col_busyTime" prefWidth="84.66671752929688" text="BusyTime" />
+						<TableColumn fx:id="col_throughput" prefWidth="83.33331298828125" text="Throughput" />
+						<TableColumn fx:id="col_utilization" prefWidth="86.666748046875" text="Utilization" />
+						<TableColumn fx:id="col_serviceTime" prefWidth="104.6666259765625" text="ServiceTime         " />
 					</columns>
 					<columnResizePolicy>
 						<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -80,12 +60,9 @@
 				</TableView>
 			</children>
 		</VBox>
-		<Pane fx:id="closeButton" layoutX="786.0" layoutY="14.0"
-			onMouseClicked="#handleClose" AnchorPane.rightAnchor="5.0"
-			AnchorPane.topAnchor="14.0">
+		<Pane fx:id="closeButton" layoutX="786.0" layoutY="14.0" onMouseClicked="#handleClose" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="14.0">
 			<children>
-				<ImageView fitHeight="20" fitWidth="20"
-					preserveRatio="true">
+				<ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
 					<image>
 						<Image url="@close.png" />
 					</image>
