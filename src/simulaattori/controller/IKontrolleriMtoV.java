@@ -3,15 +3,13 @@ package simulaattori.controller;
 import entity.Tulos;
 
 public interface IKontrolleriMtoV {
+	void hidasta();
 
-	// Rajapinta, joka tarjotaan käyttöliittymälle:
-	public void haeLoppuaika(double aika);
+	void nopeuta();
 
-	public void hidasta();
+	void kaynnistaSimulointi();
 
-	public void nopeuta();
+	Tulos getTulos();
 
-	public void kaynnistaSimulointi();
-
-	public Tulos getTulos();
+	void stopSimulaattori();
 }
