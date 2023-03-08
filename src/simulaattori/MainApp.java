@@ -62,6 +62,10 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 		simuloidaan.addListener((observable, oldValue, newValue) -> {
 			kayttajatiedotController.disableTextFieldsAndStartButton(newValue);
 			if(!oldValue) startSimulaattori();
+			
+			if(oldValue && !newValue) {
+				getTulos();
+			}
 		});
 	}
 
@@ -127,6 +131,10 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 		tietovarastoController = loader.getController();
 		tietovarastoController.setMainApp(this);
 		rootLayout.setBottom(tietovarasto);
+	}
+	
+	public Boolean simuloidaan() {
+		return simuloidaan.get();
 	}
 
 	public BooleanProperty simuloidaanProperty() {
@@ -227,7 +235,7 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 
 	@Override
 	public void setLabrakaynteja(String lkm) {
-		tulosController.setLabroja(lkm);
+		tulosController.setLabrassaKaynteja(lkm);
 	}
 
 	@Override
