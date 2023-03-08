@@ -55,13 +55,12 @@ public class TuloksetController {
 
 	@FXML
 	public void tallennaTulos() {
-		System.out.println("Tallennetaan tulos tietokantaan");
 		mainApp.tallennaTulos(tulos.get());
 	}
 
 	@FXML
 	public void poistaTulos() {
-		System.out.println("Poistetaan tulos");
+		mainApp.poistaTulos(tulos.get());
 	}
 
 	public void setELaakarit(String eLaakarit) {
