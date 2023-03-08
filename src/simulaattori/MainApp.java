@@ -1,6 +1,7 @@
 package simulaattori;
 
 import java.io.IOException;
+import java.util.Map;
 
 import entity.Tulos;
 import javafx.application.Application;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import simulaattori.controller.IKontrolleriMtoV;
 import simulaattori.controller.Kontrolleri;
 import simulaattori.simu.model.TulosDAO;
+import simulaattori.simu.model.util.IPalvelupiste;
 import simulaattori.view.ISimulaattorinUI;
 import simulaattori.view.KayttajatiedotController;
 import simulaattori.view.RootLayoutController;
@@ -61,10 +63,14 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 		
 		simuloidaan.addListener((observable, oldValue, newValue) -> {
 			kayttajatiedotController.disableTextFieldsAndStartButton(newValue);
-			if(!oldValue) startSimulaattori();
+			if(!oldValue) {
+				startSimulaattori();
+				tietovarastoController.disableTuloksetTable(true);
+			}
 			
 			if(oldValue && !newValue) {
 				getTulos();
+				tietovarastoController.disableTuloksetTable(false);
 			}
 		});
 	}
@@ -261,14 +267,12 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	public void closeTietovarasto() {
 		tietovarasto.setVisible(false);
 		tietovarasto.setManaged(false);
-		kayttajatiedotController.enableSimControls();
 		primaryStage.sizeToScene();
 	}
 
 	public void openTietovarasto() {
 		tietovarasto.setVisible(true);
 		tietovarasto.setManaged(true);
-		kayttajatiedotController.disableSimControls();
 		primaryStage.sizeToScene();
 	}
 
@@ -280,6 +284,11 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	public void poistaTulos(Tulos tulos) {
 		tulosDAO.deleteTulos(tulos.getId());
 		tietovarastoController.removeTulos(tulos);
+	}
+
+	@Override
+	public void setPalvelupisteet(Map<Integer, IPalvelupiste> palvelupisteet) {
+		simuController.alustukset(palvelupisteet);
 	}
 	
 	public static void main(String[] args) {

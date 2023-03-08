@@ -1,5 +1,9 @@
 package simulaattori.view;
 
+import java.util.Map;
+
+import simulaattori.simu.model.util.IPalvelupiste;
+
 public interface ISimulaattorinUI {
 
 	int getYlaakarienLkm();
@@ -41,4 +45,6 @@ public interface ISimulaattorinUI {
 	void setSimuloidaan(boolean value);
 
 	void getTulos();
+
+	void setPalvelupisteet(Map<Integer, IPalvelupiste> palvelupisteet);
 }
