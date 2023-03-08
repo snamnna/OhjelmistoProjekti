@@ -58,7 +58,7 @@ public class OmaMoottori extends Moottori {
 		}
 		
 		// viedään alustetut palvelupisteet UI:lle visualisointia varten
-		kontrolleri.setPalvelupisteet(palvelupisteet);
+		kontrolleri.setPalvelupisteet(tyyppiToPalveluPMap);
 		// Ensimmäinen saapuminen järjestelmään
 		saapumisprosessi.generoiSeuraava(); 
 	}
@@ -86,8 +86,8 @@ public class OmaMoottori extends Moottori {
 		// hoitaa visualisoinnin
 		if (tyyppi == TapahtumanTyyppi.ARR) {
 			saapumisprosessi.generoiSeuraava();
-			kontrolleri.visualisoiAsiakas();
 		}
+		kontrolleri.visualisoi();
 	}
 
 	protected TapahtumanTyyppi getTapahtumanTyyppi(String tyyppi, Boolean arrival) {
@@ -144,6 +144,7 @@ public class OmaMoottori extends Moottori {
 		tulos.setAverageResponseTime(averageResponseTime);
 		tulos.setAverageWaitingTime(averageWaitingTime);
 		
+		kontrolleri.visualisoi();
 		// ilmoitetaan UIlle simulaation päättymisestä
 		kontrolleri.simulointiPaattyi();
 	}
