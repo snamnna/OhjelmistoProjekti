@@ -1,5 +1,7 @@
 package simulaattori.controller;
 
+import entity.Tulos;
+
 public interface IKontrolleriMtoV {
 
 	// Rajapinta, joka tarjotaan käyttöliittymälle:
@@ -10,4 +12,6 @@ public interface IKontrolleriMtoV {
 	public void nopeuta();
 
 	public void kaynnistaSimulointi();
+
+	public Tulos getTulos();
 }
