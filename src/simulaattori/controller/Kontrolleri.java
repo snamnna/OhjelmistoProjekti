@@ -34,6 +34,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	
 	public void simulointiPaattyi() {
 		ui.setSimuloidaan(false);
+		Platform.runLater(() -> ui.getTulos());
 	}
 
 	@Override
@@ -63,15 +64,6 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 		palvelupisteet.put("YLaakari", haeYlaakarienLkm());
 		palvelupisteet.put("ELaakari", haeElaakarienLkm());
 		palvelupisteet.put("Labra", haeLabraLkm());
-		return palvelupisteet;
-	}
-
-	public Map<String, Integer> haePalvelupisteetTest() {
-		Map<String, Integer> palvelupisteet = new HashMap<>();
-		palvelupisteet.put("Sairaanhoitaja", 1); // Kovakoodattu 1 koska sairaanhoitajia aina vain 1
-		palvelupisteet.put("YLaakari", 1);
-		palvelupisteet.put("ELaakari", 1);
-		palvelupisteet.put("Labra", 1); // Kovakoodattu 1 koska labroja aina vain 1
 		return palvelupisteet;
 	}
 
@@ -137,5 +129,10 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	@Override
 	public void setKeskimaarainenJonotusaika(String aika) {
 		Platform.runLater(() -> ui.setKeskimaarainenJonotusaika(aika));
+	}
+
+	@Override
+	public Tulos getTulos() {
+		return moottori.getTulos();
 	}
 }
