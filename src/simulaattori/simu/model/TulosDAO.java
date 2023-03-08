@@ -12,6 +12,7 @@ import jakarta.persistence.EntityManager;
 public class TulosDAO {
 
 	private static TulosDAO instance;
+	// käytetään hibernaten session API:a joka implementoi EntityManagerin
 	private static SessionFactory sf;
 
 	private TulosDAO() {
@@ -32,37 +33,27 @@ public class TulosDAO {
 		}
 		return instance;
 	}
-
-	// Haetaan tulos tietokannasta
-	public Tulos haeTulos(int id) {
-		EntityManager em = datasource.MAriaDBConnector.getInstance();
-		em.getTransaction().begin();
-		Tulos tulos = em.find(Tulos.class, id);
-		em.getTransaction().commit();
-		return tulos;
-	}
-
-	// Viedään tulos tietokantaan
-	public void vieTulos(Tulos tulos) {
-		EntityManager em = datasource.MAriaDBConnector.getInstance();
-		em.getTransaction().begin();
-		em.persist(tulos);
-		em.getTransaction().commit();
-	}
 	
 	public boolean createTulos(Tulos tulos) {
-		Session istunto = sf.getCurrentSession();
-		try {
-			istunto.beginTransaction();
-			istunto.merge(tulos);
-			istunto.getTransaction().commit();
-			return true;
-		} catch (Exception e) {
-			istunto.getTransaction().rollback();
-			e.printStackTrace();
-			return false;
-		}
-	 }
+	    Session istunto = null;
+	    try {
+	        istunto = sf.openSession();
+	        istunto.beginTransaction();
+	        istunto.merge(tulos);
+	        istunto.getTransaction().commit();
+	        return true;
+	    } catch (Exception e) {
+	        if (istunto != null) {
+	            istunto.getTransaction().rollback();
+	        }
+	        e.printStackTrace();
+	        return false;
+	    } finally {
+	        if (istunto != null) {
+	            istunto.close();
+	        }
+	    }
+	}
 
 	public Tulos[] getTulokset() {
 		List<Tulos> tulosList = null;
@@ -77,17 +68,23 @@ public class TulosDAO {
 	}
 	
 	public boolean deleteTulos(int id) {
-		try (Session istunto = sf.openSession()) {
-			istunto.beginTransaction();
-			Tulos tulos = (Tulos) istunto.get(Tulos.class, id);
-			if (tulos != null) {
-				istunto.remove(tulos);
-				istunto.getTransaction().commit();
-				return true;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return false;
+	    Session istunto = null;
+	    try {
+	        istunto = sf.openSession();
+	        istunto.beginTransaction();
+	        Tulos tulos = (Tulos) istunto.get(Tulos.class, id);
+	        if (tulos != null) {
+	            istunto.remove(tulos);
+	            istunto.getTransaction().commit();
+	            return true;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (istunto != null) {
+	            istunto.close();
+	        }
+	    }
+	    return false;
 	}
 }
