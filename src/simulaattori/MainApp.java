@@ -160,6 +160,10 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	public void getTulos() {
 		tulosController.setTulos(kontrolleri.getTulos());
 	}
+	
+	public void setTulos(Tulos tulos) {
+		tulosController.setTulos(tulos);
+	}
 
 	@Override
 	public double getSimulointiAika() {
@@ -262,10 +266,12 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 
 	public void tallennaTulos(Tulos tulos) {
 		tulosDAO.createTulos(tulos);
+		tietovarastoController.lisaaTulos(tulos);
 	}
 	
 	public void poistaTulos(Tulos tulos) {
 		tulosDAO.deleteTulos(tulos.getId());
+		tietovarastoController.removeTulos(tulos);
 	}
 	
 	public static void main(String[] args) {
