@@ -2,7 +2,7 @@ package simulaattori.controller;
 
 import java.util.Map;
 
-import entity.Tulos;
+import simulaattori.simu.model.util.IPalvelupiste;
 
 public interface IKontrolleriVtoM {
 	// Rajapinta, joka tarjotaan moottorille:
@@ -18,7 +18,9 @@ public interface IKontrolleriVtoM {
 	Map<String, Integer> haePalvelupisteet();
 
 	void visualisoiAsiakas();
-	
+
 	void simulointiPaattyi();
+
+	void setPalvelupisteet(Map<Integer, IPalvelupiste> palvelupisteet);
 
 }
