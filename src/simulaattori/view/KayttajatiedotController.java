@@ -143,10 +143,8 @@ public class KayttajatiedotController {
 
 	public void disableTextFieldsAndStartButton(boolean disabled) {
 		kaynnistaButton.setDisable(disabled);
-		sairaanhoitajaLkmTextField.setDisable(disabled);
 		yLaakariLkmTextField.setDisable(disabled);
 		eLaakariLkmTextField.setDisable(disabled);
-		labraLkmTextField.setDisable(disabled);
 		simulointiViiveTextField.setDisable(disabled);
 		simulointiAikaTextField.setDisable(disabled);
 	}
