@@ -16,12 +16,10 @@ public interface ISimulaattorinUI {
 
 	int getSairaanhoitajaLkm();
 
-	double getSimulointiAika(); // simuloinnin kesto kontrollerille
+	double getSimulointiAika();
 
-	// Kontrolleri antaa käyttöliittymälle tuloksia, joita Moottori tuottaa
 	void setLoppuaika(double aika);
 
-	// Kontrolleri tarvitsee
 	SimulaattoriController getVisualisointi();
 
 	long getViive();
