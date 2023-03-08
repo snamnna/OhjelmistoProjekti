@@ -10,6 +10,4 @@ public interface IKontrolleriMtoV {
 	void kaynnistaSimulointi();
 
 	Tulos getTulos();
-
-	void stopSimulaattori();
 }
