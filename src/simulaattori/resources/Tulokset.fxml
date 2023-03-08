@@ -17,7 +17,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <GridPane alignment="CENTER" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="25.0">
+      <GridPane alignment="CENTER" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="161.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="54.0" />
@@ -34,26 +34,82 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Simuloinnin kokonaisaika" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER" />
-            <Label fx:id="kokonaisaika" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
-            <Label text="Asiakkaita palveltu" GridPane.rowIndex="1" />
-            <Label fx:id="palveltu" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Label text="Yleislääkäreitä" GridPane.rowIndex="2" />
-            <Label fx:id="ylaakarit" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Label text="Erikoislääkäreitä" GridPane.rowIndex="3" />
-            <Label fx:id="eLaakarit" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <Label text="Laboratoriokäyntejä" GridPane.rowIndex="4" />
-            <Label fx:id="labroja" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-            <Label text="Käyttöaste (utilization)" GridPane.rowIndex="5" />
-            <Label fx:id="utilization" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <Label text="Kesimääräinen palveluaika" GridPane.rowIndex="6" />
-            <Label GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Label text="Keskimääräinen läpimenoaika (palvelupisteiden)" wrapText="true" GridPane.rowIndex="7" />
-            <Label fx:id="serviceTime" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Label fx:id="averageResponseTime" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-            <Label text="Keskimääräinen jonotusaika" GridPane.rowIndex="8" />
-            <Label fx:id="averageWaitingTime" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Simuloinnin kokonaisaika" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.vgrow="NEVER">
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="kokonaisaika" contentDisplay="TEXT_ONLY" ellipsisString="" minHeight="-Infinity" minWidth="-Infinity" text="0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin></Label>
+            <Label text="Asiakkaita palveltu" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="palveltu" text="0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin></Label>
+            <Label text="Yleislääkäreitä" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="ylaakarit" text="0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin></Label>
+            <Label text="Erikoislääkäreitä" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="eLaakarit" text="0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin></Label>
+            <Label text="Laboratoriokäyntejä" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="labrassaKaynteja" text="0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin></Label>
+            <Label text="Käyttöaste (utilization)" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="utilization" text="0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin></Label>
+            <Label text="Kesimääräinen palveluaika" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="serviceTime" text="0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin></Label>
+            <Label text="Keskimääräinen läpimenoaika (palvelupisteiden)" wrapText="true" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="averageResponseTime" text="0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin></Label>
+            <Label text="Keskimääräinen jonotusaika" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets left="2.0" />
+               </GridPane.margin></Label>
+            <Label fx:id="averageWaitingTime" text="0" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin></Label>
          </children>
+         <padding>
+            <Insets left="2.0" right="2.0" />
+         </padding>
       </GridPane>
       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="520.0">
          <children>
