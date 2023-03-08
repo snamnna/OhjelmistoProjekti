@@ -57,6 +57,11 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 
 		primaryStage.sizeToScene();
 		primaryStage.show();
+		
+		simuloidaan.addListener((observable, oldValue, newValue) -> {
+			kayttajatiedotController.disableTextFieldsAndStartButton(newValue);
+			if(!oldValue) startSimulaattori();
+		});
 	}
 
 	private void initRootLayout() throws IOException {
@@ -84,12 +89,6 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 		// Give the controller access to the main app.
 		kayttajatiedotController = loader.getController();
 		kayttajatiedotController.setMainApp(this);
-
-		simuloidaan.addListener((observable, oldValue, newValue) -> {
-			kayttajatiedotController.disableTextFieldsAndStartButton(newValue);
-			if (kayttajatiedotController.isInputValid())
-				startSimulaattori();
-		});
 	}
 
 	public void showSimulaattori() throws IOException {
@@ -156,6 +155,10 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	public ObservableList<Tulos> getTulokset() {
 		return listTulos;
 	}
+	
+	public void getTulos() {
+		tulosController.setTulos(kontrolleri.getTulos());
+	}
 
 	@Override
 	public double getSimulointiAika() {
@@ -209,7 +212,7 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 
 	@Override
 	public void setELaakarienLkm(String lkm) {
-		tulosController.seteLaakarit(lkm);
+		tulosController.setELaakarit(lkm);
 	}
 
 	@Override
