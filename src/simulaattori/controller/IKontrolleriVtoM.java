@@ -1,7 +1,9 @@
 package simulaattori.controller;
 
+import java.util.List;
 import java.util.Map;
 
+import simulaattori.simu.model.TapahtumanTyyppi;
 import simulaattori.simu.model.util.IPalvelupiste;
 
 public interface IKontrolleriVtoM {
@@ -17,10 +19,9 @@ public interface IKontrolleriVtoM {
 
 	Map<String, Integer> haePalvelupisteet();
 
-	void visualisoiAsiakas();
+	void visualisoi();
 
 	void simulointiPaattyi();
 
-	void setPalvelupisteet(Map<Integer, IPalvelupiste> palvelupisteet);
-
+	void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet);
 }
