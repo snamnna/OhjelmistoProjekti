@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import simulaattori.simu.framework.IMoottori;
 import simulaattori.simu.framework.Moottori;
 import simulaattori.simu.model.OmaMoottori;
+import simulaattori.simu.model.util.IPalvelupiste;
 import simulaattori.view.ISimulaattorinUI;
 
 public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
@@ -91,5 +92,10 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	@Override
 	public Tulos getTulos() {
 		return moottori.getTulos();
+	}
+
+	@Override
+	public void setPalvelupisteet(Map<Integer, IPalvelupiste> palvelupisteet) {
+		ui.setPalvelupisteet(palvelupisteet);
 	}
 }
