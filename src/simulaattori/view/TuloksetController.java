@@ -31,11 +31,11 @@ public class TuloksetController {
 	private Label averageWaitingTime;
 	@FXML
 	private Button tallennaButton;
-	@FXML 
+	@FXML
 	private Button poistaButton;
 
 	private MainApp mainApp;
-	
+
 	private ObjectProperty<Tulos> tulos = new SimpleObjectProperty<>();
 
 	public void setMainApp(MainApp mainApp) {
@@ -46,19 +46,19 @@ public class TuloksetController {
 			setLabroja(Integer.toString(newValue.getLabrat()));
 			setPalveltu(Integer.toString(newValue.getCompletedCount()));
 			setKokonaisaika(String.format("%.2f", newValue.getSimTime()));
-		    setUtilization(String.format("%.2f", newValue.getUtilization()));
-		    setServiceTime(String.format("%.2f", newValue.getServiceTime()));
-		    setAverageResponseTime(String.format("%.2f", newValue.getAverageResponseTime()));
-		    setAverageWaitingTime(String.format("%.2f", newValue.getAverageWaitingTime()));
+			setUtilization(String.format("%.2f", newValue.getUtilization()));
+			setServiceTime(String.format("%.2f", newValue.getServiceTime()));
+			setAverageResponseTime(String.format("%.2f", newValue.getAverageResponseTime()));
+			setAverageWaitingTime(String.format("%.2f", newValue.getAverageWaitingTime()));
 		});
 	}
-	
+
 	@FXML
 	public void tallennaTulos() {
 		System.out.println("Tallennetaan tulos tietokantaan");
 		mainApp.tallennaTulos(tulos.get());
 	}
-	
+
 	@FXML
 	public void poistaTulos() {
 		System.out.println("Poistetaan tulos");
@@ -102,8 +102,5 @@ public class TuloksetController {
 
 	public void setTulos(Tulos tulos) {
 		this.tulos.set(tulos);
-//		ObservableValue<Tulos> observableTulos = new SimpleObjectProperty<>(tulos);
-//		this.tulos = observableTulos;
 	}
-
 }
