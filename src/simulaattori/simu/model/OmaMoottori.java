@@ -33,6 +33,7 @@ public class OmaMoottori extends Moottori {
 	@Override
 	protected void alustukset() {
 		Trace.setTraceLevel(Trace.Level.INFO);
+		Kello.getInstance().setAika(0);
 		// key on palvelupisteen tyyppi.
 		// arvona tietyn tyyppisten palvelupisteiden lukumäärä
 		Map<String, Integer> pPisteet = kontrolleri.haePalvelupisteet();
@@ -139,7 +140,6 @@ public class OmaMoottori extends Moottori {
 		tulos.setWaitingTime(waitingTime);
 		tulos.setAverageResponseTime(averageResponseTime);
 		tulos.setAverageWaitingTime(averageWaitingTime);
-		
 		
 		// ilmoitetaan UIlle simulaation päättymisestä
 		kontrolleri.simulointiPaattyi();
