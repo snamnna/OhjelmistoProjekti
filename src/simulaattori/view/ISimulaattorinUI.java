@@ -1,7 +1,9 @@
 package simulaattori.view;
 
+import java.util.List;
 import java.util.Map;
 
+import simulaattori.simu.model.TapahtumanTyyppi;
 import simulaattori.simu.model.util.IPalvelupiste;
 
 public interface ISimulaattorinUI {
@@ -46,5 +48,5 @@ public interface ISimulaattorinUI {
 
 	void getTulos();
 
-	void setPalvelupisteet(Map<Integer, IPalvelupiste> palvelupisteet);
+	void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet);
 }

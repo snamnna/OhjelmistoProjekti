@@ -1,6 +1,7 @@
 package simulaattori.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import entity.Tulos;
@@ -8,6 +9,7 @@ import javafx.application.Platform;
 import simulaattori.simu.framework.IMoottori;
 import simulaattori.simu.framework.Moottori;
 import simulaattori.simu.model.OmaMoottori;
+import simulaattori.simu.model.TapahtumanTyyppi;
 import simulaattori.simu.model.util.IPalvelupiste;
 import simulaattori.view.ISimulaattorinUI;
 
@@ -22,8 +24,8 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 		simulointiKaynnissa = false;
 	}
 
-	public void visualisoiAsiakas() {
-		Platform.runLater(() -> ui.getVisualisointi().uusiAsiakas());
+	public void visualisoi() {
+		Platform.runLater(() -> ui.getVisualisointi().visualisoi());
 	}
 
 	@Override
@@ -32,7 +34,6 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 			moottori = new OmaMoottori(this); // luodaan uusi moottorisäie jokaista simulointia varten
 			moottori.setSimulointiaika(ui.getSimulointiAika());
 			moottori.setViive(ui.getViive());
-			ui.getVisualisointi().tyhjennaNaytto();
 			((Thread) moottori).start();
 			simulointiKaynnissa = true;
 		}
@@ -95,7 +96,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
 	}
 
 	@Override
-	public void setPalvelupisteet(Map<Integer, IPalvelupiste> palvelupisteet) {
+	public void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet) {
 		ui.setPalvelupisteet(palvelupisteet);
 	}
 }

@@ -1,6 +1,7 @@
 package simulaattori;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import entity.Tulos;
@@ -16,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import simulaattori.controller.IKontrolleriMtoV;
 import simulaattori.controller.Kontrolleri;
+import simulaattori.simu.model.TapahtumanTyyppi;
 import simulaattori.simu.model.TulosDAO;
 import simulaattori.simu.model.util.IPalvelupiste;
 import simulaattori.view.ISimulaattorinUI;
@@ -287,7 +289,7 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
 	}
 
 	@Override
-	public void setPalvelupisteet(Map<Integer, IPalvelupiste> palvelupisteet) {
+	public void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet) {
 		simuController.alustukset(palvelupisteet);
 	}
 	
