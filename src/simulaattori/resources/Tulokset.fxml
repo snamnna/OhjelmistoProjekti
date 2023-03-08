@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
@@ -52,5 +55,14 @@
             <Label fx:id="averageWaitingTime" text="Label" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
          </children>
       </GridPane>
+      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="520.0">
+         <children>
+            <Button fx:id="tallennaTulosButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#tallennaTulos" prefHeight="25.0" prefWidth="75.0" text="Tallenna">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin></Button>
+            <Button fx:id="poistaTulosButton" alignment="CENTER" contentDisplay="CENTER" layoutX="85.0" layoutY="23.0" mnemonicParsing="false" onAction="#poistaTulos" prefHeight="25.0" prefWidth="75.0" text="Poista" />
+         </children>
+      </HBox>
    </children>
 </AnchorPane>
