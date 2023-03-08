@@ -59,16 +59,6 @@ public class KayttajatiedotController {
         System.out.println("Nopeuta");
         mainApp.nopeutaSimulaattoria();
     }
-    
-    public void disableSimControls() {
-    	kaynnistaButton.setDisable(true);
-    	simControls.setDisable(true);
-    }
-    
-    public void enableSimControls() {
-    	kaynnistaButton.setDisable(false);
-    	simControls.setDisable(false);
-    }
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
