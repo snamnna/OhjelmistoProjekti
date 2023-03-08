@@ -13,8 +13,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Sairaanhoitaja extends Palvelupiste {
 	
-	private static double kokPalveluaika;
-	
     public Sairaanhoitaja(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
         super(generator, tapahtumalista, tyyppi);
         jakauma = new Normal(0.5, 0.5);
@@ -31,7 +29,6 @@ public class Sairaanhoitaja extends Palvelupiste {
                 Kello.getInstance().getAika() + palveluaika, this.ID);
         tapahtumalista.lisaa(tapahtuma);
         viimeisinLuotuTapahtuma = tapahtuma;
-        kokPalveluaika =+ palveluaika;
         addPalveluAikaToSumma(palveluaika);
     }
 
@@ -42,8 +39,4 @@ public class Sairaanhoitaja extends Palvelupiste {
     public String getJonoString() {
         return jono.toString() + "\n Sairaanhoitaja";
     }
-    
-    public static double getKokPalveluaika() {
-		return kokPalveluaika;
-	}
 }

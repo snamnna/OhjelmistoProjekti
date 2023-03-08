@@ -12,8 +12,6 @@ import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Labra extends Palvelupiste {
-	
-	private static double kokPalveluaika;
 	private static int labraArrivals;
 	
 	public static int getLabraArrivalCount() {
@@ -49,7 +47,6 @@ public class Labra extends Palvelupiste {
 		viimeisinLuotuTapahtuma = tapahtuma;
 		tapahtumalista.lisaa(tapahtuma);
 		jono.peek().setLabrakaynti(true);
-		kokPalveluaika =+ palveluaika;
 		addPalveluAikaToSumma(palveluaika);
 	}
 
@@ -76,10 +73,6 @@ public class Labra extends Palvelupiste {
 
 	public String getJonoString() {
 		return jono.toString() + "\n labra";
-	}
-	
-	public static double getKokPalveluaika() {
-		return kokPalveluaika;
 	}
 }
 
