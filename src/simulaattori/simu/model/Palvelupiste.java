@@ -79,5 +79,8 @@ public abstract class Palvelupiste implements IPalvelupiste {
 	public int getDepartureLkm() {
 		return departures;
 	}
-
+	
+	public int getAsiakasMaaraJonossa() {
+		return jono.size();
+	}
 }

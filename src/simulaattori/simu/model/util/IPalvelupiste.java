@@ -30,4 +30,6 @@ public interface IPalvelupiste {
 	double getKaikkienPalveluAikojenSumma();
 	
 	int getDepartureLkm();
+
+	int getAsiakasMaaraJonossa();
 }
