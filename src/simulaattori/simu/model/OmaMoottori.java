@@ -56,6 +56,9 @@ public class OmaMoottori extends Moottori {
 				tyyppiToPalveluPMap.get(arrival).add(palvelupiste);
 			}
 		}
+		
+		// viedään alustetut palvelupisteet UI:lle visualisointia varten
+		kontrolleri.setPalvelupisteet(palvelupisteet);
 		// Ensimmäinen saapuminen järjestelmään
 		saapumisprosessi.generoiSeuraava(); 
 	}
@@ -147,5 +150,10 @@ public class OmaMoottori extends Moottori {
 	
 	public Tulos getTulos() {
 		return tulos;
+	}
+
+	@Override
+	public Map<Integer, IPalvelupiste> getPalvelupisteet() {
+		return palvelupisteet;
 	}
 }
