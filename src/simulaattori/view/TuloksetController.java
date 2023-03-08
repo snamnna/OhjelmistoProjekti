@@ -20,7 +20,7 @@ public class TuloksetController {
 	@FXML
 	private Label kokonaisaika;
 	@FXML
-	private Label labroja;
+	private Label labrassaKaynteja;
 	@FXML
 	private Label utilization;
 	@FXML
@@ -43,7 +43,7 @@ public class TuloksetController {
 		tulos.addListener((observable, oldValue, newValue) -> {
 			setELaakarit(Integer.toString(newValue.getErikoislääkärit()));
 			setYlaakarit(Integer.toString(newValue.getYleislääkärit()));
-			setLabroja(Integer.toString(newValue.getLabrat()));
+			setLabrassaKaynteja(Integer.toString(newValue.getLabraArrivalit()));
 			setPalveltu(Integer.toString(newValue.getCompletedCount()));
 			setKokonaisaika(String.format("%.2f", newValue.getSimTime()));
 			setUtilization(String.format("%.2f", newValue.getUtilization()));
@@ -79,8 +79,8 @@ public class TuloksetController {
 		this.kokonaisaika.setText(kokonaisaika);
 	}
 
-	public void setLabroja(String labroja) {
-		this.labroja.setText(labroja);
+	public void setLabrassaKaynteja(String labroja) {
+		this.labrassaKaynteja.setText(labroja);
 	}
 
 	public void setUtilization(String utilization) {
