@@ -23,7 +23,7 @@ public class RootLayoutController {
 		Alert alert = new Alert(Alert.AlertType.INFORMATION);
 		alert.setTitle("Päivystyssimulaattori");
 		alert.setHeaderText("About");
-		alert.setContentText("Authors: Sanna Lohkovuori, Matias Niemelä, Edvard Nivala, Tuisku Närhi");
+		alert.setContentText("Authors: Sanna Lohkovuori, Matias Niemelä,\n Edvard Nivala, Tuisku Närhi");
 		alert.showAndWait();
 	}
 	
