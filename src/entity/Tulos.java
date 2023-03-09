@@ -35,9 +35,9 @@ public class Tulos {
 	@Column(name = "averageWaitingTime")
 	private double averageWaitingTime;
 	@Column(name = "yleislääkärit")
-	private int yleislääkärit; // pitää viel kattoo miten haetaan et saadaan tietokantaan
+	private int yleislääkärit; 
 	@Column(name = "erikoislääkärit")
-	private int erikoislääkärit; // Sama homma
+	private int erikoislääkärit; 
 	@Column(name = "sairaanhoitajat")
 	private int sairaanhoitajat;
 	@Column(name = "labrat")
@@ -46,9 +46,6 @@ public class Tulos {
 	private int labraArrivalit;
 	@Column(name = "waitingTime")
 	private double waitingTime;
-	// Transienttina, jotta hibernate ei huomioisi tyhjää muuttujaa
-	@Transient
-	private double responseTime;
 	
 	public int getId() {
 		return id;
@@ -122,13 +119,6 @@ public class Tulos {
 	 */
 	public void setWaitingTime(double waitingTime) {
 		this.waitingTime = waitingTime;
-	}
-
-	/**
-	 * @param responseTime the responseTime to set
-	 */
-	public void setResponseTime(double responseTime) {
-		this.responseTime = responseTime;
 	}
 	
 	/**
@@ -220,14 +210,6 @@ public class Tulos {
 	// Keskimääräinen jononpituus N
 	public double getAverageWaitingTime() {
 		return averageWaitingTime;
-	}
-
-	// TODO: HALUTAANKO YKSITTÄISEN PALVELUPISTEEN LÄPIMENOAIKAA? NYT ON JO
-	// KESKIARVO KAIKILLE -tuisku
-
-	// Response time Ri palvelupisteen läpimenoaika
-	public double getResponseTime() {
-		return responseTime;
 	}
 
 	/**
