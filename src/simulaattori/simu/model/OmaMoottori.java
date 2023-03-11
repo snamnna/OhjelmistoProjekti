@@ -35,19 +35,19 @@ public class OmaMoottori extends Moottori {
 		Asiakas.reset();
 		// key on palvelupisteen tyyppi.
 		// arvona tietyn tyyppisten palvelupisteiden lukumäärä
-		Map<String, Integer> pPisteet = kontrolleri.haePalvelupisteet();
+		Map<TapahtumanTyyppi, Integer> pPisteet = kontrolleri.haePalvelupisteet();
 
 		// palvelupisteiden alustus
-		for (String key : pPisteet.keySet()) {
-			TapahtumanTyyppi arrival = getTapahtumanTyyppi(key);
-			TapahtumanTyyppi departure = getTapahtumanTyyppi(key, false);
+		for (TapahtumanTyyppi tapahtumanTyyppi : pPisteet.keySet()) {
+			TapahtumanTyyppi arrival = tapahtumanTyyppi;
+			TapahtumanTyyppi departure = getTapahtumanTyyppi(tapahtumanTyyppi, false);
 
 			// departure viittaa samaan listaan ku sitä vastaava arrival, esim YLDEP ja YLARR
 			tyyppiToPalveluPMap.putIfAbsent(arrival, new ArrayList<>());
 			tyyppiToPalveluPMap.putIfAbsent(departure, tyyppiToPalveluPMap.get(arrival));
 
 			// alustetaan palvelupisteet
-			for (int i = 0; i < pPisteet.get(key); i++) {
+			for (int i = 0; i < pPisteet.get(tapahtumanTyyppi); i++) {
 				IPalvelupiste palvelupiste = FPalvelupiste.createPalvelupiste(arrival, tapahtumalista);
 				palvelupisteet.putIfAbsent(palvelupiste.getID(), palvelupiste);
 
@@ -67,14 +67,12 @@ public class OmaMoottori extends Moottori {
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t) { // B-vaiheen tapahtumat
 		TapahtumanTyyppi tyyppi = t.getTyyppi();
+		IPalvelupiste seuraavaPalvelupiste = reititin.haeSeuraavaPalvelupiste(tyyppi);
 		if (tyyppi == TapahtumanTyyppi.ARR) {
-			IPalvelupiste sairaanhoitaja = reititin.haeVapaaPalvelupiste(tyyppi);
-			sairaanhoitaja.lisaaJonoon(new Asiakas());
+			seuraavaPalvelupiste.lisaaJonoon(new Asiakas());
 			saapumisprosessi.generoiSeuraava();
 		} else {
 			IPalvelupiste palvelupiste = t.getPalvelupiste();
-			IPalvelupiste seuraavaPalvelupiste = reititin.haeSeuraavaPalvelupiste(palvelupiste, tyyppi);
-
 			Asiakas asiakas = palvelupiste.otaJonosta();
 			if (seuraavaPalvelupiste != null) {
 				seuraavaPalvelupiste.lisaaJonoon(asiakas);
@@ -88,19 +86,15 @@ public class OmaMoottori extends Moottori {
 		kontrolleri.visualisoi();
 	}
 
-	protected TapahtumanTyyppi getTapahtumanTyyppi(String tyyppi, Boolean arrival) {
+	protected TapahtumanTyyppi getTapahtumanTyyppi(TapahtumanTyyppi tyyppi, Boolean arrival) {
 		TapahtumanTyyppi tTyyppi = TapahtumanTyyppi.ARR;
 		switch (tyyppi) {
-		case "Sairaanhoitaja" -> tTyyppi = TapahtumanTyyppi.ARR;
-		case "YLaakari" -> tTyyppi = arrival ? TapahtumanTyyppi.YLARR : TapahtumanTyyppi.YLDEP;
-		case "ELaakari" -> tTyyppi = arrival ? TapahtumanTyyppi.ELARR : TapahtumanTyyppi.ELDEP;
-		case "Labra" -> tTyyppi = arrival ? TapahtumanTyyppi.LABRA_ARRIVAL : TapahtumanTyyppi.LABRA_DEPARTURE;
+			case ARR -> tTyyppi = TapahtumanTyyppi.ARR;
+			case YLARR -> tTyyppi = arrival ? TapahtumanTyyppi.YLARR : TapahtumanTyyppi.YLDEP;
+			case ELARR -> tTyyppi = arrival ? TapahtumanTyyppi.ELARR : TapahtumanTyyppi.ELDEP;
+			case LABRA_ARRIVAL -> tTyyppi = arrival ? TapahtumanTyyppi.LABRA_ARRIVAL : TapahtumanTyyppi.LABRA_DEPARTURE;
 		}
 		return tTyyppi;
-	}
-
-	protected TapahtumanTyyppi getTapahtumanTyyppi(String tyyppi) {
-		return getTapahtumanTyyppi(tyyppi, true);
 	}
 
 	@Override
@@ -119,8 +113,8 @@ public class OmaMoottori extends Moottori {
 		double utilization = busyTime / loppuAika;
 		double serviceTime = Asiakas.getTotalWaitingTime() / completedCount;
 		int labraArrivals = Labra.getLabraArrivalCount();
-		double averageResponseTime = 5;
-		double averageWaitingTime = Asiakas.getTotalWaitingTime() / completedCount;
+		double averageResponseTime = Asiakas.getTotalWaitingTime() / completedCount;
+		double averageWaitingTime = Asiakas.getTotalWaitingTime() / loppuAika;
 
 		tulos.setSairaanhoitajat(sairaanhoitajaLkm);
 		tulos.setYleislääkärit(yLaakariLkm);
@@ -136,8 +130,6 @@ public class OmaMoottori extends Moottori {
 		tulos.setLabraArrivalit(labraArrivals);
 		tulos.setAverageResponseTime(averageResponseTime);
 		tulos.setAverageWaitingTime(averageWaitingTime);
-		
-		kontrolleri.visualisoi();
 		// ilmoitetaan UIlle simulaation päättymisestä
 		kontrolleri.simulointiPaattyi();
 	}
