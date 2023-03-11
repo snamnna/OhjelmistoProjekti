@@ -4,79 +4,86 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<AnchorPane prefHeight="540.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="simulaattori.view.KayttajatiedotController">
-   <children>
-      <BorderPane prefHeight="540.0" prefWidth="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
-         <center>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label text="Simulointiaika:">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="simulointiAikaTextField" promptText="Anna Simulointiaika" text="1000"/>
-                  <Label text="Viive:">
-                     <font>
-                        <Font size="13.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="simulointiViiveTextField" promptText="Anna Simulointiaika" text="10"/>
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Palvelupisteet">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label layoutX="10.0" layoutY="153.0" text="Sairaanhoitajien määrä" />
-                  <TextField fx:id="sairaanhoitajaLkmTextField" layoutX="10.0" layoutY="197.0"
-                             promptText="Anna lukumäärä" text="1"/>
-                  <Label text="Yleislääkärien määrä" />
-                  <TextField fx:id="yLaakariLkmTextField" promptText="Anna lukumäärä" text="1"/>
-                  <Label text="Erikoislääkärien määrä" />
-                  <TextField fx:id="eLaakariLkmTextField" promptText="Anna lukumäärä" text="1"/>
-                  <Label layoutX="10.0" layoutY="257.0" text="Laboratorioiden määrä" />
-                  <TextField fx:id="labraLkmTextField" layoutX="10.0" layoutY="279.0" promptText="Anna lukumäärä"
-                             text="1"/>
-                  <CheckBox fx:id="enableAdvancedCheckBox" mnemonicParsing="false" text="Enable kaikki" />
-                  <Button fx:id="kaynnistaButton" alignment="CENTER" contentDisplay="CENTER" minHeight="36.0" minWidth="100.0" mnemonicParsing="false" onAction="#handleKaynnista" scaleShape="false" text="Aloita simulointi">
-                     <VBox.margin>
-                        <Insets left="58.0" top="42.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-               <BorderPane.margin>
-                  <Insets top="5.0" />
-               </BorderPane.margin>
-            </VBox>
-         </center>
-         <padding>
-            <Insets left="5.0" right="5.0" />
-         </padding>
-         <top>
-            <Label text="Simulaation tiedot" textFill="#575656" BorderPane.alignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-         </top>
-         <bottom>
-            <ButtonBar fx:id="simControls">
-               <buttons>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleHidasta" text="Hidasta">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleNopeuta" text="Nopeuta" />
-               </buttons>
-               <padding>
-                  <Insets bottom="15.0" right="25.0" />
-               </padding>
-            </ButtonBar>
-         </bottom>
-      </BorderPane>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="540.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/19"
+            fx:controller="simulaattori.view.KayttajatiedotController">
+    <children>
+        <BorderPane prefHeight="540.0" prefWidth="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+            <center>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Label text="Simulointiaika:">
+                            <font>
+                                <Font size="13.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="simulointiAikaTextField" promptText="Anna Simulointiaika"/>
+                        <Label text="Viive:">
+                            <font>
+                                <Font size="13.0"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="simulointiViiveTextField" promptText="Anna Simulointiaika"/>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                               text="Palvelupisteet">
+                            <font>
+                                <Font size="14.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <Label layoutX="10.0" layoutY="153.0" text="Sairaanhoitajien määrä"/>
+                        <TextField fx:id="sairaanhoitajaLkmTextField" layoutX="10.0" layoutY="197.0"
+                                   promptText="Anna lukumäärä"/>
+                        <Label text="Yleislääkärien määrä"/>
+                        <TextField fx:id="yLaakariLkmTextField" promptText="Anna lukumäärä"/>
+                        <Label text="Erikoislääkärien määrä"/>
+                        <TextField fx:id="eLaakariLkmTextField" promptText="Anna lukumäärä"/>
+                        <Label layoutX="10.0" layoutY="257.0" text="Laboratorioiden määrä"/>
+                        <TextField fx:id="labraLkmTextField" layoutX="10.0" layoutY="279.0"
+                                   promptText="Anna lukumäärä"/>
+                        <CheckBox fx:id="enableAdvancedCheckBox" mnemonicParsing="false" text="Enable kaikki"/>
+                        <Button fx:id="kaynnistaButton" alignment="CENTER" contentDisplay="CENTER" minHeight="36.0"
+                                minWidth="100.0" mnemonicParsing="false" onAction="#handleKaynnista" scaleShape="false"
+                                text="Aloita simulointi">
+                            <VBox.margin>
+                                <Insets left="58.0" top="42.0"/>
+                            </VBox.margin>
+                        </Button>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets top="5.0"/>
+                    </BorderPane.margin>
+                </VBox>
+            </center>
+            <padding>
+                <Insets left="5.0" right="5.0"/>
+            </padding>
+            <top>
+                <Label text="Simulaation tiedot" textFill="#575656" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0"/>
+                    </font>
+                </Label>
+            </top>
+            <bottom>
+                <ButtonBar fx:id="simControls">
+                    <buttons>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                                onAction="#handleHidasta" text="Hidasta">
+                            <opaqueInsets>
+                                <Insets/>
+                            </opaqueInsets>
+                        </Button>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false"
+                                onAction="#handleNopeuta" text="Nopeuta"/>
+                    </buttons>
+                    <padding>
+                        <Insets bottom="15.0" right="25.0"/>
+                    </padding>
+                </ButtonBar>
+            </bottom>
+        </BorderPane>
+    </children>
 </AnchorPane>
