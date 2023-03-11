@@ -65,7 +65,6 @@ public class Asiakas {
 
     public void raportti() {
         sum += (poistumisaika - saapumisaika);
-        System.out.println(Labra.departures);
         double keskiarvo = sum / Labra.departures;
         //Trace.out(Trace.Level.INFO,"Asiakkaiden läpimenoaikojen keskiarvo tähän asti "+ keskiarvo);
     }
