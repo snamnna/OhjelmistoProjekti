@@ -1,35 +1,31 @@
 package simulaattori.simu.model.util;
 
-import simulaattori.simu.framework.Tapahtuma;
 import simulaattori.simu.model.Asiakas;
 import simulaattori.simu.model.TapahtumanTyyppi;
 
 public interface IPalvelupiste {
-	void lisaaJonoon(Asiakas a);
+    void lisaaJonoon(Asiakas a);
 
-	Asiakas otaJonosta();
+    Asiakas otaJonosta();
 
-	boolean onJonossa();
+    boolean onJonossa();
 
-	boolean onVarattu();
+    boolean onVarattu();
 
-	void aloitaPalvelu();
+    void aloitaPalvelu();
 
-	TapahtumanTyyppi getTyyppi();
+    TapahtumanTyyppi getTyyppi();
 
-	Tapahtuma getViimeisinTapahtuma();
+    int getID();
 
-	int getID();
+    double getKaikkienPalveluAikojenSumma();
 
-	double getKaikkienPalveluAikojenSumma();
+    int getDepartureLkm();
 
-	int getDepartureLkm();
+    int getAsiakasMaaraJonossa();
 
-	int getAsiakasMaaraJonossa();
+    void addDeparture();
 
-	void addDeparture();
+    void addArrival();
 
-	void addArrival();
-
-	int getArrivals();
 }
