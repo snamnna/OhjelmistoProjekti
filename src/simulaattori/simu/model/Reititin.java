@@ -2,25 +2,22 @@ package simulaattori.simu.model;
 
 import simulaattori.simu.model.util.IPalvelupiste;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class Reititin {
+import static simulaattori.simu.model.TapahtumanTyyppi.*;
 
+public class Reititin {
+    private final static TapahtumanTyyppi[] ARRIVALS = {ARR, YLARR, ELARR, LABRA_ARRIVAL};
     private Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteMap;
-    private List<Asiakas> asiakkaat;
 
     public void alustaReititin(Map<TapahtumanTyyppi, List<IPalvelupiste>> tyyppiToPalveluPMap) {
         this.palvelupisteMap = tyyppiToPalveluPMap;
     }
 
-    public List<IPalvelupiste> haePalvelupisteet(TapahtumanTyyppi t) {
-        return palvelupisteMap.get(t);
-    }
-
     public IPalvelupiste haeVapaaPalvelupiste(TapahtumanTyyppi tyyppi) {
         List<IPalvelupiste> palvelupisteet = palvelupisteMap.get(tyyppi);
-        // hae palvelupiste joka ei ole varattu tai jonka jonossa on vähiten asiakkaita
         IPalvelupiste palvelupiste = palvelupisteet.get(0);
         for (IPalvelupiste p : palvelupisteet) {
             if (!p.onVarattu() || p.getAsiakasMaaraJonossa() < palvelupiste.getAsiakasMaaraJonossa()) {
@@ -30,19 +27,10 @@ public class Reititin {
         return palvelupiste;
     }
 
-    public IPalvelupiste haeSeuraavaPalvelupiste(IPalvelupiste palvelupiste, TapahtumanTyyppi tyyppi) {
-        if (tyyppi == TapahtumanTyyppi.ARR || tyyppi == TapahtumanTyyppi.YLARR || tyyppi == TapahtumanTyyppi.ELARR || tyyppi == TapahtumanTyyppi.LABRA_ARRIVAL) {
+    public IPalvelupiste haeSeuraavaPalvelupiste(TapahtumanTyyppi tyyppi) {
+        if (Arrays.asList(ARRIVALS).contains(tyyppi)) {
             return haeVapaaPalvelupiste(tyyppi);
         }
-//        if (palvelupiste instanceof Sairaanhoitaja) {
-//            return haeVapaaPalvelupiste(haePalvelupisteet(tyyppi));
-//        } else if (palvelupiste instanceof YLaakari) {
-//            return haeVapaaPalvelupiste(haePalvelupisteet(TapahtumanTyyppi.YLARR));
-//        } else if (palvelupiste instanceof ELaakari) {
-//            return haeVapaaPalvelupiste(haePalvelupisteet(TapahtumanTyyppi.ELARR));
-//        } else if (palvelupiste instanceof Labra) {
-//            return haeVapaaPalvelupiste(haePalvelupisteet(TapahtumanTyyppi.LABRA_ARRIVAL));
-//        }
         return null;
     }
 }
