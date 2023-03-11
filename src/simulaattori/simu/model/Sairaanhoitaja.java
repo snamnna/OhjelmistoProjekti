@@ -1,7 +1,6 @@
 package simulaattori.simu.model;
 
 import eduni.distributions.ContinuousGenerator;
-import eduni.distributions.Normal;
 import simulaattori.simu.framework.Kello;
 import simulaattori.simu.framework.Tapahtuma;
 import simulaattori.simu.framework.Tapahtumalista;
@@ -14,18 +13,12 @@ public class Sairaanhoitaja extends Palvelupiste {
 
     public Sairaanhoitaja(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
         super(generator, tapahtumalista, tyyppi);
-        jakauma = new Normal(0.5, 0.5);
         arrivals = 0;
     }
 
     @Override
     public void addArrival() {
         arrivals++;
-    }
-
-    @Override
-    public int getArrivals() {
-        return arrivals;
     }
 
     // Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
@@ -37,8 +30,10 @@ public class Sairaanhoitaja extends Palvelupiste {
         Tapahtuma tapahtuma = new Tapahtuma(random.nextBoolean() ? TapahtumanTyyppi.YLARR : TapahtumanTyyppi.ELARR,
                 Kello.getInstance().getAika() + palveluaika, this);
         tapahtumalista.lisaa(tapahtuma);
-        viimeisinLuotuTapahtuma = tapahtuma;
         addPalveluAikaToSumma(palveluaika);
+        palveltuCount++;
+        palveluAikaSumma += palveluaika;
+        keskimaarainenPalveluAika = palveluAikaSumma / palveltuCount;
 
     }
 }
