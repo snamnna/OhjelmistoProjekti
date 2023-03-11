@@ -1,50 +1,32 @@
 package simulaattori.view;
 
-import java.util.List;
-import java.util.Map;
-
 import simulaattori.simu.model.TapahtumanTyyppi;
 import simulaattori.simu.model.util.IPalvelupiste;
 
+import java.util.List;
+import java.util.Map;
+
 public interface ISimulaattorinUI {
 
-	int getYlaakarienLkm();
+    int getYlaakarienLkm();
 
-	int getElaakarienLkm();
+    int getElaakarienLkm();
 
-	int getLabraLkm();
+    int getLabraLkm();
 
-	int getSairaanhoitajaLkm();
+    int getSairaanhoitajaLkm();
 
-	double getSimulointiAika();
+    double getSimulointiAika();
 
-	void setLoppuaika(double aika);
+    void setLoppuaika(double aika);
 
-	SimulaattoriController getVisualisointi();
+    SimulaattoriController getVisualisointi();
 
-	long getViive();
+    long getViive();
 
-	void setKokonaisaika(String aika);
+    void setSimuloidaan(boolean value);
 
-	void setPalveltu(String lkm);
+    void getTulos();
 
-	void setELaakarienLkm(String lkm);
-
-	void setYLaakarienLkm(String lkm);
-
-	void setLabrakaynteja(String lkm);
-
-	void setKayttoaste(String kayttoaste);
-
-	void setKeskimaarainenPalveluaika(String aika);
-
-	void setLapimenoAika(String aika);
-
-	void setKeskimaarainenJonotusaika(String aika);
-	
-	void setSimuloidaan(boolean value);
-
-	void getTulos();
-
-	void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet);
+    void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet);
 }
