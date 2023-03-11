@@ -1,39 +1,40 @@
 package simulaattori.simu.framework;
 
 import simulaattori.simu.model.TapahtumanTyyppi;
+import simulaattori.simu.model.util.IPalvelupiste;
 
 public class Tapahtuma implements Comparable<Tapahtuma> {
 
 	private TapahtumanTyyppi tyyppi;
-	private double aika;
-	private int palvelupisteID;
+    private double aika;
+    private IPalvelupiste palvelupiste;
 
-	public Tapahtuma(TapahtumanTyyppi tyyppi, double aika, int palvelupisteID) {
-		this.tyyppi = tyyppi;
-		this.aika = aika;
-		this.palvelupisteID = palvelupisteID;
-	}
-	
-	public Tapahtuma(TapahtumanTyyppi tyyppi, double aika) {
-		this.tyyppi = tyyppi;
-		this.aika = aika;
-	}
+    public Tapahtuma(TapahtumanTyyppi tyyppi, double aika, IPalvelupiste palvelupiste) {
+        this.tyyppi = tyyppi;
+        this.aika = aika;
+        this.palvelupiste = palvelupiste;
+    }
 
-	public void setPalvelupisteID(int ID) {
-		this.palvelupisteID = ID;
-	}
+    public Tapahtuma(TapahtumanTyyppi tyyppi, double aika) {
+        this.tyyppi = tyyppi;
+        this.aika = aika;
+    }
 
-	public int getPalvelupisteID() {
-		return palvelupisteID;
-	}
+    public IPalvelupiste getPalvelupiste() {
+        return palvelupiste;
+    }
 
-	public void setTyyppi(TapahtumanTyyppi tyyppi) {
-		this.tyyppi = tyyppi;
-	}
+    public void setPalvelupiste(IPalvelupiste palvelupiste) {
+        this.palvelupiste = palvelupiste;
+    }
 
-	public TapahtumanTyyppi getTyyppi() {
-		return tyyppi;
-	}
+    public TapahtumanTyyppi getTyyppi() {
+        return tyyppi;
+    }
+
+    public void setTyyppi(TapahtumanTyyppi tyyppi) {
+        this.tyyppi = tyyppi;
+    }
 
 	public void setAika(double aika) {
 		this.aika = aika;
