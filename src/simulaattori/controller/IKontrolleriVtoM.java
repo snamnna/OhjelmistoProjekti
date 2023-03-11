@@ -1,10 +1,10 @@
 package simulaattori.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import simulaattori.simu.model.TapahtumanTyyppi;
 import simulaattori.simu.model.util.IPalvelupiste;
+
+import java.util.List;
+import java.util.Map;
 
 public interface IKontrolleriVtoM {
 	// Rajapinta, joka tarjotaan moottorille:
@@ -17,7 +17,7 @@ public interface IKontrolleriVtoM {
 
 	int haeLabraLkm();
 
-	Map<String, Integer> haePalvelupisteet();
+	Map<TapahtumanTyyppi, Integer> haePalvelupisteet();
 
 	void visualisoi();
 
