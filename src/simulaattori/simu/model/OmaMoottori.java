@@ -1,40 +1,40 @@
 package simulaattori.simu.model;
 
+import eduni.distributions.Negexp;
+import entity.Tulos;
+import simulaattori.controller.IKontrolleriVtoM;
+import simulaattori.simu.framework.*;
+import simulaattori.simu.model.util.FPalvelupiste;
+import simulaattori.simu.model.util.IPalvelupiste;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
-
-import eduni.distributions.Negexp;
-import entity.Tulos;
-import simulaattori.controller.IKontrolleriVtoM;
-import simulaattori.simu.framework.Kello;
-import simulaattori.simu.framework.Moottori;
-import simulaattori.simu.framework.Saapumisprosessi;
-import simulaattori.simu.framework.Tapahtuma;
-import simulaattori.simu.framework.Trace;
-import simulaattori.simu.model.util.FPalvelupiste;
-import simulaattori.simu.model.util.IPalvelupiste;
 
 public class OmaMoottori extends Moottori {
 
 	private final Saapumisprosessi saapumisprosessi;
 	private Map<TapahtumanTyyppi, List<IPalvelupiste>> tyyppiToPalveluPMap;
 	private Tulos tulos;
-	
+	int count;
+	private Reititin reititin;
+	private int labraArrivals;
+
 	public OmaMoottori(IKontrolleriVtoM kontrolleri) {
 		super(kontrolleri);
 		saapumisprosessi = new Saapumisprosessi(new Negexp(15, 5), tapahtumalista, TapahtumanTyyppi.ARR);
 		tyyppiToPalveluPMap = new HashMap<>();
 		tulos = new Tulos();
+		reititin = new Reititin();
 	}
 
 	@Override
 	protected void alustukset() {
 		Trace.setTraceLevel(Trace.Level.ERR);
 		Kello.getInstance().setAika(0);
-		Asiakas.resetAsiakasCount();
+		Asiakas.reset();
+		labraArrivals = 0;
 		// key on palvelupisteen tyyppi.
 		// arvona tietyn tyyppisten palvelupisteiden lukumäärä
 		Map<String, Integer> pPisteet = kontrolleri.haePalvelupisteet();
@@ -43,7 +43,7 @@ public class OmaMoottori extends Moottori {
 		for (String key : pPisteet.keySet()) {
 			TapahtumanTyyppi arrival = getTapahtumanTyyppi(key);
 			TapahtumanTyyppi departure = getTapahtumanTyyppi(key, false);
-			
+
 			// departure viittaa samaan listaan ku sitä vastaava arrival, esim YLDEP ja YLARR
 			tyyppiToPalveluPMap.putIfAbsent(arrival, new ArrayList<>());
 			tyyppiToPalveluPMap.putIfAbsent(departure, tyyppiToPalveluPMap.get(arrival));
@@ -57,32 +57,35 @@ public class OmaMoottori extends Moottori {
 				tyyppiToPalveluPMap.get(arrival).add(palvelupiste);
 			}
 		}
-		
+
 		// viedään alustetut palvelupisteet UI:lle visualisointia varten
 		kontrolleri.setPalvelupisteet(tyyppiToPalveluPMap);
+		// alustetaan reititin
+		reititin.alustaReititin(tyyppiToPalveluPMap);
 		// Ensimmäinen saapuminen järjestelmään
-		saapumisprosessi.generoiSeuraava(); 
+		saapumisprosessi.generoiSeuraava();
 	}
 
 	@Override
 	protected void suoritaTapahtuma(Tapahtuma t) { // B-vaiheen tapahtumat
 		TapahtumanTyyppi tyyppi = t.getTyyppi();
-		List<IPalvelupiste> pisteet = tyyppiToPalveluPMap.get(tyyppi);
-
-		// tällä hetkellä hakee randomisti vaan jonku tapahtumatyyppiä vastaavan
-		// palvelupisteen
-		// pitää lisätä switch() jos halutaan erilaisia kriteerejä miten se palvelupiste
-		// valitaan eri tyypeille
-		// jos halutaan vaan että hakee palvelupisteen jolla on vähiten jonoa tai on
-		// vapaa niin implementoidaan se tähän tilalle
-		int rndIndex = ThreadLocalRandom.current().nextInt(0, pisteet.size());
-		pisteet.get(rndIndex).siirraAsiakas(t, palvelupisteet);
-
-		// jos asiakas saapuu ekaa kertaa simulaattoriin eli sen tapahtumatyyppi on ARR
-		// generoidaan seuraava saapuminen ja kutsutaan kontrollerin metodia, joka
-		// hoitaa visualisoinnin
 		if (tyyppi == TapahtumanTyyppi.ARR) {
+			IPalvelupiste sairaanhoitaja = reititin.haeVapaaPalvelupiste(tyyppi);
+			sairaanhoitaja.lisaaJonoon(new Asiakas());
 			saapumisprosessi.generoiSeuraava();
+		} else {
+			IPalvelupiste palvelupiste = t.getPalvelupiste();
+			IPalvelupiste seuraavaPalvelupiste = reititin.haeSeuraavaPalvelupiste(palvelupiste, tyyppi);
+
+			Asiakas asiakas = palvelupiste.otaJonosta();
+			if (seuraavaPalvelupiste != null) {
+				seuraavaPalvelupiste.lisaaJonoon(asiakas);
+				seuraavaPalvelupiste.addArrival();
+			} else {
+				palvelupiste.addDeparture();
+				asiakas.setPoistumisaika(Kello.getInstance().getAika());
+				asiakas.raportti();
+			}
 		}
 		kontrolleri.visualisoi();
 	}
@@ -104,27 +107,25 @@ public class OmaMoottori extends Moottori {
 
 	@Override
 	protected void tulokset() {
+		System.out.println(count);
 		int sairaanhoitajaLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.ARR).size();
 		int yLaakariLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.YLARR).size();
 		int eLaakariLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.ELARR).size();
 		int labraLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.LABRA_ARRIVAL).size();
 		int arrivalCount = Asiakas.getAsiakasCount();
 		double loppuAika = Kello.getInstance().getAika();
-		double busyTime = tyyppiToPalveluPMap.get(TapahtumanTyyppi.ARR).get(0).getKaikkienPalveluAikojenSumma();
-		
-		int completedCount = 0;
-		for(IPalvelupiste palvelupiste : palvelupisteet.values()) {
-			completedCount += palvelupiste.getDepartureLkm();
-		}
-		
+		double busyTime = tyyppiToPalveluPMap.get(TapahtumanTyyppi.ARR).get(0).getKaikkienPalveluAikojenSumma() / palvelupisteet.values().size();
+
+		int completedCount = tyyppiToPalveluPMap.get(TapahtumanTyyppi.ARR).get(0).getDepartureLkm();
+
 		double throughput = completedCount / loppuAika;
 		double utilization = busyTime / loppuAika;
-		double serviceTime = busyTime / completedCount;
-		int labraArrivals = Labra.getLabraArrivalCount();
-		double waitingTime = Asiakas.getWaitingTime();
-		double averageResponseTime = waitingTime / completedCount;
-		double averageWaitingTime = waitingTime / loppuAika;
-		
+		double serviceTime = Asiakas.getTotalWaitingTime() / completedCount;
+		int labraArrivals = tyyppiToPalveluPMap.get(TapahtumanTyyppi.LABRA_ARRIVAL).get(0).getArrivals();
+		double waitingTime = Asiakas.getWaitingTime() / Asiakas.getAsiakasCount();
+		double averageResponseTime = 5;
+		double averageWaitingTime = Asiakas.getTotalWaitingTime() / completedCount;
+
 		tulos.setSairaanhoitajat(sairaanhoitajaLkm);
 		tulos.setYleislääkärit(yLaakariLkm);
 		tulos.setErikoislääkärit(eLaakariLkm);

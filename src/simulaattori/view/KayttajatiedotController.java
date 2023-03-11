@@ -1,11 +1,7 @@
 package simulaattori.view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import simulaattori.MainApp;
 
 
@@ -82,7 +78,7 @@ public class KayttajatiedotController {
     }
 
     public Integer getLabraLkm() {
-        return Integer.parseInt(sairaanhoitajaLkmTextField.getText());
+        return Integer.parseInt(labraLkmTextField.getText());
     }
 
     public boolean isInputValid() {
@@ -139,10 +135,12 @@ public class KayttajatiedotController {
     }
 
 	public void disableTextFieldsAndStartButton(boolean disabled) {
-		kaynnistaButton.setDisable(disabled);
-		yLaakariLkmTextField.setDisable(disabled);
-		eLaakariLkmTextField.setDisable(disabled);
-		simulointiViiveTextField.setDisable(disabled);
-		simulointiAikaTextField.setDisable(disabled);
-	}
+        kaynnistaButton.setDisable(disabled);
+        yLaakariLkmTextField.setDisable(disabled);
+        eLaakariLkmTextField.setDisable(disabled);
+        sairaanhoitajaLkmTextField.setDisable(disabled);
+        labraLkmTextField.setDisable(disabled);
+        simulointiViiveTextField.setDisable(disabled);
+        simulointiAikaTextField.setDisable(disabled);
+    }
 }

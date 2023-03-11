@@ -5,7 +5,6 @@ import eduni.distributions.Normal;
 import simulaattori.simu.framework.Kello;
 import simulaattori.simu.framework.Tapahtuma;
 import simulaattori.simu.framework.Tapahtumalista;
-import simulaattori.simu.framework.Trace;
 import simulaattori.simu.model.util.IPalvelupiste;
 
 import java.util.Map;
@@ -20,6 +19,16 @@ public class YLaakari extends Palvelupiste {
 	}
 
 	@Override
+	public void addArrival() {
+
+	}
+
+	@Override
+	public int getArrivals() {
+		return 0;
+	}
+
+	@Override
 	public void aloitaPalvelu() {
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 
@@ -29,7 +38,7 @@ public class YLaakari extends Palvelupiste {
 		// Jakauma sille, että meneekö labraan vai kotiin
 		// luo tapahtuma, joka lisätään tapahtumalistaan
 		Tapahtuma tapahtuma = new Tapahtuma(TapahtumanTyyppi.YLDEP, Kello.getInstance().getAika() + palveluaika,
-				this.ID);
+				this);
 		if (random.nextBoolean() && !jono.peek().getLabrakaynti()) {
 			tapahtuma.setTyyppi(TapahtumanTyyppi.LABRA_ARRIVAL);
 		}
@@ -40,15 +49,15 @@ public class YLaakari extends Palvelupiste {
 
 	@Override
 	public void siirraAsiakas(Tapahtuma tapahtuma, Map<Integer, IPalvelupiste> palvelupisteet) {
-		Asiakas asiakas = palvelupisteet.get(tapahtuma.getPalvelupisteID()).otaJonosta();
-		switch (tapahtuma.getTyyppi()) {
-		case YLARR -> lisaaJonoon(asiakas);
-		case YLDEP -> {
-			asiakas.setPoistumisaika(Kello.getInstance().getAika());
-			asiakas.raportti();
-			departures++;
-		}
-		default -> throw new IllegalArgumentException("Unexpected value: " + tapahtuma.getTyyppi());
-		}
+//		Asiakas asiakas = palvelupisteet.get(tapahtuma.getPalvelupisteID()).otaJonosta();
+//		switch (tapahtuma.getTyyppi()) {
+//		case YLARR -> lisaaJonoon(asiakas);
+//		case YLDEP -> {
+//			asiakas.setPoistumisaika(Kello.getInstance().getAika());
+//			asiakas.raportti();
+//			departures++;
+//		}
+//		default -> throw new IllegalArgumentException("Unexpected value: " + tapahtuma.getTyyppi());
+//		}
 	}
 }

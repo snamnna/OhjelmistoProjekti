@@ -1,11 +1,11 @@
 package simulaattori.simu.model;
 
-import java.util.LinkedList;
-
 import eduni.distributions.ContinuousGenerator;
 import simulaattori.simu.framework.Tapahtuma;
 import simulaattori.simu.framework.Tapahtumalista;
 import simulaattori.simu.model.util.IPalvelupiste;
+
+import java.util.LinkedList;
 
 // TODO:
 // Palvelupistekohtaiset toiminnallisuudet, laskutoimitukset (+ tarvittavat muuttujat) ja raportointi koodattava
@@ -21,7 +21,7 @@ public abstract class Palvelupiste implements IPalvelupiste {
 	ContinuousGenerator jakauma;
 
 	protected boolean varattu = false;
-	protected int departures;
+	protected static int departures;
 	
 	private static double kaikkienPalveluAikaSumma;
 
@@ -75,11 +75,19 @@ public abstract class Palvelupiste implements IPalvelupiste {
 	public Tapahtuma getViimeisinTapahtuma() {
 		return viimeisinLuotuTapahtuma;
 	}
-	
+
 	public int getDepartureLkm() {
 		return departures;
 	}
-	
+
+	public void addDeparture() {
+		departures++;
+	}
+
+	public abstract void addArrival();
+
+	public abstract int getArrivals();
+
 	public int getAsiakasMaaraJonossa() {
 		return jono.size();
 	}
