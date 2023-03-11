@@ -1,7 +1,10 @@
 package simulaattori.view;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import simulaattori.MainApp;
 
 
@@ -30,9 +33,6 @@ public class KayttajatiedotController {
     
     @FXML
     private Button kaynnistaButton;
-    
-    @FXML
-    private ButtonBar simControls;
 
     private MainApp mainApp;
 
@@ -67,10 +67,6 @@ public class KayttajatiedotController {
 
     public Integer getELaakariLkm() {
         return Integer.parseInt(eLaakariLkmTextField.getText());
-    }
-
-    public long getSimulointiViive() {
-        return Long.parseLong(simulointiViiveTextField.getText());
     }
 
     public Integer getSairaanhoitajaLkm() {
