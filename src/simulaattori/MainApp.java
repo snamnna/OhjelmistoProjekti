@@ -13,9 +13,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import simulaattori.controller.IKontrolleriMtoV;
 import simulaattori.controller.Kontrolleri;
-import simulaattori.simu.model.TapahtumanTyyppi;
-import simulaattori.simu.model.TulosDAO;
-import simulaattori.simu.model.util.IPalvelupiste;
+import simulaattori.model.TapahtumanTyyppi;
+import simulaattori.model.TulosDAO;
+import simulaattori.model.util.IPalvelupiste;
 import simulaattori.view.*;
 
 import java.io.IOException;

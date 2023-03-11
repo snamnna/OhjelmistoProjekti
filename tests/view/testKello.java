@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import simulaattori.simu.framework.Kello;
+import simulaattori.framework.Kello;
 
 class testKello {
 

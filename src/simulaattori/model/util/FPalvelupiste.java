@@ -1,11 +1,11 @@
-package simulaattori.simu.model.util;
+package simulaattori.model.util;
 
 import eduni.distributions.Normal;
-import simulaattori.simu.framework.Tapahtumalista;
-import simulaattori.simu.model.Laakari;
-import simulaattori.simu.model.Labra;
-import simulaattori.simu.model.Sairaanhoitaja;
-import simulaattori.simu.model.TapahtumanTyyppi;
+import simulaattori.framework.Tapahtumalista;
+import simulaattori.model.Laakari;
+import simulaattori.model.Labra;
+import simulaattori.model.Sairaanhoitaja;
+import simulaattori.model.TapahtumanTyyppi;
 
 public class FPalvelupiste {
 	public static IPalvelupiste createPalvelupiste(TapahtumanTyyppi tyyppi, Tapahtumalista tapahtumalista) {

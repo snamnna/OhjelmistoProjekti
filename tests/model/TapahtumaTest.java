@@ -10,9 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import simulaattori.simu.framework.Kello;
-import simulaattori.simu.framework.Tapahtuma;
-import simulaattori.simu.model.TapahtumanTyyppi;
+import simulaattori.framework.Kello;
+import simulaattori.framework.Tapahtuma;
+import simulaattori.model.TapahtumanTyyppi;
 
 class TapahtumaTest {
 

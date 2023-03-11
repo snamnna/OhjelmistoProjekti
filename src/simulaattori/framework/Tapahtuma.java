@@ -1,7 +1,7 @@
-package simulaattori.simu.framework;
+package simulaattori.framework;
 
-import simulaattori.simu.model.TapahtumanTyyppi;
-import simulaattori.simu.model.util.IPalvelupiste;
+import simulaattori.model.TapahtumanTyyppi;
+import simulaattori.model.util.IPalvelupiste;
 
 public class Tapahtuma implements Comparable<Tapahtuma> {
 

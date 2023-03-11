@@ -1,9 +1,9 @@
-package simulaattori.simu.model;
+package simulaattori.model;
 
 import eduni.distributions.ContinuousGenerator;
-import simulaattori.simu.framework.Kello;
-import simulaattori.simu.framework.Tapahtuma;
-import simulaattori.simu.framework.Tapahtumalista;
+import simulaattori.framework.Kello;
+import simulaattori.framework.Tapahtuma;
+import simulaattori.framework.Tapahtumalista;
 
 import java.util.concurrent.ThreadLocalRandom;
 

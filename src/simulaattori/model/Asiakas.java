@@ -1,7 +1,7 @@
-package simulaattori.simu.model;
+package simulaattori.model;
 
-import simulaattori.simu.framework.Kello;
-import simulaattori.simu.framework.Trace;
+import simulaattori.framework.Kello;
+import simulaattori.framework.Trace;
 
 
 public class Asiakas {

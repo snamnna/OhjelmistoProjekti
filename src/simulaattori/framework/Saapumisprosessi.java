@@ -1,7 +1,7 @@
-package simulaattori.simu.framework;
+package simulaattori.framework;
 
-import eduni.distributions.*;
-import simulaattori.simu.model.TapahtumanTyyppi;
+import eduni.distributions.ContinuousGenerator;
+import simulaattori.model.TapahtumanTyyppi;
 
 public class Saapumisprosessi {
 

@@ -1,8 +1,8 @@
-package simulaattori.simu.model;
+package simulaattori.model;
 
 import eduni.distributions.ContinuousGenerator;
-import simulaattori.simu.framework.Tapahtumalista;
-import simulaattori.simu.model.util.IPalvelupiste;
+import simulaattori.framework.Tapahtumalista;
+import simulaattori.model.util.IPalvelupiste;
 
 import java.util.LinkedList;
 

@@ -1,7 +1,7 @@
 package simulaattori.controller;
 
-import simulaattori.simu.model.TapahtumanTyyppi;
-import simulaattori.simu.model.util.IPalvelupiste;
+import simulaattori.model.TapahtumanTyyppi;
+import simulaattori.model.util.IPalvelupiste;
 
 import java.util.List;
 import java.util.Map;

@@ -1,11 +1,11 @@
-package simulaattori.simu.model;
+package simulaattori.model;
 
 import eduni.distributions.Negexp;
 import entity.Tulos;
 import simulaattori.controller.IKontrolleriVtoM;
-import simulaattori.simu.framework.*;
-import simulaattori.simu.model.util.FPalvelupiste;
-import simulaattori.simu.model.util.IPalvelupiste;
+import simulaattori.framework.*;
+import simulaattori.model.util.FPalvelupiste;
+import simulaattori.model.util.IPalvelupiste;
 
 import java.util.ArrayList;
 import java.util.HashMap;

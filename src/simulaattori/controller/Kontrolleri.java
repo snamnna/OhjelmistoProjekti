@@ -2,10 +2,10 @@ package simulaattori.controller;
 
 import entity.Tulos;
 import javafx.application.Platform;
-import simulaattori.simu.framework.IMoottori;
-import simulaattori.simu.model.OmaMoottori;
-import simulaattori.simu.model.TapahtumanTyyppi;
-import simulaattori.simu.model.util.IPalvelupiste;
+import simulaattori.framework.IMoottori;
+import simulaattori.model.OmaMoottori;
+import simulaattori.model.TapahtumanTyyppi;
+import simulaattori.model.util.IPalvelupiste;
 import simulaattori.view.ISimulaattorinUI;
 
 import java.util.HashMap;

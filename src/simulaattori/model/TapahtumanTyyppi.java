@@ -1,4 +1,4 @@
-package simulaattori.simu.model;
+package simulaattori.model;
 
 // Tapahtumien tyypit määritellään simulointimallin vaatimusten perusteella
 

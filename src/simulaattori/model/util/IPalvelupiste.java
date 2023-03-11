@@ -1,7 +1,7 @@
-package simulaattori.simu.model.util;
+package simulaattori.model.util;
 
-import simulaattori.simu.model.Asiakas;
-import simulaattori.simu.model.TapahtumanTyyppi;
+import simulaattori.model.Asiakas;
+import simulaattori.model.TapahtumanTyyppi;
 
 public interface IPalvelupiste {
     void lisaaJonoon(Asiakas a);

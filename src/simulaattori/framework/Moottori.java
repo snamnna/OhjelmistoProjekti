@@ -1,10 +1,10 @@
-package simulaattori.simu.framework;
+package simulaattori.framework;
+
+import simulaattori.controller.IKontrolleriVtoM;
+import simulaattori.model.util.IPalvelupiste;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import simulaattori.controller.IKontrolleriVtoM;
-import simulaattori.simu.model.util.IPalvelupiste;
 
 public abstract class Moottori extends Thread implements IMoottori {
 

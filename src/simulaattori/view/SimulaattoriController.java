@@ -7,8 +7,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import simulaattori.MainApp;
-import simulaattori.simu.model.TapahtumanTyyppi;
-import simulaattori.simu.model.util.IPalvelupiste;
+import simulaattori.model.TapahtumanTyyppi;
+import simulaattori.model.util.IPalvelupiste;
 
 import java.util.Arrays;
 import java.util.List;

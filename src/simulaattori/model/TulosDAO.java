@@ -1,13 +1,11 @@
-package simulaattori.simu.model;
+package simulaattori.model;
 
-import java.util.List;
-
+import entity.Tulos;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import entity.Tulos;
-import jakarta.persistence.EntityManager;
+import java.util.List;
 
 public class TulosDAO {
 

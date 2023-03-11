@@ -1,4 +1,4 @@
-package simulaattori.simu.framework;
+package simulaattori.framework;
 
 import java.util.PriorityQueue;
 

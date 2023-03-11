@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import simulaattori.MainApp;
-import simulaattori.simu.model.TulosDAO;
 
 public class TuloksetController {
 

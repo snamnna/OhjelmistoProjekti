@@ -1,12 +1,12 @@
-package simulaattori.simu.model;
+package simulaattori.model;
 
-import simulaattori.simu.model.util.IPalvelupiste;
+import simulaattori.model.util.IPalvelupiste;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static simulaattori.simu.model.TapahtumanTyyppi.*;
+import static simulaattori.model.TapahtumanTyyppi.*;
 
 public class Reititin {
     private final static TapahtumanTyyppi[] ARRIVALS = {ARR, YLARR, ELARR, LABRA_ARRIVAL};

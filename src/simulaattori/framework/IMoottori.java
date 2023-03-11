@@ -1,9 +1,9 @@
-package simulaattori.simu.framework;
-
-import java.util.Map;
+package simulaattori.framework;
 
 import entity.Tulos;
-import simulaattori.simu.model.util.IPalvelupiste;
+import simulaattori.model.util.IPalvelupiste;
+
+import java.util.Map;
 
 public interface IMoottori {
 	void setSimulointiaika(double aika);
