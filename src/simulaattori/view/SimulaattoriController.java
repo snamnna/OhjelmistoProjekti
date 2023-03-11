@@ -1,9 +1,5 @@
 package simulaattori.view;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -13,6 +9,10 @@ import javafx.scene.text.TextAlignment;
 import simulaattori.MainApp;
 import simulaattori.simu.model.TapahtumanTyyppi;
 import simulaattori.simu.model.util.IPalvelupiste;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 public class SimulaattoriController {
 
@@ -65,7 +65,7 @@ public class SimulaattoriController {
 				double x = count * width;
 				double y = 20;
 
-				String jononTyyppi = palvelupiste.getSkeduloitavanTapahtumanTyyppi().toString();
+				String jononTyyppi = palvelupiste.getTyyppi().toString();
 				bufferGC.setFill(Color.rgb(128, 128, 128));
 				bufferGC.setTextAlign(TextAlignment.CENTER);
 				bufferGC.fillText(jononNimi(jononTyyppi), x + width / 2, y - 10);

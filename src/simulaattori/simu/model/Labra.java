@@ -5,9 +5,7 @@ import eduni.distributions.Normal;
 import simulaattori.simu.framework.Kello;
 import simulaattori.simu.framework.Tapahtuma;
 import simulaattori.simu.framework.Tapahtumalista;
-import simulaattori.simu.model.util.IPalvelupiste;
 
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Labra extends Palvelupiste {
@@ -56,31 +54,6 @@ public class Labra extends Palvelupiste {
 		tapahtumalista.lisaa(tapahtuma);
 		jono.peek().setLabrakaynti(true);
 		addPalveluAikaToSumma(palveluaika);
-	}
-
-	@Override
-	public void siirraAsiakas(Tapahtuma tapahtuma, Map<Integer, IPalvelupiste> palvelupisteet) {
-//		switch (tapahtuma.getTyyppi()) {
-//		// tarkistetaan kumman palvelupisteen viimeisin tapahtuma on
-//		case LABRA_ARRIVAL -> {
-//			if (palvelupisteet.get(tapahtuma.getPalvelupisteID()).getViimeisinTapahtuma().equals(tapahtuma)) {
-//				Asiakas asiakas = palvelupisteet.get(tapahtuma.getPalvelupisteID()).otaJonosta();
-//				lisaaJonoon(asiakas);
-//				labraArrivals++;
-//			}
-//		}
-//		case LABRA_DEPARTURE -> {
-//			Asiakas asiakas = otaJonosta();
-//			asiakas.setPoistumisaika(Kello.getInstance().getAika());
-//			asiakas.raportti();
-//			departures++;
-//		}
-//		default -> throw new IllegalArgumentException("Unexpected value: " + tapahtuma.getTyyppi());
-//		}
-	}
-
-	public String getJonoString() {
-		return jono.toString() + "\n labra";
 	}
 }
 

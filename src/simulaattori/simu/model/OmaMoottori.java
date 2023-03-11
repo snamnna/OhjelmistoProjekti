@@ -19,7 +19,6 @@ public class OmaMoottori extends Moottori {
 	private Tulos tulos;
 	int count;
 	private Reititin reititin;
-	private int labraArrivals;
 
 	public OmaMoottori(IKontrolleriVtoM kontrolleri) {
 		super(kontrolleri);
@@ -34,7 +33,6 @@ public class OmaMoottori extends Moottori {
 		Trace.setTraceLevel(Trace.Level.ERR);
 		Kello.getInstance().setAika(0);
 		Asiakas.reset();
-		labraArrivals = 0;
 		// key on palvelupisteen tyyppi.
 		// arvona tietyn tyyppisten palvelupisteiden lukumäärä
 		Map<String, Integer> pPisteet = kontrolleri.haePalvelupisteet();
@@ -107,7 +105,6 @@ public class OmaMoottori extends Moottori {
 
 	@Override
 	protected void tulokset() {
-		System.out.println(count);
 		int sairaanhoitajaLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.ARR).size();
 		int yLaakariLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.YLARR).size();
 		int eLaakariLkm = tyyppiToPalveluPMap.get(TapahtumanTyyppi.ELARR).size();
@@ -121,8 +118,7 @@ public class OmaMoottori extends Moottori {
 		double throughput = completedCount / loppuAika;
 		double utilization = busyTime / loppuAika;
 		double serviceTime = Asiakas.getTotalWaitingTime() / completedCount;
-		int labraArrivals = tyyppiToPalveluPMap.get(TapahtumanTyyppi.LABRA_ARRIVAL).get(0).getArrivals();
-		double waitingTime = Asiakas.getWaitingTime() / Asiakas.getAsiakasCount();
+		int labraArrivals = Labra.getLabraArrivalCount();
 		double averageResponseTime = 5;
 		double averageWaitingTime = Asiakas.getTotalWaitingTime() / completedCount;
 
@@ -138,7 +134,6 @@ public class OmaMoottori extends Moottori {
 		tulos.setUtilization(utilization);
 		tulos.setServiceTime(serviceTime);
 		tulos.setLabraArrivalit(labraArrivals);
-		tulos.setWaitingTime(waitingTime);
 		tulos.setAverageResponseTime(averageResponseTime);
 		tulos.setAverageWaitingTime(averageWaitingTime);
 		

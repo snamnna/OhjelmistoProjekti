@@ -5,9 +5,7 @@ import eduni.distributions.Normal;
 import simulaattori.simu.framework.Kello;
 import simulaattori.simu.framework.Tapahtuma;
 import simulaattori.simu.framework.Tapahtumalista;
-import simulaattori.simu.model.util.IPalvelupiste;
 
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Sairaanhoitaja extends Palvelupiste {
@@ -42,9 +40,5 @@ public class Sairaanhoitaja extends Palvelupiste {
         viimeisinLuotuTapahtuma = tapahtuma;
         addPalveluAikaToSumma(palveluaika);
 
-    }
-
-    public void siirraAsiakas(Tapahtuma tapahtuma, Map<Integer, IPalvelupiste> palvelupisteet) {
-        lisaaJonoon(new Asiakas());
     }
 }

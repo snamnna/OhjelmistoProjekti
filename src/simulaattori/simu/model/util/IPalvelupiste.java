@@ -4,8 +4,6 @@ import simulaattori.simu.framework.Tapahtuma;
 import simulaattori.simu.model.Asiakas;
 import simulaattori.simu.model.TapahtumanTyyppi;
 
-import java.util.Map;
-
 public interface IPalvelupiste {
 	void lisaaJonoon(Asiakas a);
 
@@ -17,9 +15,7 @@ public interface IPalvelupiste {
 
 	void aloitaPalvelu();
 
-	void siirraAsiakas(Tapahtuma tapahtuma, Map<Integer, IPalvelupiste> palvelupisteet);
-
-	TapahtumanTyyppi getSkeduloitavanTapahtumanTyyppi();
+	TapahtumanTyyppi getTyyppi();
 
 	Tapahtuma getViimeisinTapahtuma();
 

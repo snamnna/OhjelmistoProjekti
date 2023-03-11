@@ -14,7 +14,7 @@ public abstract class Palvelupiste implements IPalvelupiste {
 	protected LinkedList<Asiakas> jono; // Tietorakennetoteutus
 	protected final ContinuousGenerator generator;
 	protected final Tapahtumalista tapahtumalista;
-	protected final TapahtumanTyyppi skeduloitavanTapahtumanTyyppi;
+	protected final TapahtumanTyyppi tyyppi;
 	protected Tapahtuma viimeisinLuotuTapahtuma = new Tapahtuma(TapahtumanTyyppi.ELLABARR, 0);
 	protected final int ID;
 	private static int seuraavaID = 1;
@@ -28,23 +28,23 @@ public abstract class Palvelupiste implements IPalvelupiste {
 	public Palvelupiste(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
 		this.tapahtumalista = tapahtumalista;
 		this.generator = generator;
-		this.skeduloitavanTapahtumanTyyppi = tyyppi;
+		this.tyyppi = tyyppi;
 		ID = getSeuraavaID();
 		jono = new LinkedList<>();
 		departures = 0;
 		kaikkienPalveluAikaSumma = 0;
 	}
-	
+
 	protected void addPalveluAikaToSumma(double aika) {
 		kaikkienPalveluAikaSumma += aika;
 	}
-	
+
 	public double getKaikkienPalveluAikojenSumma() {
 		return kaikkienPalveluAikaSumma;
 	}
 
-	public TapahtumanTyyppi getSkeduloitavanTapahtumanTyyppi() {
-		return skeduloitavanTapahtumanTyyppi;
+	public TapahtumanTyyppi getTyyppi() {
+		return tyyppi;
 	}
 
 	private int getSeuraavaID() {

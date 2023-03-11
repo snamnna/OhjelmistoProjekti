@@ -5,17 +5,26 @@ import eduni.distributions.Normal;
 import simulaattori.simu.framework.Kello;
 import simulaattori.simu.framework.Tapahtuma;
 import simulaattori.simu.framework.Tapahtumalista;
-import simulaattori.simu.model.util.IPalvelupiste;
 
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ELaakari extends Palvelupiste {
+public class Laakari extends Palvelupiste {
+	private TapahtumanTyyppi skeduloitavanTapahtumanTyyppi;
 
-
-	public ELaakari(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
+	public Laakari(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
 		super(generator, tapahtumalista, tyyppi);
 		jakauma = new Normal(0.5, 0.5);
+		skeduloitavanTapahtumanTyyppi = getSkeduloitavanTapahtumanTyyppi();
+	}
+
+	private TapahtumanTyyppi getSkeduloitavanTapahtumanTyyppi() {
+		if (tyyppi == TapahtumanTyyppi.YLARR) {
+			return TapahtumanTyyppi.YLDEP;
+		} else if (tyyppi == TapahtumanTyyppi.ELARR) {
+			return TapahtumanTyyppi.ELDEP;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -31,13 +40,13 @@ public class ELaakari extends Palvelupiste {
 	@Override
 	public void aloitaPalvelu() {
 		ThreadLocalRandom random = ThreadLocalRandom.current();
+
 		// arvo palveluaika
 		varattu = true;
 		double palveluaika = generator.sample();
-
 		// Jakauma sille, että meneekö labraan vai kotiin
 		// luo tapahtuma, joka lisätään tapahtumalistaan
-		Tapahtuma tapahtuma = new Tapahtuma(TapahtumanTyyppi.ELDEP, Kello.getInstance().getAika() + palveluaika,
+		Tapahtuma tapahtuma = new Tapahtuma(skeduloitavanTapahtumanTyyppi, Kello.getInstance().getAika() + palveluaika,
 				this);
 		if (random.nextBoolean() && !jono.peek().getLabrakaynti()) {
 			tapahtuma.setTyyppi(TapahtumanTyyppi.LABRA_ARRIVAL);
@@ -45,23 +54,5 @@ public class ELaakari extends Palvelupiste {
 		tapahtumalista.lisaa(tapahtuma);
 		viimeisinLuotuTapahtuma = tapahtuma;
 		addPalveluAikaToSumma(palveluaika);
-	}
-
-	@Override
-	public void siirraAsiakas(Tapahtuma tapahtuma, Map<Integer, IPalvelupiste> palvelupisteet) {
-//		Asiakas asiakas = palvelupisteet.get(tapahtuma.getPalvelupisteID()).otaJonosta();
-//		switch (tapahtuma.getTyyppi()) {
-//		case ELARR -> lisaaJonoon(asiakas);
-//		case ELDEP -> {
-//			asiakas.setPoistumisaika(Kello.getInstance().getAika());
-//			asiakas.raportti();
-//			departures++;
-//		}
-//		default -> throw new IllegalArgumentException("Unexpected value: " + tapahtuma.getTyyppi());
-//		}
-	}
-
-	public String getJonoString() {
-		return jono.toString() + "\n elaakari";
 	}
 }
