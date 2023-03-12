@@ -3,7 +3,6 @@ package simulaattori.view;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 import simulaattori.MainApp;
@@ -21,8 +20,6 @@ public class SimulaattoriController {
 	private Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet;
 	private List<TapahtumanTyyppi> tyypit;
 
-	@FXML
-	private AnchorPane parentPane;
 	@FXML
 	private Canvas canvas;
 
@@ -78,7 +75,6 @@ public class SimulaattoriController {
 						y = 20;
 					}
 				}
-				y += 20;
 				count++;
 			}
 		}
@@ -115,10 +111,6 @@ public class SimulaattoriController {
 		default:
 			return Color.WHITE;
 		}
-    }
-
-    public void alustukset() {
-        tyhjennaNaytto();
     }
 
     public void setMainApp(MainApp mainApp) {
