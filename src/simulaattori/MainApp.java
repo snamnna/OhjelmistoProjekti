@@ -198,11 +198,6 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
     }
 
     @Override
-    public void setLoppuaika(double aika) {
-
-    }
-
-    @Override
     public SimulaattoriController getVisualisointi() {
         return simuController;
     }
@@ -234,8 +229,11 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         tietovarastoController.removeTulos(tulos);
     }
 
-    @Override
-    public void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet) {
-        simuController.alustukset(palvelupisteet);
+    public Map<TapahtumanTyyppi, List<IPalvelupiste>> haePalvelupisteet() {
+        return kontrolleri.getPalvelupisteet();
+    }
+
+    public void alustaVisualisointi() {
+        simuController.alustukset();
     }
 }

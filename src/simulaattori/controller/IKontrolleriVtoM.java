@@ -1,27 +1,31 @@
 package simulaattori.controller;
 
 import simulaattori.model.TapahtumanTyyppi;
-import simulaattori.model.util.IPalvelupiste;
 
-import java.util.List;
 import java.util.Map;
 
+/**
+ * Rajapinta määrittelee metodit, joita simulaattori käyttää kontrollerin kanssa kommunikoimiseen. Simulaattori kutsuu
+ * metodeja hakeakseen käyttäjän syöttämät palvelupisteiden määrät, visualisoinnin päivitykseen ja ilmoittaakseen
+ * simuloinnin päättymisestä.
+ */
 public interface IKontrolleriVtoM {
-	// Rajapinta, joka tarjotaan moottorille:
-	// hakee annetut arvot
-	int haeYlaakarienLkm();
 
-	int haeElaakarienLkm();
+    /**
+     * Hakee käyttäjän syöttämät palvelupisteiden määrät.
+     *
+     * @return tietyn tyyppisen palvelupisteiden lukumäärä kuvattuna sen saapumistyyppiin.
+     */
+    Map<TapahtumanTyyppi, Integer> haePalvelupisteet();
 
-	int haeSairaanhoitajaLkm();
+    /**
+     * Piirtää palvelupisteiden jonot käyttöliittymään.
+     */
+    void visualisoi();
 
-	int haeLabraLkm();
-
-	Map<TapahtumanTyyppi, Integer> haePalvelupisteet();
-
-	void visualisoi();
-
-	void simulointiPaattyi();
-
-	void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet);
+    /**
+     * Ilmoittaa käyttöliittymälle, kun simulointi päättyy. Käyttöliittymä käyttää tätä metodia, jotta se voi
+     * esimerkiksi päivittää käyttäjälle näkyvän datan.
+     */
+    void simulointiPaattyi();
 }

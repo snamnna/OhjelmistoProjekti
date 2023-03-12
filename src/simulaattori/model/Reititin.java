@@ -20,6 +20,15 @@ public class Reititin {
     private Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteMap;
 
     /**
+     * Luo uuden reitittimen ja alustaa sen.
+     *
+     * @param palvelupisteMap tapahtumatyyppien ja palvelupisteiden kuvaus
+     */
+    public Reititin(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteMap) {
+        alustaReititin(palvelupisteMap);
+    }
+
+    /**
      * Alustaa reitittimen tapahtumatyyppien ja palvelupisteiden välisellä kuvauksella.
      *
      * @param tyyppiToPalveluPMap tapahtumatyyppien ja palvelupisteiden kuvaus

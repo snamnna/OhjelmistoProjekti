@@ -29,7 +29,6 @@ public abstract class Moottori extends Thread implements IMoottori {
 	}
 
 	public void run() {
-		alustukset();
 		while (simuloidaan()) {
 			viive();
 			kello.setAika(nykyaika());

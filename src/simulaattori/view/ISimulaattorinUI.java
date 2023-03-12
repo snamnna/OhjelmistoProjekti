@@ -1,32 +1,58 @@
 package simulaattori.view;
 
-import simulaattori.model.TapahtumanTyyppi;
-import simulaattori.model.util.IPalvelupiste;
-
-import java.util.List;
-import java.util.Map;
-
+/**
+ * Rajapinta määrittelee metodit, joita kontrolleri käyttää käyttöliittymän kanssa kommunikointiin.
+ */
 public interface ISimulaattorinUI {
-
+    /**
+     * Palauttaa käyttäjän syöttämän yleislääkärien lukumäärän.
+     */
     int getYlaakarienLkm();
 
+    /**
+     * Palauttaa käyttäjän syöttämän erikoislääkärien lukumäärän.
+     */
     int getElaakarienLkm();
 
+    /**
+     * Palauttaa käyttäjän syöttämän laboratorioiden lukumäärän.
+     */
     int getLabraLkm();
 
+    /**
+     * Palauttaa käyttäjän syöttämän sairaanhoitajien lukumäärän.
+     */
     int getSairaanhoitajaLkm();
 
+    /**
+     * Palauttaa käyttäjän syöttämän simulointiajan.
+     */
     double getSimulointiAika();
 
-    void setLoppuaika(double aika);
-
+    /**
+     * Palauttaa SimulaattoriControllerin, joka vastaa visualisoinnista.
+     */
     SimulaattoriController getVisualisointi();
 
+    /**
+     * Palauttaa käyttäjän syöttämän viiveen.
+     */
     long getViive();
 
+    /**
+     * Asettaa, simuloidaanko vai ei.
+     *
+     * @param value true, jos simulaatio on käynnissä, false muuten.
+     */
     void setSimuloidaan(boolean value);
 
+    /**
+     * Hakee tulokset simulaattorilta
+     */
     void getTulos();
 
-    void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet);
+    /**
+     * tekee visualisointiin tarvittavat alustukset.
+     */
+    void alustaVisualisointi();
 }

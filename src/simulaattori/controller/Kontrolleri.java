@@ -33,6 +33,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
             moottori = new OmaMoottori(this); // luodaan uusi moottorisäie jokaista simulointia varten
             moottori.setSimulointiaika(ui.getSimulointiAika());
             moottori.setViive(ui.getViive());
+            ui.alustaVisualisointi();
             ((Thread) moottori).start();
             simulointiKaynnissa = true;
         }
@@ -46,32 +47,12 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
     }
 
     @Override
-    public int haeYlaakarienLkm() {
-        return ui.getYlaakarienLkm();
-    }
-
-    @Override
-    public int haeElaakarienLkm() {
-        return ui.getElaakarienLkm();
-    }
-
-    @Override
-    public int haeSairaanhoitajaLkm() {
-        return ui.getSairaanhoitajaLkm();
-    }
-
-    @Override
-    public int haeLabraLkm() {
-        return ui.getLabraLkm();
-    }
-
-    @Override
     public Map<TapahtumanTyyppi, Integer> haePalvelupisteet() {
         Map<TapahtumanTyyppi, Integer> palvelupisteet = new HashMap<>();
-        palvelupisteet.put(TapahtumanTyyppi.ARR, haeSairaanhoitajaLkm());
-        palvelupisteet.put(TapahtumanTyyppi.YLARR, haeYlaakarienLkm());
-        palvelupisteet.put(TapahtumanTyyppi.ELARR, haeElaakarienLkm());
-        palvelupisteet.put(TapahtumanTyyppi.LABRA_ARRIVAL, haeLabraLkm());
+        palvelupisteet.put(TapahtumanTyyppi.ARR, ui.getSairaanhoitajaLkm());
+        palvelupisteet.put(TapahtumanTyyppi.YLARR, ui.getYlaakarienLkm());
+        palvelupisteet.put(TapahtumanTyyppi.ELARR, ui.getElaakarienLkm());
+        palvelupisteet.put(TapahtumanTyyppi.LABRA_ARRIVAL, ui.getLabraLkm());
         return palvelupisteet;
     }
 
@@ -91,7 +72,7 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
     }
 
     @Override
-    public void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet) {
-        ui.setPalvelupisteet(palvelupisteet);
+    public Map<TapahtumanTyyppi, List<IPalvelupiste>> getPalvelupisteet() {
+        return moottori.getPalvelupisteet();
     }
 }

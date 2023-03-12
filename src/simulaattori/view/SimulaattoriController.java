@@ -117,9 +117,9 @@ public class SimulaattoriController {
 		}
 	}
 
-	public void alustukset(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet) {
+	public void alustukset() {
 		tyhjennaNaytto();
-		this.palvelupisteet = palvelupisteet;
+		this.palvelupisteet = mainApp.haePalvelupisteet();
 	}
 
 	public void setMainApp(MainApp mainApp) {

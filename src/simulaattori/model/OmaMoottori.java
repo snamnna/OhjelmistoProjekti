@@ -17,7 +17,6 @@ public class OmaMoottori extends Moottori {
 	private final Saapumisprosessi saapumisprosessi;
 	private Map<TapahtumanTyyppi, List<IPalvelupiste>> tyyppiToPalveluPMap;
 	private Tulos tulos;
-	int count;
 	private Reititin reititin;
 
 	public OmaMoottori(IKontrolleriVtoM kontrolleri) {
@@ -25,7 +24,7 @@ public class OmaMoottori extends Moottori {
 		saapumisprosessi = new Saapumisprosessi(new Negexp(15, 5), tapahtumalista, TapahtumanTyyppi.ARR);
 		tyyppiToPalveluPMap = new HashMap<>();
 		tulos = new Tulos();
-		reititin = new Reititin();
+		alustukset();
 	}
 
 	@Override
@@ -56,10 +55,8 @@ public class OmaMoottori extends Moottori {
 			}
 		}
 
-		// viedään alustetut palvelupisteet UI:lle visualisointia varten
-		kontrolleri.setPalvelupisteet(tyyppiToPalveluPMap);
 		// alustetaan reititin
-		reititin.alustaReititin(tyyppiToPalveluPMap);
+		reititin = new Reititin(tyyppiToPalveluPMap);
 		// Ensimmäinen saapuminen järjestelmään
 		saapumisprosessi.generoiSeuraava();
 	}
@@ -139,7 +136,7 @@ public class OmaMoottori extends Moottori {
 	}
 
 	@Override
-	public Map<Integer, IPalvelupiste> getPalvelupisteet() {
-		return palvelupisteet;
+	public Map<TapahtumanTyyppi, List<IPalvelupiste>> getPalvelupisteet() {
+		return tyyppiToPalveluPMap;
 	}
 }
