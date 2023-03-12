@@ -12,13 +12,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+ * käyttäjätiedot näkymän kontrolleri.
+ */
 public class KayttajatiedotController {
 
     @FXML
-    public TextField eLaakariLkmTextField;
+    private TextField eLaakariLkmTextField;
 
     @FXML
-    public TextField simulointiAikaTextField;
+    private TextField simulointiAikaTextField;
 
     @FXML
     private TextField simulointiViiveTextField;
@@ -40,6 +43,9 @@ public class KayttajatiedotController {
 
     private MainApp mainApp;
 
+    /**
+     * Käynnistää simulaattorin jos syötteet ovat kelvollisia.
+     */
     @FXML
     public void handleKaynnista() {
         if (isInputValid()) {
@@ -47,20 +53,36 @@ public class KayttajatiedotController {
         }
     }
 
+    /**
+     * Handle hidasta.
+     */
     @FXML
     public void handleHidasta() {
         mainApp.hidastaSimulaattoria();
     }
 
+    /**
+     * Handle nopeuta.
+     */
     @FXML
     public void handleNopeuta() {
         mainApp.nopeutaSimulaattoria();
     }
 
+    /**
+     * Sets main app.
+     *
+     * @param mainApp the main app
+     */
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
     }
 
+    /**
+     * Gets simulointi aika.
+     *
+     * @return the simulointi aika
+     */
     public Double getSimulointiAika() {
         return Double.parseDouble(simulointiAikaTextField.getText());
     }
@@ -132,10 +154,20 @@ public class KayttajatiedotController {
         }
     }
 
+    /**
+     * Gets viive.
+     *
+     * @return the viive
+     */
     public long getViive() {
         return Long.parseLong(simulointiViiveTextField.getText());
     }
 
+    /**
+     * Disable text fields and start button.
+     *
+     * @param disabled the disabled
+     */
     public void disableTextFieldsAndStartButton(boolean disabled) {
         kaynnistaButton.setDisable(disabled);
         yLaakariLkmTextField.setDisable(disabled);
@@ -146,6 +178,11 @@ public class KayttajatiedotController {
         simulointiAikaTextField.setDisable(disabled);
     }
 
+    /**
+     * Gets palvelupisteiden määrän.
+     *
+     * @return the palvelupiste maarat
+     */
     public Map<TapahtumanTyyppi, Integer> getPalvelupisteMaarat() {
         Map<TapahtumanTyyppi, Integer> palvelupisteet = new HashMap<>();
         palvelupisteet.put(TapahtumanTyyppi.ARR, Integer.parseInt(sairaanhoitajaLkmTextField.getText()));

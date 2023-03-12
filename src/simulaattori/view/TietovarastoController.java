@@ -7,6 +7,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import simulaattori.MainApp;
 
+/**
+ * Tietovarastonäkymän kontrolleri.
+ */
 public class TietovarastoController {
 
 	@FXML
@@ -37,23 +40,37 @@ public class TietovarastoController {
 	private MainApp mainApp;
 	private Boolean open = true;
 
+	/**
+	 * Sets main app.
+	 *
+	 * @param mainApp the main app
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		table_tulokset.setItems(mainApp.getTulokset());
 	}
 
+	/**
+	 * Remove tulos.
+	 *
+	 * @param tulos the tulos
+	 */
 	public void removeTulos(Tulos tulos) {
 		table_tulokset.getItems().remove(tulos);
 	}
 
+	/**
+	 * Lisaa tulos.
+	 *
+	 * @param tulos the tulos
+	 */
 	public void lisaaTulos(Tulos tulos) {
 		table_tulokset.getItems().add(tulos);
 	}
-	
-	public Boolean isOpen() {
-		return open;
-	}
 
+	/**
+	 * Initialize.
+	 */
 	@FXML
 	public void initialize() {
 		col_id.setCellValueFactory(cellData -> {
@@ -120,7 +137,12 @@ public class TietovarastoController {
 	private void handleClose() {
 		mainApp.closeTietovarasto();
 	}
-	
+
+	/**
+	 * Disable tulokset table.
+	 *
+	 * @param disable
+	 */
 	public void disableTuloksetTable(boolean disable) {
 		table_tulokset.setDisable(disable);
 	}

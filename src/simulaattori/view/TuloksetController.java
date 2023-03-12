@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import simulaattori.MainApp;
 
+/**
+ * Tulokste näkymän kontrolleri.
+ */
 public class TuloksetController {
 
 	@FXML
@@ -37,6 +40,11 @@ public class TuloksetController {
 
 	private ObjectProperty<Tulos> tulos = new SimpleObjectProperty<>();
 
+	/**
+	 * Sets main app.
+	 *
+	 * @param mainApp the main app
+	 */
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 		tulos.addListener((observable, oldValue, newValue) -> {
@@ -52,52 +60,108 @@ public class TuloksetController {
 		});
 	}
 
+	/**
+	 * Tallenna tulos.
+	 */
 	@FXML
 	public void tallennaTulos() {
 		mainApp.tallennaTulos(tulos.get());
 	}
 
+	/**
+	 * Poista tulos.
+	 */
 	@FXML
 	public void poistaTulos() {
 		mainApp.poistaTulos(tulos.get());
 	}
 
+	/**
+	 * Sets e laakarit.
+	 *
+	 * @param eLaakarit the e laakarit
+	 */
 	public void setELaakarit(String eLaakarit) {
 		this.eLaakarit.setText(eLaakarit);
 	}
 
+	/**
+	 * Sets ylaakarit.
+	 *
+	 * @param ylaakarit the ylaakarit
+	 */
 	public void setYlaakarit(String ylaakarit) {
 		this.ylaakarit.setText(ylaakarit);
 	}
 
+	/**
+	 * Sets palveltu.
+	 *
+	 * @param palveltu the palveltu
+	 */
 	public void setPalveltu(String palveltu) {
 		this.palveltu.setText(palveltu);
 	}
 
+	/**
+	 * Sets kokonaisaika.
+	 *
+	 * @param kokonaisaika the kokonaisaika
+	 */
 	public void setKokonaisaika(String kokonaisaika) {
 		this.kokonaisaika.setText(kokonaisaika);
 	}
 
+	/**
+	 * Sets labrassa kaynteja.
+	 *
+	 * @param labroja the labroja
+	 */
 	public void setLabrassaKaynteja(String labroja) {
 		this.labrassaKaynteja.setText(labroja);
 	}
 
+	/**
+	 * Sets utilization.
+	 *
+	 * @param utilization the utilization
+	 */
 	public void setUtilization(String utilization) {
 		this.utilization.setText(utilization);
 	}
 
+	/**
+	 * Sets service time.
+	 *
+	 * @param serviceTime the service time
+	 */
 	public void setServiceTime(String serviceTime) {
 		this.serviceTime.setText(serviceTime);
 	}
 
+	/**
+	 * Sets average response time.
+	 *
+	 * @param averageResponseTime the average response time
+	 */
 	public void setAverageResponseTime(String averageResponseTime) {
 		this.averageResponseTime.setText(averageResponseTime);
 	}
 
+	/**
+	 * Sets average waiting time.
+	 *
+	 * @param averageWaitingTime the average waiting time
+	 */
 	public void setAverageWaitingTime(String averageWaitingTime) {
 		this.averageWaitingTime.setText(averageWaitingTime);
 	}
 
+	/**
+	 * Sets tulos.
+	 *
+	 * @param tulos the tulos
+	 */
 	public void setTulos(Tulos tulos) {
 		this.tulos.set(tulos);
 	}

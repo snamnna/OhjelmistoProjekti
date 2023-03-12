@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Hoitaa simulaattorin visualisoinnin käyttöliittymässä.
+ */
 public class SimulaattoriController {
 
 	private MainApp mainApp;
@@ -30,11 +33,32 @@ public class SimulaattoriController {
 				TapahtumanTyyppi.ELARR, TapahtumanTyyppi.LABRA_ARRIVAL);
 	}
 
+	private static Color getJononVari(String tyyppi) {
+		switch (tyyppi) {
+			case "ARR":
+				return Color.GHOSTWHITE;
+			case "YLARR":
+				return Color.CYAN;
+			case "ELARR":
+				return Color.DARKCYAN;
+			case "LABRA_ARRIVAL":
+				return Color.YELLOW;
+			default:
+				return Color.WHITE;
+		}
+	}
+
+	/**
+	 * Tyhjentää näytön.
+	 */
 	public void tyhjennaNaytto() {
 		gc.setFill(Color.rgb(18, 18, 18));
 		gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
 	}
 
+	/**
+	 * Piirtää kaikki palvelupisteet bufferiin ja piirtää bufferin canvakseen.
+	 */
 	public void visualisoi() {
 		// visualisoidaan palvelupisteet bufferi canvakseen ensin
 		// jotta käyttöliittymän canvakseen ei tule keskeneräisiä visualisointeja
@@ -85,39 +109,34 @@ public class SimulaattoriController {
 
 	private String jononNimi(String tyyppi) {
 		switch (tyyppi.toString()) {
-		case "ARR":
-			return "Sairaanhoitaja";
-		case "YLARR":
-			return "Yleislääkäri";
-		case "ELARR":
-			return "Erikoislääkäri";
-		case "LABRA_ARRIVAL":
-			return "Laboratorio";
-		default:
-			return "?";
+			case "ARR":
+				return "Sairaanhoitaja";
+			case "YLARR":
+				return "Yleislääkäri";
+			case "ELARR":
+				return "Erikoislääkäri";
+			case "LABRA_ARRIVAL":
+				return "Laboratorio";
+			default:
+				return "?";
 		}
 	}
 
-	private static Color getJononVari(String tyyppi) {
-		switch (tyyppi) {
-		case "ARR":
-			return Color.GHOSTWHITE;
-		case "YLARR":
-			return Color.CYAN;
-		case "ELARR":
-			return Color.DARKCYAN;
-		case "LABRA_ARRIVAL":
-			return Color.YELLOW;
-		default:
-			return Color.WHITE;
-		}
-    }
+	/**
+	 * asettaa mainAppin
+	 *
+	 * @param mainApp
+	 */
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+	}
 
-    public void setMainApp(MainApp mainApp) {
-        this.mainApp = mainApp;
-    }
-
-    public void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet) {
-        this.palvelupisteet = palvelupisteet;
-    }
+	/**
+	 * asettaa visualisoitavat palvelupisteet.
+	 *
+	 * @param palvelupisteet
+	 */
+	public void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet) {
+		this.palvelupisteet = palvelupisteet;
+	}
 }
