@@ -1,3 +1,6 @@
+/**
+ * Kontrolleri-luokka hoitaa käyttöliittymän ja mallin välisen kommunikoinnin.
+ */
 package simulaattori.controller;
 
 import entity.Tulos;
@@ -10,6 +13,7 @@ import simulaattori.view.ISimulaattorinUI;
 
 import java.util.List;
 import java.util.Map;
+
 
 public class Kontrolleri implements IKontrolleriMtoV, IKontrolleriVtoM {
 
