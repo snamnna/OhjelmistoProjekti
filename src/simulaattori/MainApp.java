@@ -23,9 +23,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The type Main app.
+ * Simulaattorin käynnistyspääohjelma
  */
-public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
+public class MainApp extends Application implements ISimulaattorinUI {
 
     private TuloksetController tulosController;
     private TietovarastoController tietovarastoController;
