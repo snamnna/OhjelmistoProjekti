@@ -10,9 +10,12 @@ import java.util.List;
 public class TulosDAO {
 
 	private static TulosDAO instance;
-	// käytetään hibernaten session API:a joka implementoi EntityManagerin
 	private static SessionFactory sf;
 
+	/**
+	 * TulosDAO-luokan yksityinen konstruktori, joka luo uuden Hibernate-istunnon ja käyttää luettua
+	 * Hibernate-konfiguraatiotiedostoa tietokantayhteyden muodostamiseen.
+	 */
 	private TulosDAO() {
 		try {
 			sf = new Configuration().configure().buildSessionFactory();
@@ -32,6 +35,11 @@ public class TulosDAO {
 		return instance;
 	}
 	
+	/**
+	 * Luo uuden tulos-olion tietokantaan käyttämällä avointa hibernate-istuntoa.
+	 * @param tulos Tulos-olio, joka tallennetaan tietokantaan.
+	 * @return true, jos tallennus onnistuu, muutoin false.
+	 */
 	public boolean createTulos(Tulos tulos) {
 	    Session istunto = null;
 	    try {
@@ -53,6 +61,10 @@ public class TulosDAO {
 	    }
 	}
 
+	/**
+	 * Hakee kaikki tallennetut tulokset tietokannasta.
+	 * @return Tulos-olioita sisältävä taulukko, joka sisältää kaikki tietokantaan tallennetut tulokset.
+	 */
 	public Tulos[] getTulokset() {
 		List<Tulos> tulosList = null;
 		try (Session istunto = sf.openSession();) {
@@ -65,6 +77,11 @@ public class TulosDAO {
 		return tulosList.toArray(new Tulos[tulosList.size()]);
 	}
 	
+	/**
+	 * Poistaa tietokannasta halutun tulos-olion.
+	 * @param id Poistettavan tulos-olion ID.
+	 * @return true, jos poisto onnistuu, muutoin false.
+	 */
 	public boolean deleteTulos(int id) {
 	    Session istunto = null;
 	    try {
