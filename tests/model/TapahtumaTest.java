@@ -1,7 +1,7 @@
 package model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -10,9 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import simulaattori.framework.Kello;
 import simulaattori.framework.Tapahtuma;
 import simulaattori.model.TapahtumanTyyppi;
+import simulaattori.model.util.FPalvelupiste;
+import simulaattori.model.util.IPalvelupiste;
 
 class TapahtumaTest {
 
@@ -34,11 +35,12 @@ class TapahtumaTest {
 	}
 
 	@Test
-	@DisplayName("Asetetaan palvelupisteelle ID")
-	void testSetPalvelupisteId() {
+	@DisplayName("Asetetaan palvelupiste")
+	void testSetPalvelupiste() {
 		Tapahtuma tapahtuma = new Tapahtuma(TapahtumanTyyppi.ARR, 2);
-		tapahtuma.setPalvelupisteID(1);
-		assertEquals(1, tapahtuma.getPalvelupisteID(), "Palvelupisteen ID:tä ei asetettu oikein");
+		IPalvelupiste p = FPalvelupiste.createPalvelupiste(TapahtumanTyyppi.ARR, null);
+		tapahtuma.setPalvelupiste(p);
+		assertEquals(p, tapahtuma.getPalvelupiste(), "Palvelupistettä ei asetettu oikein");
 	}
 
 	//Vaihdetaan luodun tapahtuman tyyppiä ja todetaan että se muuttuu
