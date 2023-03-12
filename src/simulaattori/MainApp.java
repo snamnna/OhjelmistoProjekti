@@ -22,6 +22,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Main app.
+ */
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
 
     private TuloksetController tulosController;
@@ -37,6 +40,9 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
     private AnchorPane tietovarasto;
     private BooleanProperty simuloidaan = new SimpleBooleanProperty(false);
 
+    /**
+     * Instantiates a new Main app.
+     */
     public MainApp() {
         tulosDAO = TulosDAO.getInstance();
         Tulos[] tulokset = tulosDAO.getTulokset();
@@ -45,6 +51,11 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         }
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         launch(MainApp.class);
     }
@@ -87,6 +98,11 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         rootLayoutController.setMain(this);
     }
 
+    /**
+     * Näyttää käyttäjätietojen syöttöpaneelin käyttöliittymässä.
+     *
+     * @throws IOException
+     */
     public void showKayttajatiedot() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("resources/Kayttajatiedot.fxml"));
@@ -98,6 +114,11 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         kayttajatiedotController.setMainApp(this);
     }
 
+    /**
+     * Näyttää simulaattorin visualisointipaneelin käyttöliittymässä.
+     *
+     * @throws IOException
+     */
     public void showSimulaattori() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("resources/Simulaattori.fxml"));
@@ -109,6 +130,11 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         simuController.setMainApp(this);
     }
 
+    /**
+     * Näyttää tulospaneelin käyttöliittymässä.
+     *
+     * @throws IOException
+     */
     public void showTulokset() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("resources/Tulokset.fxml"));
@@ -120,6 +146,11 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         tulosController.setMainApp(this);
     }
 
+    /**
+     * Näyttää tietovarastopaneelin käyttöliittymässä.
+     *
+     * @throws IOException
+     */
     public void showTietovarasto() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
@@ -148,6 +179,11 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         kontrolleri.nopeuta();
     }
 
+    /**
+     * hakee tietovarastopaneelissa olevat tulokset.
+     *
+     * @return tulokset
+     */
     public ObservableList<Tulos> getTulokset() {
         return listTulos;
     }
@@ -168,11 +204,21 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         primaryStage.sizeToScene();
     }
 
+    /**
+     * Tallenna tulos tietokantaan.
+     *
+     * @param tulos
+     */
     public void tallennaTulos(Tulos tulos) {
         tulosDAO.createTulos(tulos);
         tietovarastoController.lisaaTulos(tulos);
     }
 
+    /**
+     * Poista tulos tietokannasta.
+     *
+     * @param tulos
+     */
     public void poistaTulos(Tulos tulos) {
         tulosDAO.deleteTulos(tulos.getId());
         tietovarastoController.removeTulos(tulos);

@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * OmaMoottori on simulaattorin moottori, joka toteuttaa Moottori-luokan abstraktit metodit.
+ */
 public class OmaMoottori extends Moottori {
 
 	private final Saapumisprosessi saapumisprosessi;
@@ -20,6 +23,11 @@ public class OmaMoottori extends Moottori {
 	private Tulos tulos;
 	private Reititin reititin;
 
+	/**
+	 * OmaMootori-luokan konstruktori.
+	 *
+	 * @param kontrolleri
+	 */
 	public OmaMoottori(IKontrolleriMtoV kontrolleri) {
 		super(kontrolleri);
 		saapumisprosessi = new Saapumisprosessi(new Negexp(15, 5), tapahtumalista, TapahtumanTyyppi.ARR);
@@ -83,6 +91,13 @@ public class OmaMoottori extends Moottori {
 		kontrolleri.visualisoi();
 	}
 
+	/**
+	 * hakee tapahtumatyypin vastakkaisen muodon
+	 *
+	 * @param tyyppi  the tyyppi
+	 * @param arrival onko arrival vai departure
+	 * @return tyyppi
+	 */
 	protected TapahtumanTyyppi getTapahtumanTyyppi(TapahtumanTyyppi tyyppi, Boolean arrival) {
 		TapahtumanTyyppi tTyyppi = TapahtumanTyyppi.ARR;
 		switch (tyyppi) {
@@ -131,7 +146,7 @@ public class OmaMoottori extends Moottori {
 		//kontrolleri.simulointiPaattyi();
 		kontrolleri.vieTulokset(tulos);
 	}
-	
+
 	public Tulos getTulos() {
 		return tulos;
 	}
