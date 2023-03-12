@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import simulaattori.controller.IKontrolleriMtoV;
+import simulaattori.controller.IKontrolleriVtoM;
 import simulaattori.controller.Kontrolleri;
 import simulaattori.model.TapahtumanTyyppi;
 import simulaattori.model.TulosDAO;
@@ -24,15 +24,16 @@ import java.util.Map;
 
 public class MainApp extends Application implements ISimulaattorinUI { // Simulaattorin käynnistyspääohjelma
 
-    private static TuloksetController tulosController;
-    private static TietovarastoController tietovarastoController;
+    private TuloksetController tulosController;
+    private TietovarastoController tietovarastoController;
+    private RootLayoutController rootLayoutController;
     private ObservableList<Tulos> listTulos = FXCollections.observableArrayList();
     private TulosDAO tulosDAO;
     private Stage primaryStage;
     private BorderPane rootLayout;
     private KayttajatiedotController kayttajatiedotController;
     private SimulaattoriController simuController;
-    private IKontrolleriMtoV kontrolleri;
+    private IKontrolleriVtoM kontrolleri;
     private AnchorPane tietovarasto;
     private BooleanProperty simuloidaan = new SimpleBooleanProperty(false);
 
@@ -65,37 +66,31 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         simuloidaan.addListener((observable, oldValue, newValue) -> {
             kayttajatiedotController.disableTextFieldsAndStartButton(newValue);
             if (!oldValue) {
-                startSimulaattori();
                 tietovarastoController.disableTuloksetTable(true);
             }
 
             if (oldValue && !newValue) {
-                getTulos();
                 tietovarastoController.disableTuloksetTable(false);
             }
         });
     }
 
     private void initRootLayout() throws IOException {
-        // Load root layout from fxml file.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("resources/RootLayout.fxml"));
-
-        rootLayout = (BorderPane) loader.load();
-        // Show the scene containing the root layout.
+        rootLayout = loader.load();
         Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
 
-        // Give the application.controller access to the main app.
-        RootLayoutController controller = loader.getController();
-        controller.setMain(this);
+        // Give the controller access to the main app.
+        rootLayoutController = loader.getController();
+        rootLayoutController.setMain(this);
     }
 
     public void showKayttajatiedot() throws IOException {
-        // Load person overview.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("resources/Kayttajatiedot.fxml"));
-        AnchorPane kayttajatiedot = (AnchorPane) loader.load();
+        AnchorPane kayttajatiedot = loader.load();
         rootLayout.setLeft(kayttajatiedot);
 
         // Give the controller access to the main app.
@@ -104,12 +99,9 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
     }
 
     public void showSimulaattori() throws IOException {
-        // Load person overview.
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("resources/Simulaattori.fxml"));
-        AnchorPane simulaattori = (AnchorPane) loader.load();
-
-        // Set person overview into the center of root layout.
+        AnchorPane simulaattori = loader.load();
         rootLayout.setCenter(simulaattori);
 
         // Give the controller access to the main app.
@@ -120,8 +112,7 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
     public void showTulokset() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("resources/Tulokset.fxml"));
-        AnchorPane tulokset = (AnchorPane) loader.load();
-
+        AnchorPane tulokset = loader.load();
         rootLayout.setRight(tulokset);
 
         // Give the controller access to the main app
@@ -132,7 +123,7 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
     public void showTietovarasto() throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("resources/Tietovarasto.fxml"));
-        tietovarasto = (AnchorPane) loader.load();
+        tietovarasto = loader.load();
         tietovarasto.setVisible(false);
         tietovarasto.setManaged(false);
         tietovarastoController = loader.getController();
@@ -144,11 +135,8 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         simuloidaan.set(value);
     }
 
-    public void startButtonClicked() {
-        setSimuloidaan(true);
-    }
-
     public void startSimulaattori() {
+        simuController.tyhjennaNaytto();
         kontrolleri.kaynnistaSimulointi();
     }
 
@@ -164,47 +152,8 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         return listTulos;
     }
 
-    public void getTulos() {
-        tulosController.setTulos(kontrolleri.getTulos());
-    }
-
     public void setTulos(Tulos tulos) {
         tulosController.setTulos(tulos);
-    }
-
-    @Override
-    public double getSimulointiAika() {
-        return kayttajatiedotController.getSimulointiAika();
-    }
-
-    @Override
-    public int getYlaakarienLkm() {
-        return kayttajatiedotController.getYLaakariLkm();
-    }
-
-    @Override
-    public int getElaakarienLkm() {
-        return kayttajatiedotController.getELaakariLkm();
-    }
-
-    @Override
-    public int getLabraLkm() {
-        return kayttajatiedotController.getLabraLkm();
-    }
-
-    @Override
-    public int getSairaanhoitajaLkm() {
-        return kayttajatiedotController.getSairaanhoitajaLkm();
-    }
-
-    @Override
-    public SimulaattoriController getVisualisointi() {
-        return simuController;
-    }
-
-    @Override
-    public long getViive() {
-        return kayttajatiedotController.getViive();
     }
 
     public void closeTietovarasto() {
@@ -229,11 +178,27 @@ public class MainApp extends Application implements ISimulaattorinUI { // Simula
         tietovarastoController.removeTulos(tulos);
     }
 
-    public Map<TapahtumanTyyppi, List<IPalvelupiste>> haePalvelupisteet() {
-        return kontrolleri.getPalvelupisteet();
+    public void viePalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet) {
+        simuController.setPalvelupisteet(palvelupisteet);
     }
 
-    public void alustaVisualisointi() {
-        simuController.alustukset();
+    @Override
+    public Map<TapahtumanTyyppi, Integer> getPalvelupisteMaarat() {
+        return kayttajatiedotController.getPalvelupisteMaarat();
+    }
+
+    @Override
+    public void visualisoi() {
+        simuController.visualisoi();
+    }
+
+    @Override
+    public long getViive() {
+        return kayttajatiedotController.getViive();
+    }
+
+    @Override
+    public double getSimulointiAika() {
+        return kayttajatiedotController.getSimulointiAika();
     }
 }

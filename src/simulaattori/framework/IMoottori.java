@@ -2,9 +2,7 @@ package simulaattori.framework;
 
 import entity.Tulos;
 import simulaattori.model.TapahtumanTyyppi;
-import simulaattori.model.util.IPalvelupiste;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,9 +38,10 @@ public interface IMoottori {
     Tulos getTulos();
 
     /**
-     * Palauttaa simulaation palvelupisteet.
+     * asettaa luotavien palvelupisteiden määrät
      *
-     * @return simulaatiossa käytössä olevat palvelupisteet
+     * @param palvelupisteMaarat palvelupisteiden määrät, jossa avaimena on palvelupisteen tyyppi ja arvona
+     *                           palvelupisteen määrä.
      */
-    Map<TapahtumanTyyppi, List<IPalvelupiste>> getPalvelupisteet();
+    void setPalvelupisteMaarat(Map<TapahtumanTyyppi, Integer> palvelupisteMaarat);
 }

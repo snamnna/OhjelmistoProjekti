@@ -1,6 +1,6 @@
 package simulaattori.framework;
 
-import simulaattori.controller.IKontrolleriVtoM;
+import simulaattori.controller.IKontrolleriMtoV;
 import simulaattori.model.util.IPalvelupiste;
 
 import java.util.HashMap;
@@ -15,9 +15,9 @@ public abstract class Moottori extends Thread implements IMoottori {
 
 	protected Tapahtumalista tapahtumalista;
 	protected Map<Integer, IPalvelupiste> palvelupisteet;
-	protected IKontrolleriVtoM kontrolleri;
+	protected IKontrolleriMtoV kontrolleri;
 
-	public Moottori(IKontrolleriVtoM kontrolleri) {
+	public Moottori(IKontrolleriMtoV kontrolleri) {
 		this.kontrolleri = kontrolleri;
 		kello = Kello.getInstance();
 		tapahtumalista = new Tapahtumalista();
@@ -29,6 +29,7 @@ public abstract class Moottori extends Thread implements IMoottori {
 	}
 
 	public void run() {
+		alustukset();
 		while (simuloidaan()) {
 			viive();
 			kello.setAika(nykyaika());

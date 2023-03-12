@@ -115,15 +115,17 @@ public class SimulaattoriController {
 		default:
 			return Color.WHITE;
 		}
-	}
+    }
 
-	public void alustukset() {
-		tyhjennaNaytto();
-		this.palvelupisteet = mainApp.haePalvelupisteet();
-	}
+    public void alustukset() {
+        tyhjennaNaytto();
+    }
 
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-	}
+    public void setMainApp(MainApp mainApp) {
+        this.mainApp = mainApp;
+    }
 
+    public void setPalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet) {
+        this.palvelupisteet = palvelupisteet;
+    }
 }

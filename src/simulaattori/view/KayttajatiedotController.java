@@ -6,21 +6,25 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import simulaattori.MainApp;
+import simulaattori.model.TapahtumanTyyppi;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class KayttajatiedotController {
 
     @FXML
-	public TextField eLaakariLkmTextField;
+    public TextField eLaakariLkmTextField;
 
     @FXML
-	public TextField simulointiAikaTextField;
+    public TextField simulointiAikaTextField;
 
     @FXML
     private TextField simulointiViiveTextField;
 
     @FXML
-	public TextField yLaakariLkmTextField;
+    public TextField yLaakariLkmTextField;
 
     @FXML
     private CheckBox enableAdvancedCheckBox;
@@ -30,7 +34,7 @@ public class KayttajatiedotController {
 
     @FXML
     private TextField sairaanhoitajaLkmTextField;
-    
+
     @FXML
     private Button kaynnistaButton;
 
@@ -38,8 +42,8 @@ public class KayttajatiedotController {
 
     @FXML
     public void handleKaynnista() {
-        if(isInputValid()) {
-        	mainApp.startButtonClicked();
+        if (isInputValid()) {
+            mainApp.startSimulaattori();
         }
     }
 
@@ -61,25 +65,11 @@ public class KayttajatiedotController {
         return Double.parseDouble(simulointiAikaTextField.getText());
     }
 
-    public Integer getYLaakariLkm() {
-        return Integer.parseInt(yLaakariLkmTextField.getText());
-    }
-
-    public Integer getELaakariLkm() {
-        return Integer.parseInt(eLaakariLkmTextField.getText());
-    }
-
-    public Integer getSairaanhoitajaLkm() {
-        return Integer.parseInt(sairaanhoitajaLkmTextField.getText());
-    }
-
-    public Integer getLabraLkm() {
-        return Integer.parseInt(labraLkmTextField.getText());
-    }
-/**
- * Tarkistaa, että simuloinnin syötteet ovat kelvollisia.
- * @return palauttaa true, jos syötteet ovat kelvollisia, muutoin false.
- */
+    /**
+     * Tarkistaa, että simuloinnin syötteet ovat kelvollisia.
+     *
+     * @return palauttaa true, jos syötteet ovat kelvollisia, muutoin false.
+     */
     public boolean isInputValid() {
         String errorMessage = "";
 
@@ -94,7 +84,7 @@ public class KayttajatiedotController {
         }
         if (sairaanhoitajaLkmTextField.getText() == null || sairaanhoitajaLkmTextField.getText().length() == 0) {
             errorMessage += "Sairaanhoitaja: Syötä numero!\n";
-        }  else {
+        } else {
             try {
                 Integer.parseInt(sairaanhoitajaLkmTextField.getText());
             } catch (NumberFormatException e) {
@@ -121,7 +111,7 @@ public class KayttajatiedotController {
         }
         if (labraLkmTextField.getText() == null || labraLkmTextField.getText().length() == 0) {
             errorMessage += "Laboratoriot: Syötä numero!\n";
-        }  else {
+        } else {
             try {
                 Integer.parseInt(labraLkmTextField.getText());
             } catch (NumberFormatException e) {
@@ -146,7 +136,7 @@ public class KayttajatiedotController {
         return Long.parseLong(simulointiViiveTextField.getText());
     }
 
-	public void disableTextFieldsAndStartButton(boolean disabled) {
+    public void disableTextFieldsAndStartButton(boolean disabled) {
         kaynnistaButton.setDisable(disabled);
         yLaakariLkmTextField.setDisable(disabled);
         eLaakariLkmTextField.setDisable(disabled);
@@ -154,5 +144,14 @@ public class KayttajatiedotController {
         labraLkmTextField.setDisable(disabled);
         simulointiViiveTextField.setDisable(disabled);
         simulointiAikaTextField.setDisable(disabled);
+    }
+
+    public Map<TapahtumanTyyppi, Integer> getPalvelupisteMaarat() {
+        Map<TapahtumanTyyppi, Integer> palvelupisteet = new HashMap<>();
+        palvelupisteet.put(TapahtumanTyyppi.ARR, Integer.parseInt(sairaanhoitajaLkmTextField.getText()));
+        palvelupisteet.put(TapahtumanTyyppi.YLARR, Integer.parseInt(yLaakariLkmTextField.getText()));
+        palvelupisteet.put(TapahtumanTyyppi.ELARR, Integer.parseInt(eLaakariLkmTextField.getText()));
+        palvelupisteet.put(TapahtumanTyyppi.LABRA_ARRIVAL, Integer.parseInt(labraLkmTextField.getText()));
+        return palvelupisteet;
     }
 }

@@ -8,37 +8,25 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Rajapinta määrittelee metodit, joita käyttöliittymä käyttää kontrollerin kanssa kommunikoimiseen. Käyttöliittymä
- * kutsuu metodeja käynnistääkseen ja ohjatakseen simulaation kulkua sekä hakeakseen simulaattorin tulokset simulaation
- * päätyttyä.
+ * Rajapinta määrittelee metodit, joita simulaattori käyttää käyttöliittymän kanssa kommunikoimiseen.
  */
 public interface IKontrolleriMtoV {
     /**
-     * Hidastaa simulaattoria.
+     * Visualisoi palvelupisteet
      */
-    void hidasta();
+    void visualisoi();
 
     /**
-     * Nopeuttaa simulaattoria.
-     */
-    void nopeuta();
-
-    /**
-     * Käynnistää simulaattorin.
-     */
-    void kaynnistaSimulointi();
-
-    /**
-     * Hakee simulaattorilta simuloinnin tuloksen.
+     * Vie tulokset käyttöliittymälle.
      *
-     * @return simulaation lopputulos Tulos-oliona.
+     * @param tulos
      */
-    Tulos getTulos();
+    void vieTulokset(Tulos tulos);
 
     /**
-     * Hakee simulaattorilta mapin, jossa palvelupisteet ovat tyypeittäin listoissa.
+     * Vie visualisoitavat palvelupisteet käyttöliittymälle
      *
-     * @return simulaation lopputulos Tulos-oliona.
+     * @param palvelupisteet
      */
-    Map<TapahtumanTyyppi, List<IPalvelupiste>> getPalvelupisteet();
+    void viePalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet);
 }

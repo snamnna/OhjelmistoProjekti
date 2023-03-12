@@ -8,52 +8,55 @@ import simulaattori.model.TapahtumanTyyppi;
 import simulaattori.model.util.IPalvelupiste;
 import simulaattori.view.ISimulaattorinUI;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
+public class Kontrolleri implements IKontrolleriMtoV, IKontrolleriVtoM {
 
     private ISimulaattorinUI ui;
     private IMoottori moottori;
     private volatile boolean simulointiKaynnissa;
 
+    /**
+     * Konstruktori Kontrolleri-luokalle.
+     *
+     * @param ui Käyttöliittymä
+     */
     public Kontrolleri(ISimulaattorinUI ui) {
         this.ui = ui;
         simulointiKaynnissa = false;
     }
 
+    @Override
     public void visualisoi() {
-        Platform.runLater(() -> ui.getVisualisointi().visualisoi());
+        Platform.runLater(() -> ui.visualisoi());
     }
 
     @Override
     public void kaynnistaSimulointi() {
         if (!simulointiKaynnissa) {
-            moottori = new OmaMoottori(this); // luodaan uusi moottorisäie jokaista simulointia varten
+            ui.setSimuloidaan(true);
+            moottori = new OmaMoottori(this);
             moottori.setSimulointiaika(ui.getSimulointiAika());
             moottori.setViive(ui.getViive());
-            ui.alustaVisualisointi();
+            moottori.setPalvelupisteMaarat(ui.getPalvelupisteMaarat());
             ((Thread) moottori).start();
             simulointiKaynnissa = true;
         }
     }
 
-    public void simulointiPaattyi() {
+    @Override
+    public void vieTulokset(Tulos tulos) {
         Platform.runLater(() -> {
+            ui.setTulos(tulos);
             ui.setSimuloidaan(false);
             simulointiKaynnissa = false;
         });
     }
 
     @Override
-    public Map<TapahtumanTyyppi, Integer> haePalvelupisteet() {
-        Map<TapahtumanTyyppi, Integer> palvelupisteet = new HashMap<>();
-        palvelupisteet.put(TapahtumanTyyppi.ARR, ui.getSairaanhoitajaLkm());
-        palvelupisteet.put(TapahtumanTyyppi.YLARR, ui.getYlaakarienLkm());
-        palvelupisteet.put(TapahtumanTyyppi.ELARR, ui.getElaakarienLkm());
-        palvelupisteet.put(TapahtumanTyyppi.LABRA_ARRIVAL, ui.getLabraLkm());
-        return palvelupisteet;
+    public void viePalvelupisteet(Map<TapahtumanTyyppi, List<IPalvelupiste>> palvelupisteet) {
+        ui.viePalvelupisteet(palvelupisteet);
     }
 
     @Override
@@ -64,15 +67,5 @@ public class Kontrolleri implements IKontrolleriVtoM, IKontrolleriMtoV {
     @Override
     public void nopeuta() {
         moottori.setViive((long) (moottori.getViive() * 0.9));
-    }
-
-    @Override
-    public Tulos getTulos() {
-        return moottori.getTulos();
-    }
-
-    @Override
-    public Map<TapahtumanTyyppi, List<IPalvelupiste>> getPalvelupisteet() {
-        return moottori.getPalvelupisteet();
     }
 }

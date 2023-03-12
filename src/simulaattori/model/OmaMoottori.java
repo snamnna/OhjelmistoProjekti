@@ -2,7 +2,7 @@ package simulaattori.model;
 
 import eduni.distributions.Negexp;
 import entity.Tulos;
-import simulaattori.controller.IKontrolleriVtoM;
+import simulaattori.controller.IKontrolleriMtoV;
 import simulaattori.framework.*;
 import simulaattori.model.util.FPalvelupiste;
 import simulaattori.model.util.IPalvelupiste;
@@ -16,15 +16,15 @@ public class OmaMoottori extends Moottori {
 
 	private final Saapumisprosessi saapumisprosessi;
 	private Map<TapahtumanTyyppi, List<IPalvelupiste>> tyyppiToPalveluPMap;
+	private Map<TapahtumanTyyppi, Integer> palvelupisteMaara;
 	private Tulos tulos;
 	private Reititin reititin;
 
-	public OmaMoottori(IKontrolleriVtoM kontrolleri) {
+	public OmaMoottori(IKontrolleriMtoV kontrolleri) {
 		super(kontrolleri);
 		saapumisprosessi = new Saapumisprosessi(new Negexp(15, 5), tapahtumalista, TapahtumanTyyppi.ARR);
 		tyyppiToPalveluPMap = new HashMap<>();
 		tulos = new Tulos();
-		alustukset();
 	}
 
 	@Override
@@ -32,12 +32,10 @@ public class OmaMoottori extends Moottori {
 		Trace.setTraceLevel(Trace.Level.ERR);
 		Kello.getInstance().setAika(0);
 		Asiakas.reset();
-		// key on palvelupisteen tyyppi.
-		// arvona tietyn tyyppisten palvelupisteiden lukumäärä
-		Map<TapahtumanTyyppi, Integer> pPisteet = kontrolleri.haePalvelupisteet();
+
 
 		// palvelupisteiden alustus
-		for (TapahtumanTyyppi tapahtumanTyyppi : pPisteet.keySet()) {
+		for (TapahtumanTyyppi tapahtumanTyyppi : palvelupisteMaara.keySet()) {
 			TapahtumanTyyppi arrival = tapahtumanTyyppi;
 			TapahtumanTyyppi departure = getTapahtumanTyyppi(tapahtumanTyyppi, false);
 
@@ -46,7 +44,7 @@ public class OmaMoottori extends Moottori {
 			tyyppiToPalveluPMap.putIfAbsent(departure, tyyppiToPalveluPMap.get(arrival));
 
 			// alustetaan palvelupisteet
-			for (int i = 0; i < pPisteet.get(tapahtumanTyyppi); i++) {
+			for (int i = 0; i < palvelupisteMaara.get(tapahtumanTyyppi); i++) {
 				IPalvelupiste palvelupiste = FPalvelupiste.createPalvelupiste(arrival, tapahtumalista);
 				palvelupisteet.putIfAbsent(palvelupiste.getID(), palvelupiste);
 
@@ -57,6 +55,8 @@ public class OmaMoottori extends Moottori {
 
 		// alustetaan reititin
 		reititin = new Reititin(tyyppiToPalveluPMap);
+		// alustetaan visualisointi
+		kontrolleri.viePalvelupisteet(tyyppiToPalveluPMap);
 		// Ensimmäinen saapuminen järjestelmään
 		saapumisprosessi.generoiSeuraava();
 	}
@@ -128,7 +128,8 @@ public class OmaMoottori extends Moottori {
 		tulos.setAverageResponseTime(averageResponseTime);
 		tulos.setAverageWaitingTime(averageWaitingTime);
 		// ilmoitetaan UIlle simulaation päättymisestä
-		kontrolleri.simulointiPaattyi();
+		//kontrolleri.simulointiPaattyi();
+		kontrolleri.vieTulokset(tulos);
 	}
 	
 	public Tulos getTulos() {
@@ -136,7 +137,7 @@ public class OmaMoottori extends Moottori {
 	}
 
 	@Override
-	public Map<TapahtumanTyyppi, List<IPalvelupiste>> getPalvelupisteet() {
-		return tyyppiToPalveluPMap;
+	public void setPalvelupisteMaarat(Map<TapahtumanTyyppi, Integer> palvelupisteMaara) {
+		this.palvelupisteMaara = palvelupisteMaara;
 	}
 }
