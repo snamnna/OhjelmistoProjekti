@@ -76,45 +76,61 @@ public class KayttajatiedotController {
     public Integer getLabraLkm() {
         return Integer.parseInt(labraLkmTextField.getText());
     }
-
+/**
+ * Tarkistaa, että simuloinnin syötteet ovat kelvollisia.
+ * @return palauttaa true, jos syötteet ovat kelvollisia, muutoin false.
+ */
     public boolean isInputValid() {
         String errorMessage = "";
 
         if (simulointiAikaTextField.getText() == null || simulointiAikaTextField.getText().length() == 0) {
-            errorMessage += "Syötä numero!\n";
-        }
-        else {
-            // koita parse numero intiksi.
+            errorMessage += "Simulointiaika: Syötä numero!\n";
+        } else {
             try {
                 Integer.parseInt(simulointiAikaTextField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "Vääränlainen syöttö. Syötä kokonaisluku!\n";
+                errorMessage += "Simulointiaika: Vääränlainen syöttö. Syötä kokonaisluku!\n";
+            }
+        }
+        if (sairaanhoitajaLkmTextField.getText() == null || sairaanhoitajaLkmTextField.getText().length() == 0) {
+            errorMessage += "Sairaanhoitaja: Syötä numero!\n";
+        }  else {
+            try {
+                Integer.parseInt(sairaanhoitajaLkmTextField.getText());
+            } catch (NumberFormatException e) {
+                errorMessage += "Sairaanhoitajat: Vääränlainen syöttö. Syötä kokonaisluku!\n";
             }
         }
         if (yLaakariLkmTextField.getText() == null || yLaakariLkmTextField.getText().length() == 0) {
-            errorMessage += "Syötä numero!\n";
+            errorMessage += "Yleislääkärit: Syötä numero!\n";
         } else {
-            // koita parse numero intiksi.
             try {
                 Integer.parseInt(yLaakariLkmTextField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "Vääränlainen syöttö. Syötä kokonaisluku!\n";
+                errorMessage += "Yleislääkärit: Vääränlainen syöttö. Syötä kokonaisluku!\n";
             }
         }
         if (eLaakariLkmTextField.getText() == null || eLaakariLkmTextField.getText().length() == 0) {
-            errorMessage += "Syötä numero!\n";
+            errorMessage += "Erikoislääkärit: Syötä numero!\n";
         } else {
-            // koita parse numero intiksi.
             try {
                 Integer.parseInt(eLaakariLkmTextField.getText());
             } catch (NumberFormatException e) {
-                errorMessage += "Vääränlainen syöttö. Syötä kokonaisluku!\n";
+                errorMessage += "Erikoislääkärit: Vääränlainen syöttö. Syötä kokonaisluku!\n";
+            }
+        }
+        if (labraLkmTextField.getText() == null || labraLkmTextField.getText().length() == 0) {
+            errorMessage += "Laboratoriot: Syötä numero!\n";
+        }  else {
+            try {
+                Integer.parseInt(labraLkmTextField.getText());
+            } catch (NumberFormatException e) {
+                errorMessage += "Laboratoriot: Vääränlainen syöttö. Syötä kokonaisluku!\n";
             }
         }
         if (errorMessage.length() == 0) {
             return true;
         } else {
-            // Show the error message.
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Invalid Fields");
             alert.setHeaderText("Please correct invalid fields");
