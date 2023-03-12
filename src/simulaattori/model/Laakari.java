@@ -8,21 +8,9 @@ import simulaattori.framework.Tapahtumalista;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Laakari extends Palvelupiste {
-    private TapahtumanTyyppi skeduloitavanTapahtumanTyyppi;
 
     public Laakari(ContinuousGenerator generator, Tapahtumalista tapahtumalista, TapahtumanTyyppi tyyppi) {
         super(generator, tapahtumalista, tyyppi);
-        skeduloitavanTapahtumanTyyppi = getSkeduloitavanTapahtumanTyyppi();
-    }
-
-    private TapahtumanTyyppi getSkeduloitavanTapahtumanTyyppi() {
-        if (tyyppi == TapahtumanTyyppi.YLARR) {
-            return TapahtumanTyyppi.YLDEP;
-        } else if (tyyppi == TapahtumanTyyppi.ELARR) {
-            return TapahtumanTyyppi.ELDEP;
-        } else {
-            return null;
-        }
     }
 
     @Override
@@ -35,7 +23,7 @@ public class Laakari extends Palvelupiste {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         varattu = true;
         double palveluaika = generator.sample();
-        Tapahtuma tapahtuma = new Tapahtuma(skeduloitavanTapahtumanTyyppi, Kello.getInstance().getAika() + palveluaika, this);
+        Tapahtuma tapahtuma = new Tapahtuma(tyyppi == TapahtumanTyyppi.YLARR ? TapahtumanTyyppi.YLDEP : TapahtumanTyyppi.ELDEP, Kello.getInstance().getAika() + palveluaika, this);
         if (random.nextBoolean() && !jono.peek().getLabrakaynti()) {
             tapahtuma.setTyyppi(TapahtumanTyyppi.LABRA_ARRIVAL);
         }
